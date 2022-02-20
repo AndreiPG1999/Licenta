@@ -1,0 +1,21 @@
+<app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+    Schimbare parolă
+  </div>
+<div class="wrapper">
+    <form class="form" [formGroup]="changePassForm" (ngSubmit)="onSubmit(changePassForm)">
+      <input type="password" formControlName="old_pass" name="old_pass" placeholder="Old Password" [ngClass]="{ 'is-invalid': submitted && changePassForm.get('old_pass').errors }" class="name formEntry"/>
+        <div *ngIf="submitted && changePassForm.get('old_pass').errors" class="invalid-feedback">
+            <div *ngIf="changePassForm.get('old_pass').errors['required']">Introduceti parola veche</div>
+            <div *ngIf="changePassForm.get('old_pass').errors['minlength']">Parola este prea mică</div>
+        </div>
+      <input type="password" formControlName="new_pass" name="new_pass" placeholder="New password" [ngClass]="{ 'is-invalid': submitted && changePassForm.get('new_pass').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && changePassForm.get('new_pass').errors" class="invalid-feedback">
+        <div *ngIf="changePassForm.get('new_pass').errors['required']">Introduceti parola noua.</div>
+        <div *ngIf="changePassForm.get('new_pass').errors['minlength']">Parola este prea mică</div>
+        <div *ngIf="changePassForm.get('new_pass').errors['areEqual']">Parolele trebuie să fie diferite</div>
+    </div>
+    <button type="submit" class="submit formEntry">Schimbă parola</button>
+    </form>
+  </div>
+  <app-footer></app-footer>

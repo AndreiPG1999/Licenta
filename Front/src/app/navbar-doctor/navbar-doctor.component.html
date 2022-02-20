@@ -1,0 +1,58 @@
+<div class="nav">
+    <ul>
+      <li><a [routerLink]="['/homeD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
+        <i class="fas fa-home"></i>
+        Acasa</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Adaugare
+            <i class="fas fa-chevron-circle-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/add-pacient']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-plus"></i>
+                Adaugare pacient</a>
+            <a href="#">
+                <i class="far fa-calendar-plus"></i>
+                Adaugare programare</a>
+            <a [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-briefcase-medical"></i>
+                Adaugare tratamente</a>
+            <a href="#">
+                <i class="fas fa-diagnoses"></i>
+                Adaugare diagnostice</a>
+          </div>
+        </div>
+      </li>
+      <li><a [routerLink]="['/aboutD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Pacienti</a></li>
+      <li><a [routerLink]="['/aboutD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-address-card"></i> Despre</a></li>
+      <li><a [routerLink]="['/contactD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-id-card"></i> Contact</a></li>
+      <div class="nav-right">
+        <li>
+          <div class="dropdown">
+            
+            <button class="dropbtn">
+              Profil
+              <i class="fas fa-chevron-circle-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a [routerLink]="['/profilD']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-user-circle"></i>
+                Date personale
+              </a>
+              <a [routerLink]="['/change_passD']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-key"></i>
+                Schimbare parola
+              </a>
+              <a href="#">
+                <i class="fas fa-trash"></i>
+                Stergere cont</a>
+            </div>
+          </div>
+        </li>
+        <li><a [routerLink]="['/login']" [queryParams]="{ loggedIn: 'false' }" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout</a></li>
+      </div>
+    </ul>
+  </div>

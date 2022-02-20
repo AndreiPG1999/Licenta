@@ -1,0 +1,29 @@
+<div class="title-text">
+	Bine ați venit la DentaPlus!
+</div>
+<div>
+	<img src="./assets/images/cabinet1.jpg" width="300" height="300" class="img-left">
+	<img src="./assets/images/cabinet2.jpg" width="300" height="300" class="img-right">
+</div>
+
+<div class="login">
+	<div class="form">
+	  <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)" class="login-form">
+		<span class="material-icons">Login</span>
+		<input type="text" formControlName="email" name="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && loginForm.get('email').errors }"/>
+		<div *ngIf="submitted && loginForm.get('email').errors" class="invalid-feedback">
+			<div *ngIf="loginForm.get('email').errors['required']">Introduceti email-ul</div>
+			<div *ngIf="loginForm.get('email').errors['email']">Email-ul este invalid</div>
+		</div>
+		<input type="password" formControlName="password" name="password" placeholder="Parolă" [ngClass]="{ 'is-invalid': submitted && loginForm.get('password').errors }" />
+		<div *ngIf="submitted && loginForm.get('password').errors" class="invalid-feedback">
+			<div *ngIf="loginForm.get('password').errors['required']" >Introduceti parola </div>
+		</div>
+		<button type="submit"><i class="fas fa-sign-in-alt"></i> Logare</button>
+		<p>Nu aveți un cont?</p>
+		<button type="button" routerLink="/register"><i class="fas fa-user-plus"></i> Înregistrare</button>
+	  </form>  
+	</div>
+  </div>
+  
+  <app-footer></app-footer>

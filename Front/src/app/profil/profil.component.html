@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+    <div class="profile">
+      <p style="font-size: larger;">Date personale</p>
+      <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+      </div>
+      <p>Nume: {{loggedInUser.last_name}}</p>
+      <br>
+      <p>Prenume: {{loggedInUser.first_name}}</p>
+      <br>
+      <p>Email: {{currentUser.email}}</p>
+      <br>
+      <p>Id cont: {{loggedInUser.id}}</p>
+      <br>
+      <p>Tip cont: {{loggedInUser.type}}</p>
+    </div>
+    <div class="div-right">
+      <img src="./assets/images/cabinet2.jpg" width="700" height="500" class="img-right">
+    </div>
+    <app-footer></app-footer>

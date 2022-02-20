@@ -1,0 +1,57 @@
+<div class="nav">
+    <ul>
+      <li><a [routerLink]="['/home']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
+        <i class="fas fa-home"></i>
+        Acasa</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Date medicale
+            <i class="fas fa-chevron-circle-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">
+              <i class="fas fa-briefcase-medical"></i>
+              Tratamente</a>
+              <a href="#">
+                <i class="fas fa-briefcase-medical"></i>
+                Diagnostice</a>
+            <a href="#">
+              <i class="fas fa-history"></i>
+              Istoric</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#Programari" class="nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Programari</a></li>
+      <li><a [routerLink]="['/about']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-address-card"></i> Despre</a></li>
+      <li><a [routerLink]="['/contact']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-id-card"></i> Contact</a></li>
+      <div class="nav-right">
+        <li>
+          <div class="dropdown">
+            
+            <button class="dropbtn">
+              Profil
+              <i class="fas fa-chevron-circle-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a [routerLink]="['/profil']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-user-circle"></i>
+                Date personale
+              </a>
+              <a [routerLink]="['/change_pass']" [queryParams]="{ loggedIn: 'true' }">
+                <i class="fas fa-key"></i>
+                Schimbare parola
+              </a>
+              <a href="#">
+                <i class="fas fa-trash"></i>
+                Stergere cont</a>
+            </div>
+          </div>
+        </li>
+        <li><a [routerLink]="['/login']" [queryParams]="{ loggedIn: 'false' }" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout</a></li>
+      </div>
+    </ul>
+  </div>

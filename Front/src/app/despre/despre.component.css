@@ -1,0 +1,26 @@
+
+  .middle-up {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 50px;
+  }
+  .about-text{
+    position:absolute;
+    top:30%;
+    left:5%;
+    right: 50%;
+    text-align: justify;
+    color:white;
+  }
+  .img-round{
+    border-radius: 50%;
+  }
+  .div-right{
+    float:right;
+    padding-top: 130px;
+    padding-right: 150px;
+  }

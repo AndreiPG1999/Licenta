@@ -1,0 +1,42 @@
+<!-- Adaug cate un tratament pe rand, si pretul il adaug la o coloana costuri totale de la user, care se reseteaza cand user ul "plateste"-->
+<app-navbar-doctor></app-navbar-doctor>
+<div class="left-up">
+    Adăugare tratament
+  </div>
+<div class="wrapper">
+    <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form-left">
+      <input type="text" formControlName="email" name="email" placeholder="Email pacient" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('email').errors }" class="email formEntry"/>
+      <div *ngIf="submitted && treatmentForm.get('email').errors" class="invalid-feedback">
+        <div *ngIf="treatmentForm.get('email').errors['required']">Introduceti un email</div>
+        <div *ngIf="treatmentForm.get('email').errors['email']">Email-ul este invalid</div>
+        <div *ngIf="treatmentForm.get('email').errors['noEmail']">Nu exista nici un cont cu acest email</div>
+      </div>
+      <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
+        <option *ngFor="let price of prices">
+          {{price.treatments}}..............................{{price.price}} lei
+        </option>
+      </select>
+      <button type="submit" class="submit formEntry">Adauga tratament</button>
+    </form>
+  </div>
+
+  <div class="right-up">
+    Adăugare radiografie
+  </div>
+  <div class="wrapper">
+    <form [formGroup]="radiografieForm" (ngSubmit)="onSubmitRad(radiografieForm)" class="form-right">
+      <input type="text" formControlName="email" name="email" placeholder="Email pacient" [ngClass]="{ 'is-invalid': submittedRad && radiografieForm.get('email').errors }" class="email formEntry"/>
+      <div *ngIf="submittedRad && radiografieForm.get('email').errors" class="invalid-feedback">
+        <div *ngIf="radiografieForm.get('email').errors['required']">Introduceti un email</div>
+        <div *ngIf="radiografieForm.get('email').errors['email']">Email-ul este invalid</div>
+        <div *ngIf="radiografieForm.get('email').errors['noEmail']">Nu exista nici un cont cu acest email</div>
+      </div>
+      <input type="text" formControlName="radiografie" name="radiografie" placeholder="Radiografie" [ngClass]="{ 'is-invalid': submittedRad && radiografieForm.get('radiografie').errors }" class="email formEntry"/>
+      <div *ngIf="submittedRad && radiografieForm.get('radiografie').errors" class="invalid-feedback">
+        <div *ngIf="radiografieForm.get('radiografie').errors['required']">Introduceti o radiografie</div>
+      </div>
+      <button type="submit" class="submit formEntry">Adauga radiografie</button>
+    </form>
+  </div>
+  <app-footer></app-footer>
+

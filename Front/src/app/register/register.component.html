@@ -1,0 +1,39 @@
+<div class="title-text">
+	Bine ați venit la DentaPlus!
+</div>
+<div class="register">
+	<div class="form">
+	  <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)" class="login-form">
+		<span class="material-icons">Register</span>
+		<input type="text" formControlName="first_name" name="first_name" placeholder="Prenume" [ngClass]="{ 'is-invalid': submitted && registerForm.get('first_name').errors }"/>
+		<div *ngIf="submitted && registerForm.get('first_name').errors" class="invalid-feedback">
+			<div *ngIf="registerForm.get('first_name').errors['required']">Introduceți prenumele</div>
+		</div>
+		<input type="text" formControlName="last_name" name="last_name" placeholder="Nume" [ngClass]="{ 'is-invalid': submitted && registerForm.get('last_name').errors }"/>
+		<div *ngIf="submitted && registerForm.get('last_name').errors" class="invalid-feedback">
+			<div *ngIf="registerForm.get('last_name').errors['required']">Introduceți numele</div>
+		</div>
+		<input type="text" formControlName="nr_telefon" name="nr_telefon" placeholder="Numar de telefon" [ngClass]="{ 'is-invalid': submitted && registerForm.get('nr_telefon').errors }"/>
+		<div *ngIf="submitted && registerForm.get('nr_telefon').errors" class="invalid-feedback">
+			<div *ngIf="registerForm.get('nr_telefon').errors['required']">Introduceți numarul de telefon</div>
+		</div>
+		<input type="text" formControlName="email" name="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && registerForm.get('email').errors }"/>
+		<div *ngIf="submitted && registerForm.get('email').errors" class="invalid-feedback">
+			<div *ngIf="registerForm.get('email').errors['required']">Introduceți email-ul</div>
+			<div *ngIf="registerForm.get('email').errors['email']">Email-ul este invalid</div>
+			<div *ngIf="registerForm.get('email').errors['emailExists']">Exista deja un cont cu acest email</div>
+		</div>
+		<input type="password" formControlName="password" name="password" placeholder="Parolă" [ngClass]="{ 'is-invalid': submitted && registerForm.get('password').errors }"/>
+		<div *ngIf="submitted && registerForm.get('password').errors" class="invalid-feedback">
+			<div *ngIf="registerForm.get('password').errors['required']">Introduceți parola</div>
+			<div *ngIf="registerForm.get('password').errors['minlength']">Parola este prea mică</div>
+		</div>
+		
+		<button type="submit"><i class="fas fa-user-plus"></i>Creează cont</button>
+		<p></p>
+		<p></p>
+		<button type="button" routerLink="/login"><i class="fas fa-backspace"></i> Înapoi</button>
+	  </form>  
+	</div>
+  </div>
+  <app-footer></app-footer>

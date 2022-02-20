@@ -1,0 +1,26 @@
+<app-navbar-doctor></app-navbar-doctor>
+  <div class="middle-up">
+    Contactează-ne
+  </div>
+  <div class="wrapper">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)" class="form">
+        <input type="text" formControlName="name" name="name" placeholder="Nume complet" [ngClass]="{ 'is-invalid': submitted && contactForm.get('name').errors }" class="name formEntry"/>
+		<div *ngIf="submitted && contactForm.get('name').errors" class="invalid-feedback">
+			<div *ngIf="contactForm.get('name').errors['required']">Introduceti numele</div>
+		</div>
+      <input type="text" formControlName="email" name="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && contactForm.get('email').errors }" class="email formEntry"/>
+		<div *ngIf="submitted && contactForm.get('email').errors" class="invalid-feedback">
+			<div *ngIf="contactForm.get('email').errors['required']">Introduceti email-ul</div>
+			<div *ngIf="contactForm.get('email').errors['email']">Email-ul este invalid</div>
+      <div *ngIf="contactForm.get('email').errors['noEmail']">Nu exista nici un cont cu acest email</div>
+		</div>
+      <textarea formControlName="message" name="message" placeholder="Mesaj" [ngClass]="{ 'is-invalid': submitted && contactForm.get('message').errors }" class="message formEntry">
+      </textarea>
+      <div *ngIf="submitted && contactForm.get('message').errors" class="invalid-feedback">
+        <div *ngIf="contactForm.get('message').errors['required']">Introduceti mesajul</div>
+      </div>  
+      <button type="submit" class="submit formEntry">Trimite</button>
+    </form>
+  </div>
+  <app-footer></app-footer>
+  
