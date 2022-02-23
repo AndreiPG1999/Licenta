@@ -36,6 +36,14 @@ export class UserService {
     return this.http.put<User>(`${this.apiServerUrl}/user/updatePassword/${email}/${pass}`, pass);
   }
 
+  public updatePacient(email: User, doctor_id_upd: number): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updatePassword/${email}/${doctor_id_upd}`, doctor_id_upd);
+  }
+
+  public updateTreatment(email: User, treatment: string): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updatePassword/${email}/${treatment}`, treatment);
+  }
+
   public deleteUser(userId: number): Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${userId}`);
   }

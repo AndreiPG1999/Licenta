@@ -39,17 +39,18 @@ export class PassChangeComponent implements OnInit {
     this.submitted=true;
     if(changePassForm.valid){
       this.userService.updatePassword(this.currentUser.email,this.changePassForm.controls['new_pass'].value).subscribe({
-        next: (response: User) => {
+        next: async (response: User) => {
           console.log(response);
           this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
+          changePassForm.reset();
+          this.submitted = false;
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
         }
       });
-      await new Promise(f => setTimeout(f, 1000));
-      changePassForm.reset();
-      this.submitted = false;
+      
     }
   }
 }

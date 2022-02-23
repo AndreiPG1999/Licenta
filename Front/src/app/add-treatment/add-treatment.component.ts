@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../notification.service';
 import { Prices } from '../prices';
 import { PricesService } from '../prices.service';
+import { User } from '../user';
 import { UserService } from '../user.service';
 import { emailValidator } from '../validators/register-email.validator';
 
@@ -51,10 +52,20 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.showToasterSuccess();
-      await new Promise(f => setTimeout(f, 1000));
-      treatmentForm.reset();
-      this.submitted = false;
+      this.userService.updateTreatment(this.treatmentForm.controls['email'].value,this.treatmentForm.controls['treatment'].value).subscribe({
+        next: async (response: User) => {
+          console.log(response);
+          this.showToasterSuccess();
+          this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
+          treatmentForm.reset();
+          this.submitted = false;
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+      
     }
   }
   async onSubmitRad(radiografieForm:FormGroup){

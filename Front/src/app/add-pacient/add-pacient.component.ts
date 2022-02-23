@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../notification.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -14,7 +15,7 @@ export class AddPacientComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private notifyService:NotificationService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -45,6 +46,23 @@ export class AddPacientComponent implements OnInit {
     if(results.length === 0 || !key){
       this.getUsers();
     }
+  }
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Pacient adaugat cu succes !!")
+  }
+
+  public onAddPacient(){
+    //nu stiu sa adaug emailu pacientului respectiv
+    this.userService.updatePacient(this.currentUser.email,this.loggedInUser.id).subscribe({
+      next: (response: User) => {
+        console.log(response);
+        this.showToasterSuccess();
+        window.location.reload();
+      },
+      error: (error:HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
   }
 
 }
