@@ -9,8 +9,8 @@
         {
             "type": "pwa-chrome",
             "request": "launch",
-            "name": "add-treatment",
-            "file": "add-treatment.component.ts"
+            "name": "localhost:4200/change_pass",
+            "file": "change_pass.component.ts"
         }
     ]
 }

@@ -18,7 +18,8 @@ export class PassChangeComponent implements OnInit {
   changePassForm!: FormGroup;
   userService!:UserService;
   submitted = false;
-  currentUser!:User;
+  currentUser!:any;
+  loggedInUser!:any;
   constructor(private authService:AuthService, private notifyService:NotificationService, private token:TokenStorageService) { }
   
   
@@ -32,22 +33,23 @@ export class PassChangeComponent implements OnInit {
       old_pass: new FormControl('',[Validators.required,Validators.minLength(8)]),
       new_pass: new FormControl('',[Validators.required,Validators.minLength(8)])
     });
-  }
+    }
 
   async onSubmit(changePassForm: FormGroup){
     this.submitted=true;
     if(changePassForm.valid){
-      this.userService.updateUser(changePassForm.value).subscribe({
+      this.userService.updatePassword(this.currentUser.email,this.changePassForm.controls['new_pass'].value).subscribe({
         next: (response: User) => {
           console.log(response);
+          this.showToasterSuccess();
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
         }
       });
-      this.showToasterSuccess();
       await new Promise(f => setTimeout(f, 1000));
       changePassForm.reset();
+      this.submitted = false;
     }
   }
 }
