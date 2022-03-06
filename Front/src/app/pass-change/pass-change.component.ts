@@ -16,15 +16,14 @@ export class PassChangeComponent implements OnInit {
 
   error="Password change failed!";
   changePassForm!: FormGroup;
-  userService!:UserService;
   submitted = false;
   currentUser!:any;
-  loggedInUser!:any;
-  constructor(private authService:AuthService, private notifyService:NotificationService, private token:TokenStorageService) { }
+  hideExpression !: any;
+  constructor(private notifyService:NotificationService, private token:TokenStorageService, private userService:UserService) { }
   
   
   showToasterSuccess(){
-    this.notifyService.showSuccess("Login successful !!")
+    this.notifyService.showSuccess("Parola schimbata cu succes !!")
   }
 
   ngOnInit(): void {
@@ -38,7 +37,7 @@ export class PassChangeComponent implements OnInit {
   async onSubmit(changePassForm: FormGroup){
     this.submitted=true;
     if(changePassForm.valid){
-      this.userService.updatePassword(this.currentUser.email,this.changePassForm.controls['new_pass'].value).subscribe({
+      this.userService.updatePassword(this.currentUser.email,this.changePassForm.get('new_pass')!.value).subscribe({
         next: async (response: User) => {
           console.log(response);
           this.showToasterSuccess();

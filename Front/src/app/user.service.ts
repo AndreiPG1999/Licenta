@@ -32,7 +32,7 @@ export class UserService {
     return this.http.get<User>(`${this.apiServerUrl}/user/find/${email}`);
   }
 
-  public updatePassword(email: User, pass: string): Observable<User>{
+  public updatePassword(email: string, pass: string): Observable<User>{
     return this.http.put<User>(`${this.apiServerUrl}/user/updatePassword/${email}/${pass}`, pass);
   }
 

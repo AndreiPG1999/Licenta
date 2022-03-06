@@ -14,7 +14,6 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { NavbarPacientComponent } from './navbar/navbar.component';
 import { PassChangeComponent } from './pass-change/pass-change.component';
-import { FooterComponent } from './footer/footer.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import { NavbarDoctorComponent } from './navbar-doctor/navbar-doctor.component';
 import { ContactDoctorComponent } from './contact-doctor/contact-doctor.component';
@@ -35,7 +34,6 @@ import { AddPacientComponent } from './add-pacient/add-pacient.component';
     ProfilComponent,
     NavbarPacientComponent,
     PassChangeComponent,
-    FooterComponent,
     HomeDoctorComponent,
     NavbarDoctorComponent,
     ContactDoctorComponent,

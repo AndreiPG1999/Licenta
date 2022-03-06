@@ -20,6 +20,8 @@ html, body, div, p, ul, li {
     font-family:'Comfortaa', cursive;
     font-weight: 100;
     float:right;
+    z-index: 1000;
+    position: fixed;
   }
   .img-right{
     float: right;
@@ -48,8 +50,9 @@ html, body, div, p, ul, li {
     background-color:transparent;
     opacity: 0.9;
     height: 60px; /* set same as height & line-height below */
+    z-index: 1000;
+    position: relative;
   }
-  
   /* This rule centers the nav items verticaly in the bar with the height and line height properties. Spacing between the nav items is controlled by setting right and left padding.  */
   .nav li {
     display: inline-block;
@@ -85,14 +88,12 @@ html, body, div, p, ul, li {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 9999999;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  float: none;
   background: rgb(27, 27, 184);
   color: white;
   padding: 12px 16px;
