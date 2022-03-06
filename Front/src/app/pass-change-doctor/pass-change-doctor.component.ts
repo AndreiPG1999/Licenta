@@ -6,6 +6,7 @@ import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { match } from '../validators/register-email.validator';
 
 @Component({
   selector: 'app-pass-change-doctor',
@@ -28,8 +29,11 @@ export class PassChangeDoctorComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.changePassForm = new FormGroup({
-      old_pass: new FormControl('',[Validators.required,Validators.minLength(8)]),
-      new_pass: new FormControl('',[Validators.required,Validators.minLength(8)])
+      new_pass: new FormControl('',[Validators.required,Validators.minLength(8)]),
+      confirm_pass: new FormControl('',[Validators.required,Validators.minLength(8)])
+    },
+    {
+      validators: [match('new_pass','confirm_pass')]
     });
   }
 

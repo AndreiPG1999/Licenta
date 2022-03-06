@@ -3,7 +3,6 @@ import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/for
 import { Email } from '../email';
 import { NotificationService } from '../notification.service';
 import { UserService } from '../user.service';
-import { emailValidator } from '../validators/register-email.validator';
 
 @Component({
   selector: 'app-contact',

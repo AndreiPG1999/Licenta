@@ -6,7 +6,8 @@ import { Prices } from '../prices';
 import { PricesService } from '../prices.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { emailValidator } from '../validators/register-email.validator';
+import { registerEmailValidator } from '../validators/register-email.validator';
+
 
 @Component({
   selector: 'app-add-treatment',
@@ -24,16 +25,16 @@ export class AddTreatmentComponent implements OnInit {
     
   }
   showToasterSuccess(){
-    this.notifyService.showSuccess("Treatment added successfully !!")
+    this.notifyService.showSuccess("Tratament adaugat cu succes !!")
   }
 
   ngOnInit(): void {
     this.treatmentForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
+      email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
       treatment: new FormControl('', Validators.required)
     });
     this.radiografieForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
+      email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
       radiografie: new FormControl('', Validators.required)
     })
     this.getPrices();
@@ -52,10 +53,9 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.userService.updateTreatment(this.treatmentForm.controls['email'].value,this.treatmentForm.controls['treatment'].value).subscribe({
+      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value).subscribe({
         next: async (response: User) => {
           console.log(response);
-          this.showToasterSuccess();
           this.showToasterSuccess();
           await new Promise(f => setTimeout(f, 1000));
           treatmentForm.reset();

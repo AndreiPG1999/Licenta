@@ -4,15 +4,16 @@
   </div>
 <div class="wrapper">
     <form class="form" [formGroup]="changePassForm" (ngSubmit)="onSubmit(changePassForm)">
-      <input type="password" formControlName="old_pass" name="old_pass" placeholder="Parola veche" [ngClass]="{ 'is-invalid': submitted && changePassForm.get('old_pass').errors }" class="name formEntry"/>
-        <div *ngIf="submitted && changePassForm.get('old_pass').errors" class="invalid-feedback">
-            <div *ngIf="changePassForm.get('old_pass').errors['required']">Introduceti parola veche</div>
-            <div *ngIf="changePassForm.get('old_pass').errors['minlength']">Parola este prea scurta</div>
-        </div>
       <input type="password" formControlName="new_pass" name="new_pass" placeholder="Parola nouă" [ngClass]="{ 'is-invalid': submitted && changePassForm.get('new_pass').errors }" class="name formEntry"/>
-      <div *ngIf="submitted && changePassForm.get('new_pass').errors" class="invalid-feedback">
-        <div *ngIf="changePassForm.get('new_pass').errors['required']">Introduceti parola noua</div>
-        <div *ngIf="changePassForm.get('new_pass').errors['minlength']">Parola este prea scurta</div>
+        <div *ngIf="submitted && changePassForm.get('new_pass').errors" class="invalid-feedback">
+            <div *ngIf="changePassForm.get('new_pass').errors['required']">Introduceti parola noua</div>
+            <div *ngIf="changePassForm.get('new_pass').errors['minlength']">Parola este prea scurta</div>
+        </div>
+      <input type="password" formControlName="confirm_pass" name="confirm_pass" placeholder="Confirmați parola nouă" [ngClass]="{ 'is-invalid': submitted && changePassForm.get('confirm_pass').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && changePassForm.get('confirm_pass').errors" class="invalid-feedback">
+        <div *ngIf="changePassForm.get('confirm_pass').errors['required']">Confirmati parola noua</div>
+        <div *ngIf="changePassForm.get('confirm_pass').errors['minlength']">Parola este prea scurta</div>
+        <div *ngIf="changePassForm.get('confirm_pass').errors['matching']">Parolele sunt diferite.</div>
     </div>
     <button type="submit" class="submit formEntry">Schimbă parola</button>
     </form>
