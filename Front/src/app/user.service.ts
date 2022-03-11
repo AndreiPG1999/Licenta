@@ -44,7 +44,7 @@ export class UserService {
     return this.http.put<User>(`${this.apiServerUrl}/user/updateTreatment/${email}/${treatment}`, treatment);
   }
 
-  public deleteUser(userId: number): Observable<void>{
-      return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${userId}`);
+  public deleteUser(email: string): Observable<void>{
+      return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${email}`);
   }
 }

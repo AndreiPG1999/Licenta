@@ -84,6 +84,15 @@ html, body, div, p, ul, li {
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
+.btn{
+  background-color: inherit;
+  font-family: inherit;
+  color: white;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .dropdown-content {
 display: none;
 position: absolute;
@@ -104,6 +113,7 @@ display: block;
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
 background-color: rgb(146, 143, 143);
+cursor: pointer;
 }
 
 /* Show the dropdown menu on hover */
