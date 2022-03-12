@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../notification.service';
 import { UserService } from '../user.service';
-import { registerEmailValidator } from '../validators/register-email.validator';
+import { emailValidator } from '../validators/register-email.validator';
 
 @Component({
   selector: 'app-contact-doctor',
@@ -21,7 +21,7 @@ export class ContactDoctorComponent implements OnInit {
   ngOnInit(): void {
     this.contactForm = new FormGroup({
       name: new FormControl('',[Validators.required]),
-      email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
+      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       message: new FormControl('',[Validators.required])
     });
   }

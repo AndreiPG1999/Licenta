@@ -3,6 +3,7 @@ import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/for
 import { Email } from '../email';
 import { NotificationService } from '../notification.service';
 import { UserService } from '../user.service';
+import { emailValidator } from '../validators/register-email.validator';
 
 @Component({
   selector: 'app-contact',
@@ -22,7 +23,7 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.contactForm = new FormGroup({
       name: new FormControl('',[Validators.required]),
-      email: new FormControl('',[Validators.required,Validators.email]),
+      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       message: new FormControl('',[Validators.required])
     });
   }

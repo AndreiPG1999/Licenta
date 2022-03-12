@@ -15,36 +15,38 @@ export class RegisterComponent implements OnInit {
 
   registerForm!:FormGroup
   submitted=false;
-  constructor(private user: UserService, private userService: UserService, private router:Router, private notifyService : NotificationService) { }
+  constructor(private userService: UserService, private router:Router, private notifyService : NotificationService) { }
 
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Cont creat cu succes !!")
+}
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       first_name: new FormControl('',Validators.required),
       last_name: new FormControl('',Validators.required),
       email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
       password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-      nr_telefon: new FormControl('',[Validators.required])
+      nr_telefon: new FormControl('',[Validators.required,Validators.pattern('^[0-9-]+$')])
     });
   }
 
-  showToasterSuccess(){
-    this.notifyService.showSuccess("Registration successful !!")
-}
-  async onRegister(registerForm: FormGroup): Promise<void>{
+  
+  onRegister(registerForm: FormGroup){
     this.submitted=true;
     if(registerForm.valid)
     {
       this.userService.addUser(registerForm.value).subscribe({
-        next:(response: User) => {
+        next:async (response: User) => {
           console.log(response);
+          this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
+          this.router.navigate(['/login'], {queryParams: { registered: 'true' } });
         },
         error: (error: HttpErrorResponse) => {
           alert(error.message);
         }
       });
-      this.showToasterSuccess();
-      await new Promise(f => setTimeout(f, 1000));
-      this.router.navigate(['/login'], {queryParams: { registered: 'true' } });
+      
     }
   } 
 }

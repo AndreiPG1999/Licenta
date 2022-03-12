@@ -16,6 +16,7 @@
 		<input type="text" formControlName="nr_telefon" name="nr_telefon" placeholder="Numar de telefon" [ngClass]="{ 'is-invalid': submitted && registerForm.get('nr_telefon').errors }"/>
 		<div *ngIf="submitted && registerForm.get('nr_telefon').errors" class="invalid-feedback">
 			<div *ngIf="registerForm.get('nr_telefon').errors['required']">Introduceți numarul de telefon</div>
+			<div *ngIf="registerForm.get('nr_telefon').errors['pattern']">Trebuie să conțină doar cifre.</div>
 		</div>
 		<input type="text" formControlName="email" name="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && registerForm.get('email').errors }"/>
 		<div *ngIf="submitted && registerForm.get('email').errors" class="invalid-feedback">

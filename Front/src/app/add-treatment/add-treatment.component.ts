@@ -6,7 +6,7 @@ import { Prices } from '../prices';
 import { PricesService } from '../prices.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { registerEmailValidator } from '../validators/register-email.validator';
+import { emailValidator} from '../validators/register-email.validator';
 
 
 @Component({
@@ -30,11 +30,11 @@ export class AddTreatmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.treatmentForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
+      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       treatment: new FormControl('', Validators.required)
     });
     this.radiografieForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], registerEmailValidator(this.userService)),
+      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       radiografie: new FormControl('', Validators.required)
     })
     this.getPrices();
