@@ -9,4 +9,5 @@ export interface User{
     id_doctor: number;
     datorii_totale: Float32Array;
     nr_telefon:string;
+    type:string;
 }

@@ -1,7 +1,4 @@
 <app-navbar-doctor></app-navbar-doctor>
-<!-- <p>La inceput afisare lista cu toti pacientii. Cautare dupa email cu afisare nume prenume email daca tipul este pacient, apoi click pe pacientul care apare si buton de adaugare care adauga id ul doctorului la pacientul respectiv.
-    O alta lista cu toti pacientii doctorului.
-</p> -->
 <form class="form">
     <input type="text" (ngModelChange)="searchUsers(key.value)" #key="ngModel" ngModel
      name="key" id="searchName" class="search formEntry" placeholder="Caută pacienți..." required>
@@ -9,24 +6,27 @@
 <div>
    <p></p>
 </div>
-  <div class="container" id="main-container">
+<div class="container" id="main-container">
   <div class="row">
-    <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-       <div class="card">
-          <div class="list-group ">
-             <div class="list-title align-self-center mb-0">
-                <h5>{{user.last_name}} {{user.first_name}}</h5>
-             </div>
-          </div>
-          <ul class="list-group list-group-flush">
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}}</li>
-             <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{user.nr_telefon}}</li>
-          </ul>
-          <div class="list-body">
-             <div class="btn-group btn-group-sm">
-                <a (ngSubmit)="onAddPacient()" class="btn btn-primary tooltips" data-placement="top" data-original-title="Add"><i class="fa fa-plus"></i> Adauga pacient</a>
-             </div>
-          </div>
-       </div>
+      <div *ngFor="let user of users" class="col-md-6 col-xl-3">
+         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == null)">
+            <div class="card">
+               <div class="list-group">
+                  <div class="list-title align-self-center mb-0">
+                     <h5>{{user.last_name}} {{user.first_name}}</h5>
+                  </div>
+               </div>
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}}</li>
+                  <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{user.nr_telefon}}</li>
+               </ul>
+               <div class="list-body">
+                  <div class="btn-group btn-group-sm">
+                     <a (click)="onAddPacient(user)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Add"><i class="fa fa-plus"></i> Adauga pacient</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
    </div>
-  </div>
+</div>

@@ -22,7 +22,7 @@ export class NavbarPacientComponent implements OnInit {
     this.currentUser = this.token.getUser();
   }
   clickMethod(){
-    if(confirm("Are you sure do you want to delete the account?")){
+    if(confirm("Sunteți sigur că doriți să ștergeți contul?")){
       this.userService.deleteUser(this.currentUser.email).subscribe({
         next: async () => {
           this.showToasterSuccess();

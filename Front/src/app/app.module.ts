@@ -22,6 +22,7 @@ import { ProfilDoctorComponent } from './profil-doctor/profil-doctor.component';
 import { PassChangeDoctorComponent } from './pass-change-doctor/pass-change-doctor.component';
 import { AddTreatmentComponent } from './add-treatment/add-treatment.component';
 import { AddPacientComponent } from './add-pacient/add-pacient.component';
+import { PacientiComponent } from './pacienti/pacienti.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AddPacientComponent } from './add-pacient/add-pacient.component';
     ProfilDoctorComponent,
     PassChangeDoctorComponent,
     AddTreatmentComponent,
-    AddPacientComponent
+    AddPacientComponent,
+    PacientiComponent
   ],
   imports: [
     BrowserModule,

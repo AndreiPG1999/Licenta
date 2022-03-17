@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../notification.service';
+import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -15,10 +16,20 @@ export class AddPacientComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
 
-  constructor(private userService:UserService, private notifyService:NotificationService) { }
+  constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService) { }
 
   ngOnInit(): void {
     this.getUsers();
+    this.currentUser = this.token.getUser();
+    this.userService.findUser(this.currentUser.email).subscribe({
+      next:(response: User) => {
+        this.loggedInUser = response;
+        console.log(this.loggedInUser);
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
   }
 
   public getUsers(): void {
@@ -51,18 +62,18 @@ export class AddPacientComponent implements OnInit {
     this.notifyService.showSuccess("Pacient adaugat cu succes !!")
   }
 
-  public onAddPacient(){
-    //nu stiu sa adaug emailu pacientului respectiv
-    this.userService.updatePacient(this.currentUser.email,this.loggedInUser.id).subscribe({
-      next: (response: User) => {
-        console.log(response);
-        this.showToasterSuccess();
-        window.location.reload();
-      },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+  public onAddPacient(user:User){
+    if(confirm("Sunteți sigur că doriți să vă atribuiți acest pacient?")){
+      this.userService.updatePacient(user.email,this.loggedInUser.id).subscribe({
+        next: (response: User) => {
+          console.log(response);
+          window.location.reload();
+          this.showToasterSuccess();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
-
 }
