@@ -1,4 +1,7 @@
 <app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+   Adăugare pacienți
+ </div>
 <form class="form">
     <input type="text" (ngModelChange)="searchUsers(key.value)" #key="ngModel" ngModel
      name="key" id="searchName" class="search formEntry" placeholder="Caută pacienți..." required>
@@ -8,20 +11,20 @@
 </div>
 <div class="container" id="main-container">
   <div class="row">
-      <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == null)">
+      <div *ngFor="let user of users" class="col-md-6">
+         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == null || user.id_doctor == 0)">
             <div class="card">
                <div class="list-group">
                   <div class="list-title align-self-center mb-0">
-                     <h5>{{user.last_name}} {{user.first_name}}</h5>
+                     <li class="list-group-item"><h5>{{user.last_name}} {{user.first_name}}</h5></li>
                   </div>
                </div>
                <ul class="list-group list-group-flush">
                   <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}}</li>
                   <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{user.nr_telefon}}</li>
                </ul>
-               <div class="list-body">
-                  <div class="btn-group btn-group-sm">
+               <div class="list-group-item">
+                  <div class="btn-primary">
                      <a (click)="onAddPacient(user)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Add"><i class="fa fa-plus"></i> Adauga pacient</a>
                   </div>
                </div>
