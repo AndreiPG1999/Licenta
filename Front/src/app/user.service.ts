@@ -44,6 +44,10 @@ export class UserService {
     return this.http.put<User>(`${this.apiServerUrl}/user/updateTreatment/${email}/${treatment}`, treatment);
   }
 
+  public updateDiagnostic(email: string, diagnostic: string): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updateTreatment/${email}/${diagnostic}`, diagnostic);
+  }
+
   public deleteUser(email: string): Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${email}`);
   }

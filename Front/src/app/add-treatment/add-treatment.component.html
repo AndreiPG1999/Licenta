@@ -1,7 +1,7 @@
 <!-- Adaug cate un tratament pe rand, si pretul il adaug la o coloana costuri totale de la user, care se reseteaza cand user ul "plateste"-->
 <app-navbar-doctor></app-navbar-doctor>
 <div class="left-up">
-    Adăugare tratament
+    Adăugare diagnostic și tratament
   </div>
 <div class="wrapper">
     <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form-left">
@@ -11,12 +11,17 @@
         <div *ngIf="treatmentForm.get('email').errors['email']">Email-ul este invalid</div>
         <div *ngIf="treatmentForm.get('email').errors['noEmail']">Nu exista nici un cont cu acest email</div>
       </div>
+      <select formControlName="diagnostic" name="diagnostic" placeholder="Diagnostic" class="select formEntry">
+        <option *ngFor="let diagnostic of diagnostics">
+          {{diagnostic.diagnostic}}
+        </option>
+      </select>
       <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
         <option *ngFor="let price of prices">
           {{price.treatments}}
         </option>
       </select>
-      <button type="submit" class="submit formEntry">Adauga tratament</button>
+      <button type="submit" class="submit formEntry">Adauga diagnostic și tratament</button>
     </form>
   </div>
 

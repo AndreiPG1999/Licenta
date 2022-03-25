@@ -30,8 +30,8 @@
     border-radius: 5px;
     max-width: 480px;
     float:right;
-    top:-95px;
-    left:10%;
+    top:-165px;
+    left:15px;
     position: relative;
   }
   ::-webkit-input-placeholder {
@@ -124,13 +124,14 @@
     color: white;
     transform: translate(-50%, -50%);
     float:left;
-    font-size: 50px;
+    font-size: 30px;
   }
   .right-up {
     position: relative;
-    top:-19%;
+    top:-25%;
+    right:10%;
     color: white;
     transform: translate(-50%, -50%);
     float:right;
-    font-size: 50px;
+    font-size: 30px;
   }
