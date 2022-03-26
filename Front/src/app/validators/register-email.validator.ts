@@ -25,7 +25,6 @@ export function emailValidator(userService:UserService):AsyncValidatorFn{
   }
 }
 
-
 export function match(controlName: string, checkControlName: string): ValidatorFn {
     return (controls: AbstractControl) => {
       const control = controls.get(controlName);

@@ -42,8 +42,8 @@ export class AddTreatmentComponent implements OnInit {
       email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       radiografie: new FormControl('', Validators.required)
     })
+    this.getDiagnostics()
     this.getPrices();
-    this.getDiagnostics();
   }
 
   public getDiagnostics(){

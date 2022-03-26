@@ -45,7 +45,7 @@ export class UserService {
   }
 
   public updateDiagnostic(email: string, diagnostic: string): Observable<User>{
-    return this.http.put<User>(`${this.apiServerUrl}/user/updateTreatment/${email}/${diagnostic}`, diagnostic);
+    return this.http.put<User>(`${this.apiServerUrl}/user/updateDiagnostic/${email}/${diagnostic}`, diagnostic);
   }
 
   public deleteUser(email: string): Observable<void>{
