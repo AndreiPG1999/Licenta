@@ -57,4 +57,32 @@ export class PacientiComponent implements OnInit {
       this.getUsers();
     }
   }
+
+  public onUnasignPacient(user:User){
+    if(confirm("Sunteți sigur că doriți să renunțați la acest pacient?")){
+      this.userService.updatePacient(user.email,0).subscribe({
+        next: (response: User) => {
+          console.log(response);
+          window.location.reload();
+          // this.showToasterSuccess();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
+  }
+  public onDeletePacient(user:User){
+    if(confirm("Sigur doriți să ștergeți contul acestui pacient?")){
+      this.userService.deleteUser(user.email).subscribe({
+        next: async () => {
+          await new Promise(f => setTimeout(f, 2000));
+          window.location.reload();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
+  }
 }

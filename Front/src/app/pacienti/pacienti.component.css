@@ -1,146 +1,153 @@
 /* @import "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"; */
 .middle-up {
-    position: absolute;
-    top: 12%;
-    left: 50%;
-    color: white;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 30px;
-  }
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 30px;
+}
 .formEntry {
-    display: block;
-    margin: 45px auto;
-    min-width: 300px;
-    padding: 10px;
-    border-radius: 2px;
-    border: none;
-    transition: all 0.5s ease 0s;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius:.25rem;
-  }
+  display: block;
+  margin: 45px auto;
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 2px;
+  border: none;
+  transition: all 0.5s ease 0s;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius:.25rem;
+}
 .form {
-    background: inherit;
-    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
-    border-radius: 5px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    top: 3%;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    left: 0;
-    right: 0;
-    position: relative;
-  }
-  .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  border-radius: 6px;
+  background: inherit;
+  box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  border-radius: 5px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 3%;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  left: 0;
+  right: 0;
+  position: relative;
+}
+.container {
+padding-right: 15px;
+padding-left: 15px;
+border-radius: 6px;
 }
 .row {
-    position: absolute;
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-  }
-  .col-md-6{
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .list-group-item {
+  position: absolute;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+}
+.col-md-6{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 50px;
+  padding-top: 20px;
+}
+.list-group-item {
+  align-items: center;
   position: relative;
   display: flex;
-  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.5rem;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .list-group-item:first-child {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.list-group-item.disabled, .list-group-item:disabled {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #fff;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.list-group-item + .list-group-item {
+  border-top-width: 0;
+}
+
+.list-group-item + .list-group-item.active {
+  margin-top: -1px;
+  border-top-width: 1px;
+}
+.card{
+    display:flex;
+    flex-direction:column;
+    min-width:fit-content;
+    width: 220px;
+    word-wrap:break-word;
+    background-color:#fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius:.25rem;
   }
-  
-  .list-group-item:last-child {
-    border-bottom-right-radius: inherit;
-    border-bottom-left-radius: inherit;
+  .card-body{
+      -ms-flex:1 1 auto;
+      flex:1 1 auto;
+      padding:1.25rem;
   }
-  
-  .list-group-item.disabled, .list-group-item:disabled {
-    color: #6c757d;
-    pointer-events: none;
-    background-color: #fff;
+  .col-6{
+      -ms-flex:0 0 50%;
+      flex:0 0 50%;
+      max-width:50%;
   }
-  
-  .list-group-item.active {
-    z-index: 2;
+  .card-title{
+      margin-bottom:.75rem;
+  }
+  .list-title{
+      margin-bottom:.75rem;
+      text-align: center;
+      word-wrap: break-word;
+  }
+  .btn-primary{
+    margin-left: 6%;
     color: #fff;
     background-color: #007bff;
+    word-wrap: break-word;
     border-color: #007bff;
+    align-items: center;
+    text-align: center;
+    border: 1px solid inherit;
+    border-radius:.25rem;
+    width: 90px;
   }
-  
-  .list-group-item + .list-group-item {
-    border-top-width: 0;
+  .btn-primary:hover {
+      color: #fff;
+      background-color: #0069d9;
+      border-color: #0062cc;
+      cursor: pointer;
+    }
+  .align-self-center{
+      -ms-flex-item-align:center!important;
+      align-self:center!important;
   }
-  
-  .list-group-item + .list-group-item.active {
-    margin-top: -1px;
-    border-top-width: 1px;
+  .mb-0{
+      margin-bottom:0!important;
   }
-  .card{
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-      word-wrap:break-word;
-      background-color:#fff;
-      border: 1px solid rgba(0, 0, 0, 0.125);
-      border-radius:.25rem;
-    }
-    .card-body{
-        -ms-flex:1 1 auto;
-        flex:1 1 auto;
-        padding:1.25rem;
-    }
-    .col-6{
-        -ms-flex:0 0 50%;
-        flex:0 0 50%;
-        max-width:50%;
-    }
-    .card-title{
-        margin-bottom:.75rem;
-    }
-    .list-title{
-        margin-bottom:.75rem;
-        text-align: center;
-    }
-    .btn-primary{
-        color: #fff;
-        background-color: #007bff;
-        border-color: #007bff;
-        text-align: center;
-        border: 1px solid inherit;
-        border-radius:.25rem;
-        width: 100%;
-    }
-    .btn-primary:hover {
-        color: #fff;
-        background-color: #0069d9;
-        border-color: #0062cc;
-        cursor: pointer;
-      }
-    .align-self-center{
-        -ms-flex-item-align:center!important;
-        align-self:center!important;
-    }
-    .mb-0{
-        margin-bottom:0!important;
-    }
-    .list-group .list-group-item:first-child{
-        border-top:0;
-        text-align: center;
-    }
-    .list-group-flush .list-group-item{
-        border-right:0;border-left:0;border-radius:0;
-        text-align: center;
-    };
+  .list-group .list-group-item:first-child{
+      border-top:0;
+      text-align: center;
+  }
+  .list-group-flush .list-group-item{
+      border-right:0;border-left:0;border-radius:0;
+      text-align: center;
+  };

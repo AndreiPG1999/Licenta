@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
 import { NotificationService } from '../notification.service';
-import { Prices } from '../prices';
-import { PricesService } from '../prices.service';
+import { Treatment } from '../treatment';
+import { TreatmentService } from '../treatment.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { emailValidator} from '../validators/register-email.validator';
@@ -22,10 +22,10 @@ export class AddTreatmentComponent implements OnInit {
   radiografieForm!: FormGroup
   submitted = false
   submittedRad = false
-  prices !: Prices[];
+  prices !: Treatment[];
   diagnostics !: Diagnostic[];
 
-  constructor(private notifyService:NotificationService, private userService:UserService, private priceService:PricesService, private diagnosticSerivce: DiagnosticService) {
+  constructor(private notifyService:NotificationService, private userService:UserService, private priceService:TreatmentService, private diagnosticSerivce: DiagnosticService) {
     
   }
   showToasterSuccess(){
@@ -58,7 +58,7 @@ export class AddTreatmentComponent implements OnInit {
   }
   public getPrices(){
     this.priceService.getPrices().subscribe({
-      next:(response: Prices[]) => {
+      next:(response: Treatment[]) => {
         this.prices = response;
       },
       error: (error: HttpErrorResponse) => {

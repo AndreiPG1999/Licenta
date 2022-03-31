@@ -12,8 +12,8 @@
 </div>
 <div class="container" id="main-container">
   <div class="row">
-      <div *ngFor="let user of users" class="col-md-6">
-         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == 13)">
+      <div *ngFor="let user of users">
+         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == loggedInUser.id)" class="col-md-6">
             <div class="card">
                <div class="list-group">
                   <div class="list-title align-self-center mb-0">
@@ -24,6 +24,14 @@
                   <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}}</li>
                   <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{user.nr_telefon}}</li>
                </ul>
+               <div class="list-group-item">
+                  <div class="btn-primary">
+                     <a mat-raised-button (click)="onUnasignPacient(user)" data-placement="top" data-original-title="Erase">Eliminare pacient</a>
+                  </div>
+                  <div class="btn-primary">
+                     <a mat-raised-button (click)="onDeletePacient(user)" data-placement="top" data-original-title="Delete">Stergere cont</a>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

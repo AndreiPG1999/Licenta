@@ -63,6 +63,7 @@ export class AddPacientComponent implements OnInit {
   }
 
   public onAddPacient(user:User){
+    console.log("Futu-ti mama ta!");
     if(confirm("Sunteți sigur că doriți să vă atribuiți acest pacient?")){
       this.userService.updatePacient(user.email,this.loggedInUser.id).subscribe({
         next: (response: User) => {

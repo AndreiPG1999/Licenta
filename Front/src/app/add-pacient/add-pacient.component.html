@@ -11,8 +11,8 @@
 </div>
 <div class="container" id="main-container">
   <div class="row">
-      <div *ngFor="let user of users" class="col-md-6">
-         <div *ngIf="(user.type == 'pacient') && (user.id_doctor == null || user.id_doctor == 0)">
+      <div *ngFor="let user of users">
+         <div *ngIf="(user.type == 'pacient') && user.id_doctor == 0" class="col-md-6">
             <div class="card">
                <div class="list-group">
                   <div class="list-title align-self-center mb-0">
@@ -25,7 +25,7 @@
                </ul>
                <div class="list-group-item">
                   <div class="btn-primary">
-                     <a (click)="onAddPacient(user)" class="btn btn-primary tooltips" data-placement="top" data-original-title="Add"><i class="fa fa-plus"></i> Adauga pacient</a>
+                     <a mat-raised-button (click)="onAddPacient(user)" data-placement="top" data-original-title="Add"><i class="fa fa-plus"></i></a>
                   </div>
                </div>
             </div>
