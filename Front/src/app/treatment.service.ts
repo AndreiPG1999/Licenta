@@ -14,7 +14,7 @@ export class TreatmentService {
   static getPrices: any;
   constructor(private http: HttpClient) { }
 
-  public getPrices(): Observable<Treatment[]>{
-    return this.http.get<Treatment[]>(`${this.apiServerUrl}/prices/all`);
+  public getTreatments(): Observable<Treatment[]>{
+    return this.http.get<Treatment[]>(`${this.apiServerUrl}/treatments/all`);
   }
 }

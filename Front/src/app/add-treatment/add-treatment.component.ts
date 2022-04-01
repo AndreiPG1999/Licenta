@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
+import { Dinte } from '../dinte';
+import { DinteService } from '../dinte.service';
 import { NotificationService } from '../notification.service';
 import { Treatment } from '../treatment';
 import { TreatmentService } from '../treatment.service';
@@ -22,28 +24,31 @@ export class AddTreatmentComponent implements OnInit {
   radiografieForm!: FormGroup
   submitted = false
   submittedRad = false
-  prices !: Treatment[];
+  treatments !: Treatment[];
   diagnostics !: Diagnostic[];
+  dinti !: Dinte[];
 
-  constructor(private notifyService:NotificationService, private userService:UserService, private priceService:TreatmentService, private diagnosticSerivce: DiagnosticService) {
+  constructor(private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private dinteService:DinteService) {
     
   }
   showToasterSuccess(){
-    this.notifyService.showSuccess("Diagnostic și tratament adaugate cu succes !!")
+    this.notifyService.showSuccess("Date adaugate cu succes !!")
   }
 
   ngOnInit(): void {
     this.treatmentForm = new FormGroup({
       email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       treatment: new FormControl('', Validators.required),
-      diagnostic: new FormControl('', Validators.required)
+      diagnostic: new FormControl('', Validators.required),
+      dinte: new FormControl('', Validators.required)
     });
     this.radiografieForm = new FormGroup({
       email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
       radiografie: new FormControl('', Validators.required)
     })
     this.getDiagnostics()
-    this.getPrices();
+    this.getTreatments()
+    this.getDinti();
   }
 
   public getDiagnostics(){
@@ -56,10 +61,20 @@ export class AddTreatmentComponent implements OnInit {
       }
     })
   }
-  public getPrices(){
-    this.priceService.getPrices().subscribe({
+  public getTreatments(){
+    this.treatmentService.getTreatments().subscribe({
       next:(response: Treatment[]) => {
-        this.prices = response;
+        this.treatments = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    })
+  }
+  public getDinti(){
+    this.dinteService.getDinti().subscribe({
+      next:(response: Dinte[]) => {
+        this.dinti = response;
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -69,7 +84,7 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value).subscribe({
+      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value,this.treatments.).subscribe({
         next:(response: User) => {
           console.log(response);
         },
@@ -78,6 +93,14 @@ export class AddTreatmentComponent implements OnInit {
         }
       });
       this.userService.updateDiagnostic(this.treatmentForm.get('email')!.value,this.treatmentForm.get('diagnostic')!.value).subscribe({
+        next:(response: User) => {
+          console.log(response);
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+      this.userService.updateDinte(this.treatmentForm.get('email')!.value,this.treatmentForm.get('dinte')!.value).subscribe({
         next:(response: User) => {
           console.log(response);
         },

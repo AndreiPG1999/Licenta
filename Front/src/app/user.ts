@@ -7,7 +7,9 @@ export interface User{
     treatments: string;
     appointment: Date;
     id_doctor: number;
-    datorii_totale: Float32Array;
     nr_telefon:string;
     type:string;
+    diagnostic:string;
+    dinte:string;
+    pret:Float32Array;
 }
