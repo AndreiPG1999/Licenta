@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  sendEmail(email:Email):Observable<any>{
+  public sendEmail(email:Email):Observable<any>{
     return this.http.post(`${this.apiServerUrl}/user/email`,email);
   }
 

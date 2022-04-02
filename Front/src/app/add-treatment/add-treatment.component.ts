@@ -84,7 +84,7 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value,this.treatments.).subscribe({
+      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value,this.treatmentForm.get('treatment')!.value).subscribe({
         next:(response: User) => {
           console.log(response);
         },
