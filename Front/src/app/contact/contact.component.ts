@@ -20,7 +20,7 @@ export class ContactComponent implements OnInit {
   constructor(private notifyService:NotificationService, private userService:UserService, private token:TokenStorageService) { }
 
   showToasterSuccess(){
-    this.notifyService.showSuccess("Your message was submitted successfully !!")
+    this.notifyService.showSuccess("Mesaj trimis cu succes !!")
   }
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
