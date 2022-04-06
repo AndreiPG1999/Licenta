@@ -10,14 +10,12 @@ public class Treatment implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
     private String treatments;
-    private double pret;
 
     public Treatment(){}
 
-    public Treatment(Long id, String treatments, double pret) {
+    public Treatment(Long id, String treatments) {
         this.id = id;
         this.treatments = treatments;
-        this.pret = pret;
     }
 
     public Long getId() {
@@ -36,20 +34,11 @@ public class Treatment implements Serializable {
         this.treatments = treatments;
     }
 
-    public double getPret() {
-        return pret;
-    }
-
-    public void setPret(double pret) {
-        this.pret = pret;
-    }
-
     @Override
     public String toString() {
         return "Treatment{" +
                 "id=" + id +
                 ", treatments='" + treatments + '\'' +
-                ", pret=" + pret +
                 '}';
     }
 }

@@ -3,14 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
-import { Dinte } from '../dinte';
-import { DinteService } from '../dinte.service';
 import { NotificationService } from '../notification.service';
+import { TokenStorageService } from '../token-storage.service';
 import { Treatment } from '../treatment';
 import { TreatmentService } from '../treatment.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { emailValidator} from '../validators/register-email.validator';
 
 
 @Component({
@@ -26,9 +24,11 @@ export class AddTreatmentComponent implements OnInit {
   submittedRad = false
   treatments !: Treatment[];
   diagnostics !: Diagnostic[];
-  dinti !: Dinte[];
+  users !: User[];
+  loggedInUser!: any;
+  currentUser!: any;
 
-  constructor(private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private dinteService:DinteService) {
+  constructor(private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){
@@ -36,19 +36,42 @@ export class AddTreatmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUser = this.token.getUser();
     this.treatmentForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
+      email: new FormControl('',Validators.required),
       treatment: new FormControl('', Validators.required),
       diagnostic: new FormControl('', Validators.required),
+      pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
       dinte: new FormControl('', Validators.required)
     });
     this.radiografieForm = new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email], emailValidator(this.userService)),
+      email: new FormControl('',Validators.required),
       radiografie: new FormControl('', Validators.required)
     })
+    this.userService.findUser(this.currentUser.email).subscribe({
+      next:(response: User) => {
+        this.loggedInUser = response;
+        console.log(this.loggedInUser);
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
     this.getDiagnostics()
     this.getTreatments()
-    this.getDinti();
+    this.getUsers();
+  }
+
+  public getUsers(): void {
+    this.userService.getUsers().subscribe({
+      next:(response: User[]) => {
+        this.users = response;
+        console.log(this.users);
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
   }
 
   public getDiagnostics(){
@@ -71,36 +94,10 @@ export class AddTreatmentComponent implements OnInit {
       }
     })
   }
-  public getDinti(){
-    this.dinteService.getDinti().subscribe({
-      next:(response: Dinte[]) => {
-        this.dinti = response;
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    })
-  }
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.userService.updateTreatment(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value,this.treatmentForm.get('treatment')!.value).subscribe({
-        next:(response: User) => {
-          console.log(response);
-        },
-        error: (error:HttpErrorResponse) => {
-          alert(error.message);
-        }
-      });
-      this.userService.updateDiagnostic(this.treatmentForm.get('email')!.value,this.treatmentForm.get('diagnostic')!.value).subscribe({
-        next:(response: User) => {
-          console.log(response);
-        },
-        error: (error:HttpErrorResponse) => {
-          alert(error.message);
-        }
-      });
-      this.userService.updateDinte(this.treatmentForm.get('email')!.value,this.treatmentForm.get('dinte')!.value).subscribe({
+      this.userService.updateIstoric(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value, this.treatmentForm.get('diagnostic')!.value, this.treatmentForm.get('pret')!.value, this.treatmentForm.get('dinte')!.value).subscribe({
         next:(response: User) => {
           console.log(response);
         },
@@ -110,7 +107,6 @@ export class AddTreatmentComponent implements OnInit {
       });
       this.showToasterSuccess();
       await new Promise(f => setTimeout(f, 1000));
-      treatmentForm.reset();
       this.submitted = false;
     }
   }

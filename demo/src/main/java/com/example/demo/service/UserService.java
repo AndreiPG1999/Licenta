@@ -34,19 +34,21 @@ public class UserService {
         user.setPassword(pass);
         return userRepo.save(user);
     }
-    public User updateTreatment(User user, String treatment, double pret){
+    public User updateIstoric(User user, String treatment, String diagnostic, double pret, String dinte){
         user.setTreatments(treatment);
+        user.setDiagnostic(diagnostic);
+        user.setDinte(dinte);
         user.setPret(pret);
         return userRepo.save(user);
     }
-    public User updateDiagnostic(User user, String diagnostic){
-        user.setDiagnostic(diagnostic);
-        return userRepo.save(user);
-    }
-    public User updateDinte(User user, String dinte){
-        user.setDinte(dinte);
-        return userRepo.save(user);
-    }
+//    public User updateDiagnostic(User user, String diagnostic){
+//        user.setDiagnostic(diagnostic);
+//        return userRepo.save(user);
+//    }
+//    public User updateDinte(User user, String dinte){
+//        user.setDinte(dinte);
+//        return userRepo.save(user);
+//    }
     public User findUserByEmail(String email){
         return userRepo.findUserByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));

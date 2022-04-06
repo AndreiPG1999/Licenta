@@ -24,12 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/user/email").permitAll()
                 .antMatchers(HttpMethod.PUT,"/user/updatePacient/{email}/{doctor_id_upd}").permitAll()
                 .antMatchers(HttpMethod.PUT, "/user/updatePassword/{email}/{pass}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/user/updateTreatment/{email}/{treatment}/{pret}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/user/updateDiagnostic/{email}/{diagnostic}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/user/updateDinte/{email}/{dinte}").permitAll()
+                .antMatchers(HttpMethod.PUT, "/user/updateIstoric/{email}/{treatment}/{diagnostic}/{pret}/{dinte}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/user/delete/{email}").permitAll()
                 .antMatchers(HttpMethod.GET, "/diagnostic/all" ).permitAll()
-                .antMatchers(HttpMethod.GET, "/dinte/all" ).permitAll()
                 .anyRequest().authenticated();
     }
 

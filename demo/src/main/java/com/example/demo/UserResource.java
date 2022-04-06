@@ -28,12 +28,8 @@ public class UserResource {
 
     @PostMapping("/email")
     public ResponseEntity<Email> sendEmail(@RequestBody Email email){
-//        try{
         emailSenderService.sendEmail(email);
         return new ResponseEntity<>(email, HttpStatus.OK);
-//        }catch(MailException e){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
     }
 
     @RequestMapping("/login")
@@ -98,41 +94,33 @@ public class UserResource {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PutMapping("/updateTreatment/{email}/{treatment}/{pret}")
-    public ResponseEntity<User> updateTreatment(@PathVariable("email") String email,@PathVariable("treatment") String treatment,@PathVariable("pret") double pret){
+    @PutMapping("/updateIstoric/{email}/{treatment}/{diagnostic}/{pret}/{dinte}")
+    public ResponseEntity<User> updateTreatment(@PathVariable("email") String email, @PathVariable("treatment") String treatment,
+                                                @PathVariable("diagnostic") String diagnostic,
+                                                @PathVariable("pret") double pret,
+                                                @PathVariable("dinte") String dinte) {
         List<User> users = userService.findAllUsers();
         for(User userLog : users)
         {
             if(userLog.getEmail().equals(email))
             {
-                User updateUser = userService.updateTreatment(userLog,treatment,pret);
+                User updateUser = userService.updateIstoric(userLog, treatment, diagnostic, pret, dinte);
                 return new ResponseEntity<>(updateUser, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PutMapping("/updateDiagnostic/{email}/{diagnostic}")
-    public ResponseEntity<User> updateDiagnostic(@PathVariable("email") String email,@PathVariable("diagnostic") String diagnostic) {
-        List<User> users = userService.findAllUsers();
-        for (User userLog : users) {
-            if (userLog.getEmail().equals(email)) {
-                User updateUser = userService.updateDiagnostic(userLog, diagnostic);
-                return new ResponseEntity<>(updateUser, HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-    @PutMapping("/updateDinte/{email}/{dinte}")
-    public ResponseEntity<User> updateDinte(@PathVariable("email") String email,@PathVariable("dinte") String dinte) {
-        List<User> users = userService.findAllUsers();
-        for (User userLog : users) {
-            if (userLog.getEmail().equals(email)) {
-                User updateUser = userService.updateDinte(userLog, dinte);
-                return new ResponseEntity<>(updateUser, HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+//    @PutMapping("/updateDiagnostic/{email}/{diagnostic}")
+//    public ResponseEntity<User> updateDiagnostic(@PathVariable("email") String email,@PathVariable("diagnostic") String diagnostic) {
+//        List<User> users = userService.findAllUsers();
+//        for (User userLog : users) {
+//            if (userLog.getEmail().equals(email)) {
+//                User updateUser = userService.updateDiagnostic(userLog, diagnostic);
+//                return new ResponseEntity<>(updateUser, HttpStatus.OK);
+//            }
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
     @Transactional
     @DeleteMapping("/delete/{email}")

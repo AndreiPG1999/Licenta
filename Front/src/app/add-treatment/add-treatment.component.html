@@ -4,31 +4,36 @@
     Adăugare diagnostic și tratament
   </div>
 <div>
-    <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form-left">
-      <input type="text" formControlName="email" name="email" placeholder="Email pacient" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('email').errors }" class="email formEntry"/>
-      <div *ngIf="submitted && treatmentForm.get('email').errors" class="invalid-feedback">
-        <div *ngIf="treatmentForm.get('email').errors['required']">Introduceti un email</div>
-        <div *ngIf="treatmentForm.get('email').errors['email']">Email-ul este invalid</div>
-        <div *ngIf="treatmentForm.get('email').errors['noEmail']">Nu exista nici un cont cu acest email</div>
-      </div>
-      <select formControlName="diagnostic" name="diagnostic" placeholder="Diagnostic" class="select formEntry">
-        <option *ngFor="let diagnostic of diagnostics">
-          {{diagnostic.diagnostic}}
-        </option>
-      </select>
-      <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
-        <option *ngFor="let treatment of treatments">
-          {{treatment.treatments}}
-        </option>
-      </select>
-      <select formControlName="dinte" name="dinte" placeholder="Dinte" class="select formEntry">
-        <option *ngFor="let dinte of dinti">
-          {{dinte.dinte}}
-        </option>
-      </select>
-      <button type="submit" class="submit formEntry">Adaugă</button>
-    </form>
-  </div>
+  <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form-left">
+    <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
+      <option *ngFor="let user of users">
+        <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
+          {{user.email}}
+        </div>  
+      </option>
+    </select>
+    <select formControlName="diagnostic" name="diagnostic" placeholder="Diagnostic" class="select formEntry">
+      <option *ngFor="let diagnostic of diagnostics">
+        {{diagnostic.diagnostic}}
+      </option>
+    </select>
+    <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
+      <option *ngFor="let treatment of treatments">
+        {{treatment.treatments}}
+      </option>
+    </select>
+    <input type="text" formControlName="pret" name="pret" placeholder="Pret" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('pret').errors }" class="name formEntry"/>
+    <div *ngIf="submitted && treatmentForm.get('pret').errors" class="invalid-feedback">
+			<div *ngIf="treatmentForm.get('pret').errors['required']">Introduceti pretul.</div>
+      <div *ngIf="treatmentForm.get('pret').errors['pattern']">Pretul trebuie să fie un număr.</div>
+		</div>
+    <input type="text" formControlName="dinte" name="dinte" placeholder="Dinte" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('dinte').errors }" class="name formEntry"/>
+    <div *ngIf="submitted && treatmentForm.get('dinte').errors" class="invalid-feedback">
+			<div *ngIf="treatmentForm.get('dinte').errors['required']">Introduceti dintele.</div>
+		</div>
+    <button type="submit" class="submit formEntry">Adaugă</button>
+  </form>
+</div>
 
   <div class="right-up">
     Adăugare radiografie
