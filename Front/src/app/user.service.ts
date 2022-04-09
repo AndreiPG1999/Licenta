@@ -11,8 +11,6 @@ import { Email } from './email';
 export class UserService {
 
   private apiServerUrl = environment.apiBaseUrl;
-  static userService: any;
-  static getUsers: any;
 
   constructor(private http: HttpClient) { }
 
@@ -38,10 +36,6 @@ export class UserService {
 
   public updatePacient(email: string, doctor_id_upd: number): Observable<User>{
     return this.http.put<User>(`${this.apiServerUrl}/user/updatePacient/${email}/${doctor_id_upd}`, doctor_id_upd);
-  }
-
-  public updateIstoric(email: string, treatment: string, diagnostic: string, pret: Float32Array, dinte: string): Observable<User>{
-    return this.http.put<User>(`${this.apiServerUrl}/user/updateIstoric/${email}/${treatment}/${diagnostic}/${pret}/${dinte}`, treatment);
   }
 
   public deleteUser(email: string): Observable<void>{

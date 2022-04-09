@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
+import { Istoric } from '../istoric';
+import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { Treatment } from '../treatment';
@@ -28,7 +30,7 @@ export class AddTreatmentComponent implements OnInit {
   loggedInUser!: any;
   currentUser!: any;
 
-  constructor(private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
+  constructor(private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){
@@ -38,16 +40,12 @@ export class AddTreatmentComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.treatmentForm = new FormGroup({
-      email: new FormControl('',Validators.required),
+      email_pacient: new FormControl('',Validators.required),
       treatment: new FormControl('', Validators.required),
       diagnostic: new FormControl('', Validators.required),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
       dinte: new FormControl('', Validators.required)
     });
-    this.radiografieForm = new FormGroup({
-      email: new FormControl('',Validators.required),
-      radiografie: new FormControl('', Validators.required)
-    })
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
         this.loggedInUser = response;
@@ -97,26 +95,21 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.userService.updateIstoric(this.treatmentForm.get('email')!.value,this.treatmentForm.get('treatment')!.value, this.treatmentForm.get('diagnostic')!.value, this.treatmentForm.get('pret')!.value, this.treatmentForm.get('dinte')!.value).subscribe({
-        next:(response: User) => {
+      //treb adaugata si radiografie
+      this.istoricService.addIstoric(treatmentForm.value).subscribe({
+        next:async (response: Istoric) => {
           console.log(response);
+          this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
+          this.treatmentForm.controls['pret'].reset();
+          this.treatmentForm.controls['dinte'].reset();
+          this.treatmentForm.controls['radiografie'].reset();
+          this.submitted = false;
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
         }
-      });
-      this.showToasterSuccess();
-      await new Promise(f => setTimeout(f, 1000));
-      this.submitted = false;
-    }
-  }
-  async onSubmitRad(radiografieForm:FormGroup){
-    this.submittedRad = true;
-    if(radiografieForm.valid){
-      this.showToasterSuccess();
-      await new Promise(f => setTimeout(f, 1000));
-      radiografieForm.reset();
-      this.submittedRad = false;
+      })
     }
   }
 }

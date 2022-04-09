@@ -15,23 +15,14 @@
   } */
   
   /* form animation starts */
-  .form-left {
+  .form {
     background: inherit;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
     border-radius: 5px;
     max-width: 480px;
-    top: 100px;
-    left:10%;
-    position: relative;
-  }
-  .form-right {
-    background: inherit;
-    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
-    border-radius: 5px;
-    max-width: 480px;
-    float:right;
-    top:-270px;
-    left:15px;
+    text-align: center;
+    top:50px;
+    left:500px;
     position: relative;
   }
   ::-webkit-input-placeholder {
@@ -117,10 +108,10 @@
     border-radius: 0%;
   }
   
-  .left-up {
+  .middle-up {
     position: relative;
-    top: 10%;
-    left: 25%;
+    top:35px;
+    left:740px;
     color: white;
     transform: translate(-50%, -50%);
     float:left;

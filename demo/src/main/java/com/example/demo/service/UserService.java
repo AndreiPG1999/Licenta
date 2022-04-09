@@ -34,19 +34,11 @@ public class UserService {
         user.setPassword(pass);
         return userRepo.save(user);
     }
-    public User updateIstoric(User user, String treatment, String diagnostic, double pret, String dinte){
-        user.setTreatments(treatment);
-        user.setDiagnostic(diagnostic);
-        user.setDinte(dinte);
-        user.setPret(pret);
-        return userRepo.save(user);
-    }
-//    public User updateDiagnostic(User user, String diagnostic){
+//    public User updateIstoric(User user, String treatment, String diagnostic, double pret, String dinte){
+//        user.setTreatments(treatment);
 //        user.setDiagnostic(diagnostic);
-//        return userRepo.save(user);
-//    }
-//    public User updateDinte(User user, String dinte){
 //        user.setDinte(dinte);
+//        user.setPret(pret);
 //        return userRepo.save(user);
 //    }
     public User findUserByEmail(String email){

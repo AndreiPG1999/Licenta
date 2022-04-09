@@ -17,14 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/user/all").permitAll()
+                .antMatchers(HttpMethod.GET,"/istoric/all").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/add").permitAll()
+                .antMatchers(HttpMethod.POST,"/istoric/add").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/treatments/all" ).permitAll()
                 .antMatchers(HttpMethod.GET,"/user/find/{email}").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/email").permitAll()
                 .antMatchers(HttpMethod.PUT,"/user/updatePacient/{email}/{doctor_id_upd}").permitAll()
                 .antMatchers(HttpMethod.PUT, "/user/updatePassword/{email}/{pass}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/user/updateIstoric/{email}/{treatment}/{diagnostic}/{pret}/{dinte}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/user/delete/{email}").permitAll()
                 .antMatchers(HttpMethod.GET, "/diagnostic/all" ).permitAll()
                 .anyRequest().authenticated();
