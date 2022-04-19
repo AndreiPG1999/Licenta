@@ -8,6 +8,7 @@ import { DespreDoctorComponent } from './despre-doctor/despre-doctor.component';
 import { DespreComponent } from './despre/despre.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import { HomePacientComponent } from './home-pacient/home-pacient.component';
+import { IstoricComponent } from './istoric/istoric.component';
 import { LoginComponent } from './login/login.component';
 import { PacientiComponent } from './pacienti/pacienti.component';
 import { PassChangeDoctorComponent } from './pass-change-doctor/pass-change-doctor.component';
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'change_passD', component:PassChangeDoctorComponent},
   { path: 'add-treatments', component:AddTreatmentComponent},
   { path: 'add-pacient', component:AddPacientComponent},
-  { path: 'pacienti', component:PacientiComponent}
+  { path: 'pacienti', component:PacientiComponent},
+  { path: 'istoric', component:IstoricComponent}
 
 ];
 

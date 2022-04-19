@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="middle-up">
+    Istoric
+  </div>
+<div id="wrapper" class="container">
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th><span>Diagnostic</span></th>
+                <th><span>Tratament</span></th>
+                <th><span>Dinte</span></th>
+                <th><span>Pret</span></th>
+                <th><span>Data</span></th>
+                <th><span>Radiografie</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let istoric of istorics">
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.diagnostic}}</td>
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.treatment}}</td>
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.dinte}}</td>
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.pret}}</td>
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.date}}</td>
+                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">coming soon</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

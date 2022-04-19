@@ -15,7 +15,7 @@
               <a href="#">
                 <i class="fas fa-briefcase-medical"></i>
                 Diagnostice</a>
-            <a href="#">
+            <a [routerLink]="['/istoric']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
               <i class="fas fa-history"></i>
               Istoric</a>
           </div>
