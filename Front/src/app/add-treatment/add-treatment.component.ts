@@ -21,9 +21,7 @@ import { UserService } from '../user.service';
 export class AddTreatmentComponent implements OnInit {
 
   treatmentForm!:FormGroup
-  radiografieForm!: FormGroup
   submitted = false
-  submittedRad = false
   treatments !: Treatment[];
   diagnostics !: Diagnostic[];
   users !: User[];

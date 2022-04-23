@@ -24,6 +24,7 @@ import { AddTreatmentComponent } from './add-treatment/add-treatment.component';
 import { AddPacientComponent } from './add-pacient/add-pacient.component';
 import { PacientiComponent } from './pacienti/pacienti.component';
 import { IstoricComponent } from './istoric/istoric.component';
+import { AddProgramareComponent } from './add-programare/add-programare.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { IstoricComponent } from './istoric/istoric.component';
     AddTreatmentComponent,
     AddPacientComponent,
     PacientiComponent,
-    IstoricComponent
+    IstoricComponent,
+    AddProgramareComponent
   ],
   imports: [
     BrowserModule,

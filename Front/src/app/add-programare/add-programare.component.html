@@ -1,0 +1,32 @@
+<app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+    Adaugă programare
+</div>
+<div>
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit(appointmentForm)" class="form">
+      <select formControlName="email_pacient" name="email_pacient" placeholder="Email_pacient" class="select formEntry">
+        <option *ngFor="let user of users">
+          <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
+            {{user.email}}
+          </div>  
+        </option>
+      </select>
+      <input type="text" formControlName="data" name="data" placeholder="Data" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('data').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && appointmentForm.get('data').errors" class="invalid-feedback">
+        <div *ngIf="appointmentForm.get('data').errors['required']">Introduceti data.</div>
+      </div>
+      <input type="text" formControlName="ora_incepere" name="ora_incepere" placeholder="Ora incepere" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_incepere').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && appointmentForm.get('ora_incepere').errors" class="invalid-feedback">
+        <div *ngIf="appointmentForm.get('ora_incepere').errors['required']">Introduceti ora de începere.</div>
+      </div>
+      <input type="text" formControlName="ora_finalizare" name="ora_finalizare" placeholder="Ora finalizare" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_finalizare').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && appointmentForm.get('ora_finalizare').errors" class="invalid-feedback">
+        <div *ngIf="appointmentForm.get('ora_finalizare').errors['required']">Introduceti ora de finalizare.</div>
+      </div>
+      <input type="text" formControlName="descriere" name="descriere" placeholder="Descriere" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('descriere').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && appointmentForm.get('descriere').errors" class="invalid-feedback">
+        <div *ngIf="appointmentForm.get('descriere').errors['required']">Introduceti descrierea.</div>
+      </div>
+      <button type="submit" class="submit formEntry">Adaugă</button>
+    </form>
+  </div>

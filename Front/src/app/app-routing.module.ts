@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPacientComponent } from './add-pacient/add-pacient.component';
+import { AddProgramareComponent } from './add-programare/add-programare.component';
 import { AddTreatmentComponent } from './add-treatment/add-treatment.component';
 import { ContactDoctorComponent } from './contact-doctor/contact-doctor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -34,8 +35,8 @@ const routes: Routes = [
   { path: 'add-treatments', component:AddTreatmentComponent},
   { path: 'add-pacient', component:AddPacientComponent},
   { path: 'pacienti', component:PacientiComponent},
-  { path: 'istoric', component:IstoricComponent}
-
+  { path: 'istoric', component:IstoricComponent},
+  { path: 'add-programare', component:AddProgramareComponent}
 ];
 
 @NgModule({
