@@ -25,6 +25,8 @@ import { AddPacientComponent } from './add-pacient/add-pacient.component';
 import { PacientiComponent } from './pacienti/pacienti.component';
 import { IstoricComponent } from './istoric/istoric.component';
 import { AddProgramareComponent } from './add-programare/add-programare.component';
+import { ProgramariDoctorComponent } from './programari-doctor/programari-doctor.component';
+import { ProgramariPacientComponent } from './programari-pacient/programari-pacient.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { AddProgramareComponent } from './add-programare/add-programare.componen
     AddPacientComponent,
     PacientiComponent,
     IstoricComponent,
-    AddProgramareComponent
+    AddProgramareComponent,
+    ProgramariDoctorComponent,
+    ProgramariPacientComponent
   ],
   imports: [
     BrowserModule,

@@ -87,5 +87,16 @@ public class Istoric implements Serializable {
         this.email_pacient = email_pacient;
     }
 
-
+    @Override
+    public String toString() {
+        return "Istoric{" +
+                "id=" + id +
+                ", treatment='" + treatment + '\'' +
+                ", pret=" + pret +
+                ", diagnostic='" + diagnostic + '\'' +
+                ", date=" + date +
+                ", dinte='" + dinte + '\'' +
+                ", email_pacient='" + email_pacient + '\'' +
+                '}';
+    }
 }

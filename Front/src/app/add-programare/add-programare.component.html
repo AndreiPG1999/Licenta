@@ -4,7 +4,8 @@
 </div>
 <div>
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit(appointmentForm)" class="form">
-      <select formControlName="email_pacient" name="email_pacient" placeholder="Email_pacient" class="select formEntry">
+      <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
+        <option disabled selected value="">Selectati un email</option>
         <option *ngFor="let user of users">
           <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
             {{user.email}}
@@ -26,6 +27,11 @@
       <input type="text" formControlName="descriere" name="descriere" placeholder="Descriere" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('descriere').errors }" class="name formEntry"/>
       <div *ngIf="submitted && appointmentForm.get('descriere').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('descriere').errors['required']">Introduceti descrierea.</div>
+      </div>
+      <!-- <input type="text" name="id_doctor" value="{{loggedInUser.id}}" class="name formEntry" readonly/> -->
+      <input type="text" formControlName="id_doctor" name="id_doctor" placeholder="Id-ul tau este: {{loggedInUser.id}}" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('id_doctor').errors }" class="name formEntry"/>
+      <div *ngIf="submitted && appointmentForm.get('id_doctor').errors" class="invalid-feedback">
+        <div *ngIf="appointmentForm.get('id_doctor').errors['required']">Introduceti descrierea.</div>
       </div>
       <button type="submit" class="submit formEntry">Adaugă</button>
     </form>

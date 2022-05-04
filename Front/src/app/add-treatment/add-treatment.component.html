@@ -5,6 +5,7 @@
 <div>
   <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form">
     <select formControlName="email_pacient" name="email_pacient" placeholder="Email_pacient" class="select formEntry">
+      <option disabled selected value="">Selectati un email</option>
       <option *ngFor="let user of users">
         <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
           {{user.email}}
@@ -12,11 +13,13 @@
       </option>
     </select>
     <select formControlName="diagnostic" name="diagnostic" placeholder="Diagnostic" class="select formEntry">
+      <option disabled selected value="">Selectati un diagnostic</option>
       <option *ngFor="let diagnostic of diagnostics">
         {{diagnostic.diagnostic}}
       </option>
     </select>
     <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
+      <option disabled selected value="">Selectati un tratament</option>
       <option *ngFor="let treatment of treatments">
         {{treatment.treatments}}
       </option>
@@ -30,7 +33,7 @@
     <div *ngIf="submitted && treatmentForm.get('dinte').errors" class="invalid-feedback">
 			<div *ngIf="treatmentForm.get('dinte').errors['required']">Introduceti dintele.</div>
 		</div>
-    <input type="text" formControlName="radiografie" name="radiografie" placeholder="Radiografie" class="name formEntry"/>
+    <!-- <input type="text" formControlName="radiografie" name="radiografie" placeholder="Radiografie" class="name formEntry"/> -->
     <button type="submit" class="submit formEntry">Adaugă</button>
   </form>
 </div>

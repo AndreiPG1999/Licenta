@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT,"/user/updatePacient/{email}/{doctor_id_upd}").permitAll()
                 .antMatchers(HttpMethod.PUT, "/user/updatePassword/{email}/{pass}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/user/delete/{email}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/appointment/delete/{email}").permitAll()
                 .antMatchers(HttpMethod.GET, "/diagnostic/all" ).permitAll()
                 .anyRequest().authenticated();
     }

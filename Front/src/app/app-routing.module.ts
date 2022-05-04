@@ -16,6 +16,8 @@ import { PassChangeDoctorComponent } from './pass-change-doctor/pass-change-doct
 import { PassChangeComponent } from './pass-change/pass-change.component';
 import { ProfilDoctorComponent } from './profil-doctor/profil-doctor.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ProgramariDoctorComponent } from './programari-doctor/programari-doctor.component';
+import { ProgramariPacientComponent } from './programari-pacient/programari-pacient.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -36,7 +38,9 @@ const routes: Routes = [
   { path: 'add-pacient', component:AddPacientComponent},
   { path: 'pacienti', component:PacientiComponent},
   { path: 'istoric', component:IstoricComponent},
-  { path: 'add-programare', component:AddProgramareComponent}
+  { path: 'add-programare', component:AddProgramareComponent},
+  { path: 'programari_doctor', component:ProgramariDoctorComponent},
+  { path: 'programari_pacient', component:ProgramariPacientComponent}
 ];
 
 @NgModule({

@@ -94,22 +94,6 @@ public class UserResource {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-//    @PutMapping("/updateIstoric/{email}/{treatment}/{diagnostic}/{pret}/{dinte}")
-//    public ResponseEntity<User> updateTreatment(@PathVariable("email") String email, @PathVariable("treatment") String treatment,
-//                                                @PathVariable("diagnostic") String diagnostic,
-//                                                @PathVariable("pret") double pret,
-//                                                @PathVariable("dinte") String dinte) {
-//        List<User> users = userService.findAllUsers();
-//        for(User userLog : users)
-//        {
-//            if(userLog.getEmail().equals(email))
-//            {
-//                User updateUser = userService.updateIstoric(userLog, treatment, diagnostic, pret, dinte);
-//                return new ResponseEntity<>(updateUser, HttpStatus.OK);
-//            }
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
 
     @Transactional
     @DeleteMapping("/delete/{email}")

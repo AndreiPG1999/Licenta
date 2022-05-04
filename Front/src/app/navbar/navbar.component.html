@@ -21,7 +21,7 @@
           </div>
         </div>
       </li>
-      <li><a href="#Programari" class="nav-link">
+      <li><a [routerLink]="['/programari_pacient']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
         <i class="fas fa-calendar-check"></i>
         Programari</a></li>
       <li><a [routerLink]="['/about']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-address-card"></i> Despre</a></li>

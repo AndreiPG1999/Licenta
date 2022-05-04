@@ -38,9 +38,9 @@ export class AddTreatmentComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.treatmentForm = new FormGroup({
-      email_pacient: new FormControl('',Validators.required),
-      treatment: new FormControl('', Validators.required),
-      diagnostic: new FormControl('', Validators.required),
+      email_pacient: new FormControl(''),
+      treatment: new FormControl(''),
+      diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
       dinte: new FormControl('', Validators.required)
     });
@@ -99,9 +99,7 @@ export class AddTreatmentComponent implements OnInit {
           console.log(response);
           this.showToasterSuccess();
           await new Promise(f => setTimeout(f, 1000));
-          this.treatmentForm.controls['pret'].reset();
-          this.treatmentForm.controls['dinte'].reset();
-          this.treatmentForm.controls['radiografie'].reset();
+          window.location.reload();
           this.submitted = false;
         },
         error: (error:HttpErrorResponse) => {
