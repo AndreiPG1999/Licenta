@@ -16,7 +16,6 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String type;
-    private Date appointment;
     private Long id_doctor;
     private String nr_telefon;
 
@@ -29,7 +28,6 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.type = type;
-        this.appointment = appointment;
         this.id_doctor = id_doctor;
         this.nr_telefon = nr_telefon;
     }
@@ -82,14 +80,6 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public Date getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Date appointment) {
-        this.appointment = appointment;
-    }
-
     public Long getId_doctor() {
         return id_doctor;
     }
@@ -115,7 +105,6 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
-                ", appointment=" + appointment +
                 ", id_doctor=" + id_doctor +
                 ", nr_telefon='" + nr_telefon + '\'' +
                 '}';

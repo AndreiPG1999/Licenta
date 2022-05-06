@@ -2,26 +2,39 @@
 <!-- merge facut un buton de finalizare programare care sa ma duca la adaugare tratament -->
 <div class="middle-up">
     Programări
-  </div>
-  <div id="wrapper" class="container">
+</div>
+<div id="wrapper" class="container">
     <table cellspacing="0" cellpadding="0">
         <thead>
             <tr>
+                <th><span>Email pacient</span></th>
                 <th><span>Oră începere</span></th>
                 <th><span>Oră finalizare</span></th>
                 <th><span>Data</span></th>
                 <th><span>Descriere</span></th>
-                <th><span>Delete</span></th>
+                <th><span>Ștrergere programare</span></th>
+                <th><span>Finalizare</span></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let appointment of appointments">
+                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.email}}</td>
                 <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.ora_incepere}}</td>
                 <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.ora_finalizare}}</td>
                 <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.data}}</td>
                 <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.descriere}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">Buton delete coming soon</td>
+                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">
+                    <button class="btn" (click)="clickMethod(appointment.id)">
+                        <i class="fas fa-solid fa-trash"></i>
+                        Ștergere programare</button>
+                </td>
+                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">
+                    <button class="btn" [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
+                        <i class="fas fa-briefcase-medical"></i>
+                        Adăugare date consultație</button>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+  

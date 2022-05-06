@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
 
-    void deleteAppointmentByEmail(String email);
+    void deleteAppointmentById(Long id);
 }

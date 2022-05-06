@@ -9,11 +9,11 @@
   padding-right: 150px;
 }
 .profile{
-  position:absolute;
-  top: 50%;
-  left: 20%;
+  position:relative;
+  float:left;
+  top: 50px;
+  left: 80px;
   color: white;
-  transform: translate(-50%, -50%);
   font-size: 30px;
 }
 .divider-custom {

@@ -5,22 +5,22 @@
 <div>
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit(appointmentForm)" class="form">
       <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
-        <option disabled selected value="">Selectati un email</option>
+        <option disabled selected value="">Selectati email-ul pacientului:</option>
         <option *ngFor="let user of users">
           <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
             {{user.email}}
           </div>  
         </option>
       </select>
-      <input type="text" formControlName="data" name="data" placeholder="Data" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('data').errors }" class="name formEntry"/>
+      <input type="date" formControlName="data" name="data" placeholder="Data" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('data').errors }" class="name formEntry"/>
       <div *ngIf="submitted && appointmentForm.get('data').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('data').errors['required']">Introduceti data.</div>
       </div>
-      <input type="text" formControlName="ora_incepere" name="ora_incepere" placeholder="Ora incepere" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_incepere').errors }" class="name formEntry"/>
+      <input type="time"  formControlName="ora_incepere" name="ora_incepere" placeholder="Ora incepere" value="18:00" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_incepere').errors }" class="name formEntry"/>
       <div *ngIf="submitted && appointmentForm.get('ora_incepere').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('ora_incepere').errors['required']">Introduceti ora de începere.</div>
       </div>
-      <input type="text" formControlName="ora_finalizare" name="ora_finalizare" placeholder="Ora finalizare" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_finalizare').errors }" class="name formEntry"/>
+      <input type="time"  formControlName="ora_finalizare" name="ora_finalizare" placeholder="Ora finalizare" value="19:00" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('ora_finalizare').errors }" class="name formEntry"/>
       <div *ngIf="submitted && appointmentForm.get('ora_finalizare').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('ora_finalizare').errors['required']">Introduceti ora de finalizare.</div>
       </div>
@@ -28,10 +28,9 @@
       <div *ngIf="submitted && appointmentForm.get('descriere').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('descriere').errors['required']">Introduceti descrierea.</div>
       </div>
-      <!-- <input type="text" name="id_doctor" value="{{loggedInUser.id}}" class="name formEntry" readonly/> -->
       <input type="text" formControlName="id_doctor" name="id_doctor" placeholder="Id-ul tau este: {{loggedInUser.id}}" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('id_doctor').errors }" class="name formEntry"/>
       <div *ngIf="submitted && appointmentForm.get('id_doctor').errors" class="invalid-feedback">
-        <div *ngIf="appointmentForm.get('id_doctor').errors['required']">Introduceti descrierea.</div>
+        <div *ngIf="appointmentForm.get('id_doctor').errors['required']">Introduceti id-ul dumneavoastră.</div>
       </div>
       <button type="submit" class="submit formEntry">Adaugă</button>
     </form>

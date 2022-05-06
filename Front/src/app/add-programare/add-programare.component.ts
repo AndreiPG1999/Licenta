@@ -32,7 +32,7 @@ export class AddProgramareComponent implements OnInit {
     this.currentUser = this.token.getUser();
     this.appointmentForm = new FormGroup({
       email: new FormControl('',Validators.required),
-      data: new FormControl('', Validators.required),
+      data: new FormControl((new Date()).toISOString().substring(0,10)),
       ora_incepere: new FormControl('', Validators.required),
       ora_finalizare: new FormControl('',Validators.required),
       descriere: new FormControl('', Validators.required),

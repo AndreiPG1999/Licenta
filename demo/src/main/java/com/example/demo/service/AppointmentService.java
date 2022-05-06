@@ -22,7 +22,7 @@ public class AppointmentService {
 
     public List<Appointment> findAllAppointments(){ return appointmentRepo.findAll(); }
 
-    public void deleteAppointment(String email){
-        appointmentRepo.deleteAppointmentByEmail(email);
+    public void deleteAppointment(Long id){
+        appointmentRepo.deleteAppointmentById(id);
     }
 }

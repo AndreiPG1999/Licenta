@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
+import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -18,7 +19,7 @@ export class ProgramariDoctorComponent implements OnInit {
   loggedInUser!: any;
   users !: User[];
 
-  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService) { }
+  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser()
@@ -31,7 +32,10 @@ export class ProgramariDoctorComponent implements OnInit {
         alert(error.message);
       }
     });
-    this.getAppointment();
+    this.getAppointment()
+  }
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Programare ștearsă cu succes !!")
   }
 
   public getAppointment(): void {
@@ -45,18 +49,17 @@ export class ProgramariDoctorComponent implements OnInit {
       }
     });
   }
-  // clickMethod(){
-  //   if(confirm("Sunteți sigur că doriți să vă ștergeți contul?")){
-  //     this.userService.deleteUser(this.currentUser.email).subscribe({
-  //       next: async () => {
-  //         this.showToasterSuccess();
-  //         await new Promise(f => setTimeout(f, 2000));
-  //         this.router.navigate(['/login']);
-  //       },
-  //       error: (error:HttpErrorResponse) => {
-  //         alert(error.message);
-  //       }
-  //     });
-  //   }
-  // }
+  clickMethod(id:number){
+    if(confirm("Sunteți sigur că doriți să ștergeți această programare?")){
+      this.appointmentService.deleteAppointment(id).subscribe({
+        next: async () => {
+          this.showToasterSuccess();
+          window.location.reload();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
+  }
 }

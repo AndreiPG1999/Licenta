@@ -20,4 +20,8 @@ export class AppointmentService{
     public addAppointment(appointment: Appointment): Observable<Appointment>{
         return this.http.post<Appointment>(`${this.apiServerUrl}/appointment/add`, appointment);
     }
+
+    public deleteAppointment(id: number): Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/appointment/delete/${id}`);
+    }
 }

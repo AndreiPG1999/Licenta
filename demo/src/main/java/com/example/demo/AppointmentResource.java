@@ -32,9 +32,9 @@ public class AppointmentResource {
     }
 
     @Transactional
-    @DeleteMapping("/delete/{email}")
-    public ResponseEntity<?> deleteAppointment(@PathVariable("email") String email) {
-        appointmentService.deleteAppointment(email);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteAppointment(@PathVariable("id") Long id) {
+        appointmentService.deleteAppointment(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
