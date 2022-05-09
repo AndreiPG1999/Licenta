@@ -38,6 +38,18 @@ export class UserService {
     return this.http.put<User>(`${this.apiServerUrl}/user/updatePacient/${email}/${doctor_id_upd}`, doctor_id_upd);
   }
 
+  public updateNrTel(email: string, nr_telefon: string): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updateNrTel/${email}/${nr_telefon}`, nr_telefon);
+  }
+
+  public updateLastName(email: string, last_name: string): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updateLastName/${email}/${last_name}`, last_name);
+  }
+
+  public updateFirstName(email: string, first_name: number): Observable<User>{
+    return this.http.put<User>(`${this.apiServerUrl}/user/updatePacient/${email}/${first_name}`, first_name);
+  }
+
   public deleteUser(email: string): Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${email}`);
   }

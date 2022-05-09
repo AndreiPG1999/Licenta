@@ -30,6 +30,18 @@ public class UserService {
         user.setId_doctor(id_doctor_upd);
         return userRepo.save(user);
     }
+    public User updateNrTel(User user, String nr_telefon){
+        user.setNr_telefon(nr_telefon);
+        return userRepo.save(user);
+    }
+    public User updateFirstName(User user, String firstName){
+        user.setFirst_name(firstName);
+        return userRepo.save(user);
+    }
+    public User updateLastName(User user, String lastName){
+        user.setLast_name(lastName);
+        return userRepo.save(user);
+    }
     public User updatePassword(User user, String pass){
         user.setPassword(pass);
         return userRepo.save(user);
