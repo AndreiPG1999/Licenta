@@ -20,13 +20,12 @@ public class User implements Serializable {
     private String type;
     private Long id_doctor;
     private String nr_telefon;
-    @Lob
-    private ByteArray profile_picture;
+    private String profile_picture;
 
     public User(){}
 
     public User(Long id, String first_name, String last_name, String email, String password, String type,
-                Long id_doctor, String nr_telefon, ByteArray profile_picture) {
+                Long id_doctor, String nr_telefon, String profile_picture) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -102,11 +101,11 @@ public class User implements Serializable {
         this.nr_telefon = nr_telefon;
     }
 
-    public ByteArray getProfile_picture() {
+    public String getProfile_picture() {
         return profile_picture;
     }
 
-    public void setProfile_picture(ByteArray profile_picture) {
+    public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
     }
 

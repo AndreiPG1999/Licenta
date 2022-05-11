@@ -48,6 +48,15 @@ export class AddTreatmentComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+          next:(response: User[]) => {
+            this.users = response;
+            console.log(this.users);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        });
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -93,7 +102,6 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      //treb adaugata si radiografie
       this.istoricService.addIstoric(treatmentForm.value).subscribe({
         next:async (response: Istoric) => {
           console.log(response);

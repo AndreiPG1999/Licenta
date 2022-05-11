@@ -18,10 +18,12 @@ public class Istoric implements Serializable {
     private String dinte;
     @Column(nullable = false, updatable = false)
     private String email_pacient;
+    private String radiografie;
 
     public Istoric(){}
 
-    public Istoric(Long id, String treatment, double pret, String diagnostic, Date date, String dinte, String email_pacient) {
+    public Istoric(Long id, String treatment, double pret, String diagnostic, Date date, String dinte,
+                   String email_pacient, String radiografie) {
         this.id = id;
         this.treatment = treatment;
         this.pret = pret;
@@ -29,6 +31,7 @@ public class Istoric implements Serializable {
         this.date = date;
         this.dinte = dinte;
         this.email_pacient = email_pacient;
+        this.radiografie = radiografie;
     }
 
     public Long getId() {
@@ -87,6 +90,14 @@ public class Istoric implements Serializable {
         this.email_pacient = email_pacient;
     }
 
+    public String getRadiografie() {
+        return radiografie;
+    }
+
+    public void setRadiografie(String radiografie) {
+        this.radiografie = radiografie;
+    }
+
     @Override
     public String toString() {
         return "Istoric{" +
@@ -97,6 +108,7 @@ public class Istoric implements Serializable {
                 ", date=" + date +
                 ", dinte='" + dinte + '\'' +
                 ", email_pacient='" + email_pacient + '\'' +
+                ", radiografie='" + radiografie + '\'' +
                 '}';
     }
 }

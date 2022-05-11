@@ -42,25 +42,23 @@ export class AddProgramareComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+          next:(response: User[]) => {
+            this.users = response;
+            console.log(this.users);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        });
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
-    this.getUsers();
+    
   }
 
-  public getUsers(): void {
-    this.userService.getUsers().subscribe({
-      next:(response: User[]) => {
-        this.users = response;
-        console.log(this.users);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
-  }
 
   async onSubmit(appointmentForm:FormGroup){
     this.submitted = true;

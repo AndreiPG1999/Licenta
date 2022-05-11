@@ -7,9 +7,7 @@
       <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
         <option disabled selected value="">Selectati email-ul pacientului:</option>
         <option *ngFor="let user of users">
-          <div *ngIf="(user.type == 'pacient') && user.id_doctor == loggedInUser.id">
             {{user.email}}
-          </div>  
         </option>
       </select>
       <input type="date" formControlName="data" name="data" placeholder="Data" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('data').errors }" class="name formEntry"/>

@@ -6,4 +6,5 @@ export interface Istoric{
     email_pacient: string;
     pret: Float32Array;
     treatment: string;
+    radiografie: string;
 }
