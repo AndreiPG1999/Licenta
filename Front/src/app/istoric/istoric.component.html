@@ -2,6 +2,13 @@
 <div class="middle-up">
     Istoric
   </div>
+<form class="form">
+    <input type="text" (ngModelChange)="searchIstoric(key.value)" #key="ngModel" ngModel
+     name="key" id="searchName" class="search formEntry" placeholder="Caută după dată..." required>
+</form>
+<div>
+   <p></p>
+</div>
 <div id="wrapper" class="container">
     <table cellspacing="0" cellpadding="0">
         <thead>

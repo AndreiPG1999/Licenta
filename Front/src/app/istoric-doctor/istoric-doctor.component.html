@@ -1,0 +1,37 @@
+<app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+    Istoric
+  </div>
+<form class="form">
+    <input type="text" (ngModelChange)="searchIstoric(key.value)" #key="ngModel" ngModel
+     name="key" id="searchName" class="search formEntry" placeholder="Caută după email pacient sau dată..." required>
+</form>
+<div>
+   <p></p>
+</div>
+<div id="wrapper" class="container">
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th><span>Email pacient</span></th>
+                <th><span>Diagnostic</span></th>
+                <th><span>Tratament</span></th>
+                <th><span>Dinte</span></th>
+                <th><span>Pret</span></th>
+                <th><span>Data</span></th>
+                <th><span>Radiografie</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let istoric of istorics">
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.email_pacient}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.diagnostic}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.treatment}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.dinte}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.pret}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">{{istoric.date}}</td>
+                <td *ngIf="loggedInUser.id === istoric.id_doctor" class="lalign">coming soon</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -14,16 +14,17 @@ public class Istoric implements Serializable {
     private double pret;
     private String diagnostic;
     @Column(nullable = false, updatable = false)
-    private Date date;
+    private String date;
     private String dinte;
     @Column(nullable = false, updatable = false)
     private String email_pacient;
     private String radiografie;
+    private Long id_doctor;
 
     public Istoric(){}
 
-    public Istoric(Long id, String treatment, double pret, String diagnostic, Date date, String dinte,
-                   String email_pacient, String radiografie) {
+    public Istoric(Long id, String treatment, double pret, String diagnostic, String date, String dinte,
+                   String email_pacient, String radiografie, Long id_doctor) {
         this.id = id;
         this.treatment = treatment;
         this.pret = pret;
@@ -32,6 +33,7 @@ public class Istoric implements Serializable {
         this.dinte = dinte;
         this.email_pacient = email_pacient;
         this.radiografie = radiografie;
+        this.id_doctor = id_doctor;
     }
 
     public Long getId() {
@@ -66,11 +68,11 @@ public class Istoric implements Serializable {
         this.diagnostic = diagnostic;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -98,6 +100,14 @@ public class Istoric implements Serializable {
         this.radiografie = radiografie;
     }
 
+    public Long getId_doctor() {
+        return id_doctor;
+    }
+
+    public void setId_doctor(Long id_doctor) {
+        this.id_doctor = id_doctor;
+    }
+
     @Override
     public String toString() {
         return "Istoric{" +
@@ -105,10 +115,11 @@ public class Istoric implements Serializable {
                 ", treatment='" + treatment + '\'' +
                 ", pret=" + pret +
                 ", diagnostic='" + diagnostic + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", dinte='" + dinte + '\'' +
                 ", email_pacient='" + email_pacient + '\'' +
                 ", radiografie='" + radiografie + '\'' +
+                ", id_doctor=" + id_doctor +
                 '}';
     }
 }

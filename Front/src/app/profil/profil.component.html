@@ -1,23 +1,110 @@
 <app-navbar></app-navbar>
-    <div class="profile">
-      <p style="font-size: larger;">Date personale</p>
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
-        <div class="divider-custom-line"></div>
-      </div>
-      <p>Nume: {{loggedInUser.last_name}}   <button class="btn"><i class="fas fa-solid fa-pen"></i></button></p>
-      <br>
-      <p>Prenume: {{loggedInUser.first_name}}   <button class="btn"><i class="fas fa-solid fa-pen"></i></button></p>
-      <br>
-      <p>Nr. telefon: {{loggedInUser.nr_telefon}}   <button class="btn"><i class="fas fa-solid fa-pen"></i></button></p>
-      <br>
-      <p>Email: {{currentUser.email}}</p>
-      <br>
-      <p>Id cont: {{loggedInUser.id}}</p>
-      <br>
-      <p>Tip cont: {{loggedInUser.type}}</p>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+<div  id="main-container">
+  <div class="profile">
+    <p style="font-size: larger;">Date personale</p>
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+      <div class="divider-custom-line"></div>
     </div>
-    <div class="div-right">
-      <img src="./assets/images/cabinet2.jpg" width="700" height="500" class="img-right">
+    <p>Nume: {{loggedInUser.last_name}}   <button class="btn" (click)="onOpenLastNameModal()" ><i class="fas fa-solid fa-pen"></i></button></p>
+    <br>
+    <p>Prenume: {{loggedInUser.first_name}}   <button class="btn" (click)="onOpenFirstNameModal()"><i class="fas fa-solid fa-pen"></i></button></p>
+    <br>
+    <p>Nr. telefon: {{loggedInUser.nr_telefon}}   <button class="btn" (click)="onOpenNrTelefonModal()"><i class="fas fa-solid fa-pen"></i></button></p>
+    <br>
+    <p>Email: {{currentUser.email}}</p>
+    <br>
+    <p>Id cont: {{loggedInUser.id}}</p>
+    <br>
+    <p>Tip cont: {{loggedInUser.type}}</p>
+  </div>
+  <div class="div-right">
+    <img src="./assets/images/cabinet2.jpg" width="700" height="500" class="img-right">
+  </div>
+
+  <!-- update last name modal -->
+  <div class="modal" tabindex="-1" id="updateLastNameModal" role="dialog"  [ngStyle]="{'display':displayLast}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Update</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseLastModal()"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="updateLastNameform">
+                    <div class="form-group">
+                       <input type="text" formcontrolName="last_name" name="last_name" class="text formEntry" id="last_name" placeholder="Nume" [ngClass]="{ 'is-invalid': submittedLast && updateLastNameform.get('last_name').errors }">
+                       <div *ngIf="submittedLast && updateLastNameform.get('last_name').errors" class="invalid-feedback">
+                        <div *ngIf="updateLastNameform.get('last_name').errors['required']">Introduceti numele</div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                       <button (click)="updateLastName(updateLastNameform)" data-dismiss="modal" class="btnModal" >Update</button>
+                       <button type="button" class="btnModal" (click)="onCloseLastModal()" >Close</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
     </div>
+  </div>
+
+  <!-- update first name modal -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayFirst}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Update</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseFirstModal()"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="updateFirstNameform">
+                    <div class="form-group">
+                       <label for="name">Prenume</label>
+                       <input type="text" formcontrolName="firstName" name="first_name" class="text formEntry" id="firstName" placeholder="Prenume" [ngClass]="{ 'is-invalid': submittedFirst && updateFirstNameform.get('first_name').errors }">
+                       <div *ngIf="submittedFirst && updateFirstNameform.get('first_name').errors" class="invalid-feedback">
+                        <div *ngIf="updateFirstNameform.get('first_name').errors['required']">Introduceti prenumele</div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                       <button (click)="updateFirstName(updateFirstNameform)" data-dismiss="modal" class="btn" >Update</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-default" (click)="onCloseFirstModal()" >Close</button>
+                </div>
+            </div>
+    </div>
+  </div>
+
+  <!-- update nr telefon modal -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayNr}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Update</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseNrModal()"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="updateNrTelefonform">
+                    <div class="form-group">
+                       <label for="name">Număr de telefon</label>
+                       <input type="text" formcontrolName="nr_telefon" name="nr_telefon" class="text formEntry" id="nr_telefon" placeholder="Număr de telefon" [ngClass]="{ 'is-invalid': submittedNrTelefon && updateNrTelefonform.get('nr_telefon').errors }">
+                       <div *ngIf="submittedNrTelefon && updateNrTelefonform.get('nr_telefon').errors" class="invalid-feedback">
+                        <div *ngIf="updateNrTelefonform.get('nr_telefon').errors['required']">Introduceti numărul de telefon</div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                       <button (click)="updateNrTelefon(updateNrTelefonform)" data-dismiss="modal" class="btn" >Update</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-default" (click)="onCloseNrModal()" >Close</button>
+                </div>
+            </div>
+    </div>
+  </div>
+

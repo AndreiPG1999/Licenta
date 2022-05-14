@@ -1,0 +1,114 @@
+#title-Tag-Line {
+    font-size: 20px;
+  }
+  .form {
+    background: inherit;
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    border-radius: 5px;
+    max-width: 480px;
+    text-align: center;
+    top:80px;
+    left:500px;
+    position: relative;
+  }
+  ::-webkit-input-placeholder {
+    font-size: 1.3em;
+  }
+  
+  .title{
+    display: block;
+    font-family:'Comfortaa', cursive;
+    margin: 10px auto 5px;
+    width: 300px;
+  }
+  .termsConditions{
+    margin: 0 auto 5px 80px;
+  }
+  
+  .pageTitle{
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .secondaryTitle{
+    color: grey;
+  }
+  
+  .name {
+    background-color: #ebebeb;
+    font-family:'Comfortaa', cursive;
+  }
+  .name:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 30px;
+    width: 380px;
+    transition: ease 0.5s;
+  }
+  .select{
+    background-color: #ebebeb;
+    height: 3.5em;
+    width:320px;
+    font-family:'Comfortaa', cursive;
+  }
+  .select:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 55px;
+    width: 380px;
+    transition: ease 0.5s;
+  }
+  .email {
+    background-color: #ebebeb;
+    height: 2em;
+    font-family:'Comfortaa', cursive;
+  }
+  
+  .email:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 30px;
+    width: 380px;
+    transition: ease 0.5s;
+  }
+  
+  .formEntry {
+    display: block;
+    margin: 30px auto;
+    min-width: 300px;
+    padding: 10px;
+    border-radius: 2px;
+    border: none;
+    transition: all 0.5s ease 0s;
+  }
+  
+  .submit {
+    width: 200px;
+    color: white;
+    background-color: #0e3721;
+    font-size: 20px;
+    font-family:'Comfortaa', cursive;
+  }
+  
+  .submit:hover {
+    box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
+    transform: translateY(-3px);
+    width: 300px;
+    border-top: 5px solid #0e3750;
+    border-radius: 0%;
+  }
+  
+  .middle-up {
+    position: relative;
+    top:50px;
+    left:740px;
+    color: white;
+    transform: translate(-50%, -50%);
+    float:left;
+    font-size: 30px;
+  }
+  .right-up {
+    position: relative;
+    top:-40%;
+    right:10%;
+    color: white;
+    transform: translate(-50%, -50%);
+    float:right;
+    font-size: 30px;
+  }

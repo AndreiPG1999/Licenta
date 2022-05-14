@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPacientComponent } from './add-pacient/add-pacient.component';
 import { AddProgramareComponent } from './add-programare/add-programare.component';
+import { AddTreatmentPacientComponent } from './add-treatment-pacient/add-treatment-pacient.component';
 import { AddTreatmentComponent } from './add-treatment/add-treatment.component';
 import { ContactDoctorComponent } from './contact-doctor/contact-doctor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -9,6 +10,7 @@ import { DespreDoctorComponent } from './despre-doctor/despre-doctor.component';
 import { DespreComponent } from './despre/despre.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import { HomePacientComponent } from './home-pacient/home-pacient.component';
+import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.component';
 import { IstoricComponent } from './istoric/istoric.component';
 import { LoginComponent } from './login/login.component';
 import { PacientiComponent } from './pacienti/pacienti.component';
@@ -38,9 +40,11 @@ const routes: Routes = [
   { path: 'add-pacient', component:AddPacientComponent},
   { path: 'pacienti', component:PacientiComponent},
   { path: 'istoric', component:IstoricComponent},
+  { path: 'istoric_doctor', component:IstoricDoctorComponent},
   { path: 'add-programare', component:AddProgramareComponent},
   { path: 'programari_doctor', component:ProgramariDoctorComponent},
-  { path: 'programari_pacient', component:ProgramariPacientComponent}
+  { path: 'programari_pacient', component:ProgramariPacientComponent},
+  { path: 'add-treatment-pacient', component:AddTreatmentPacientComponent},
 ];
 
 @NgModule({

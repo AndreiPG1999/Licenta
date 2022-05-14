@@ -32,4 +32,17 @@ export class IstoricComponent implements OnInit {
       }
     });
   }
+
+  public searchIstoric(key: string) : void{
+    const results: Istoric[] = [];
+    for(const istoric of this.istorics){
+      if(istoric.date.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(istoric);
+      }
+    }
+    this.istorics = results;
+    if(results.length === 0 || !key){
+      this.getIstoric();
+    }
+  }
 }

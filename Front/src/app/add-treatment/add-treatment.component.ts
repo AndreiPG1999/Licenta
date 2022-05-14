@@ -42,7 +42,8 @@ export class AddTreatmentComponent implements OnInit {
       treatment: new FormControl(''),
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
-      dinte: new FormControl('', Validators.required)
+      dinte: new FormControl('', Validators.required),
+      id_doctor: new FormControl('')
     });
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -64,19 +65,6 @@ export class AddTreatmentComponent implements OnInit {
     });
     this.getDiagnostics()
     this.getTreatments()
-    this.getUsers();
-  }
-
-  public getUsers(): void {
-    this.userService.getUsers().subscribe({
-      next:(response: User[]) => {
-        this.users = response;
-        console.log(this.users);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
   }
 
   public getDiagnostics(){
@@ -102,6 +90,7 @@ export class AddTreatmentComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
+      this.treatmentForm.value['id_doctor'] = this.loggedInUser.id;
       this.istoricService.addIstoric(treatmentForm.value).subscribe({
         next:async (response: Istoric) => {
           console.log(response);

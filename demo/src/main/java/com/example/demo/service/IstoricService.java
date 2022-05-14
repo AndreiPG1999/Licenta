@@ -5,6 +5,7 @@ import com.example.demo.repo.IstoricRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,9 @@ public class IstoricService {
 
     public Istoric addIstoric(Istoric istoric){
         Date currentDate = Calendar.getInstance().getTime();
-        istoric.setDate(currentDate);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(currentDate);
+        istoric.setDate(strDate);
         return istoricRepo.save(istoric);
     }
 

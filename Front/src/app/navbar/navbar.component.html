@@ -4,22 +4,14 @@
         <i class="fas fa-home"></i>
         Acasa</a></li>
       <li>
-        <div class="dropdown">
-          <button class="dropbtn">Date medicale
-            <i class="fas fa-chevron-circle-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="#">
-              <i class="fas fa-briefcase-medical"></i>
-              Tratamente</a>
-              <a href="#">
-                <i class="fas fa-briefcase-medical"></i>
-                Diagnostice</a>
-            <a [routerLink]="['/istoric']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
-              <i class="fas fa-history"></i>
-              Istoric</a>
-          </div>
-        </div>
+        <a [routerLink]="['/add-treatment-pacient']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
+          <i class="fas fa-briefcase-medical"></i>
+          Adăugare tratament</a>
+      </li>
+      <li>
+        <a [routerLink]="['/istoric']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
+          <i class="fas fa-history"></i>
+          Istoric</a>
       </li>
       <li><a [routerLink]="['/programari_pacient']" [queryParams]="{ loggedIn: 'true' }" class="nav-link">
         <i class="fas fa-calendar-check"></i>

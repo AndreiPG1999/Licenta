@@ -49,6 +49,19 @@ export class ProgramariDoctorComponent implements OnInit {
       }
     });
   }
+
+  public searchProgramari(key: string) : void{
+    const results: Appointment[] = [];
+    for(const appointment of this.appointments){
+      if(appointment.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 || appointment.data.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(appointment);
+      }
+    }
+    this.appointments = results;
+    if(results.length === 0 || !key){
+      this.getAppointment();
+    }
+  }
   clickMethod(id:number){
     if(confirm("Sunteți sigur că doriți să ștergeți această programare?")){
       this.appointmentService.deleteAppointment(id).subscribe({

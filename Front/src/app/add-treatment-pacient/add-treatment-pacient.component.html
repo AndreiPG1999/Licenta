@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="middle-up">
+    Adăugare date consultație
+  </div>
+<div>
+  <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form">
+    <input type="email" formControlName="email_pacient" name="email_pacient" placeholder="Email pacient" hidden>
+    <select formControlName="diagnostic" name="diagnostic" placeholder="Diagnostic" class="select formEntry">
+      <option disabled selected value="">Selectati un diagnostic</option>
+      <option *ngFor="let diagnostic of diagnostics">
+        {{diagnostic.diagnostic}}
+      </option>
+    </select>
+    <select formControlName="treatment" name="treatment" placeholder="Tratament" class="select formEntry">
+      <option disabled selected value="">Selectati un tratament</option>
+      <option *ngFor="let treatment of treatments">
+        {{treatment.treatments}}
+      </option>
+    </select>
+    <input type="text" formControlName="pret" name="pret" placeholder="Pret" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('pret').errors }" class="name formEntry"/>
+    <div *ngIf="submitted && treatmentForm.get('pret').errors" class="invalid-feedback">
+			<div *ngIf="treatmentForm.get('pret').errors['required']">Introduceti pretul.</div>
+      <div *ngIf="treatmentForm.get('pret').errors['pattern']">Pretul trebuie să fie un număr.</div>
+		</div>
+    <input type="text" formControlName="dinte" name="dinte" placeholder="Dinte" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('dinte').errors }" class="name formEntry"/>
+    <div *ngIf="submitted && treatmentForm.get('dinte').errors" class="invalid-feedback">
+			<div *ngIf="treatmentForm.get('dinte').errors['required']">Introduceti dintele.</div>
+		</div>
+    <input type="file" formControlName="radiografie" name="radiografie" placeholder="Radiografie" class="text formEntry"/>
+    
+    <button type="submit" class="submit formEntry">Adaugă</button>
+  </form>
+</div>

@@ -36,7 +36,7 @@ export class AddProgramareComponent implements OnInit {
       ora_incepere: new FormControl('', Validators.required),
       ora_finalizare: new FormControl('',Validators.required),
       descriere: new FormControl('', Validators.required),
-      id_doctor: new FormControl('', Validators.required)
+      id_doctor: new FormControl('')
     });
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -56,13 +56,12 @@ export class AddProgramareComponent implements OnInit {
         alert(error.message);
       }
     });
-    
   }
-
 
   async onSubmit(appointmentForm:FormGroup){
     this.submitted = true;
     if(appointmentForm.valid){
+      this.appointmentForm.value['id_doctor'] = this.loggedInUser.id;
       this.appointmentService.addAppointment(appointmentForm.value).subscribe({
         next:async (response: Appointment) => {
           console.log(response);
