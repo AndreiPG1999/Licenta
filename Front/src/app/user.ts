@@ -1,4 +1,3 @@
-import { Byte } from "@angular/compiler/src/util";
 
 export interface User{
     id: number;
@@ -9,5 +8,4 @@ export interface User{
     id_doctor: number;
     nr_telefon:string;
     type:string;
-    profile_picture: Byte;
 }

@@ -26,10 +26,6 @@
       <div *ngIf="submitted && appointmentForm.get('descriere').errors" class="invalid-feedback">
         <div *ngIf="appointmentForm.get('descriere').errors['required']">Introduceti descrierea.</div>
       </div>
-      <!-- <input type="text" formControlName="id_doctor" name="id_doctor" placeholder="Id-ul tau este: {{loggedInUser.id}}" [ngClass]="{ 'is-invalid': submitted && appointmentForm.get('id_doctor').errors }" class="name formEntry"/>
-      <div *ngIf="submitted && appointmentForm.get('id_doctor').errors" class="invalid-feedback">
-        <div *ngIf="appointmentForm.get('id_doctor').errors['required']">Introduceti id-ul dumneavoastră.</div>
-      </div> -->
       <button type="submit" class="submit formEntry">Adaugă</button>
     </form>
   </div>

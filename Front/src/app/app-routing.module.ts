@@ -8,6 +8,7 @@ import { ContactDoctorComponent } from './contact-doctor/contact-doctor.componen
 import { ContactComponent } from './contact/contact.component';
 import { DespreDoctorComponent } from './despre-doctor/despre-doctor.component';
 import { DespreComponent } from './despre/despre.component';
+import { FormularComponent } from './formular/formular.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import { HomePacientComponent } from './home-pacient/home-pacient.component';
 import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'programari_doctor', component:ProgramariDoctorComponent},
   { path: 'programari_pacient', component:ProgramariPacientComponent},
   { path: 'add-treatment-pacient', component:AddTreatmentPacientComponent},
+  { path: 'formular', component:FormularComponent}
 ];
 
 @NgModule({
