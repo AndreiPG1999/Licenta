@@ -4,6 +4,7 @@ import { AddPacientComponent } from './add-pacient/add-pacient.component';
 import { AddProgramareComponent } from './add-programare/add-programare.component';
 import { AddTreatmentPacientComponent } from './add-treatment-pacient/add-treatment-pacient.component';
 import { AddTreatmentComponent } from './add-treatment/add-treatment.component';
+import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afisare-formular-pacient.component';
 import { ContactDoctorComponent } from './contact-doctor/contact-doctor.component';
 import { ContactComponent } from './contact/contact.component';
 import { DespreDoctorComponent } from './despre-doctor/despre-doctor.component';
@@ -46,7 +47,8 @@ const routes: Routes = [
   { path: 'programari_doctor', component:ProgramariDoctorComponent},
   { path: 'programari_pacient', component:ProgramariPacientComponent},
   { path: 'add-treatment-pacient', component:AddTreatmentPacientComponent},
-  { path: 'formular', component:FormularComponent}
+  { path: 'formular', component:FormularComponent},
+  { path: 'afisare-formular-pacient', component:AfisareFormularPacientComponent}
 ];
 
 @NgModule({

@@ -1,11 +1,12 @@
 /* @import "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"; */
 .middle-up {
   position: absolute;
-  top: 12%;
-  left: 50%;
+  top:12%;
+  margin-left: auto;
+  margin-right: auto;
   color: white;
+  left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
   font-size: 30px;
 }
 .formEntry {
@@ -26,17 +27,17 @@
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
-  top: 3%;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  left: 0;
+  text-align: center;
+  top:10%;
+  left:0;
   right: 0;
-  position: relative;
+  position: absolute;
 }
 .container {
-padding-right: 15px;
-padding-left: 15px;
-border-radius: 6px;
+  padding-right: 15%;
+  padding-left: 2%;
+  padding-top: 8%;
+  border-radius: 6px;
 }
 .row {
   position: absolute;
@@ -46,10 +47,11 @@ border-radius: 6px;
 }
 .col-md-6{
   position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 50px;
-  padding-top: 20px;
+    min-height: 1px;
+    padding-right: 15%;
+    padding-left: 50px;
+    padding-bottom: 10%;
+    /* padding-top: 55%; */
 }
 .list-group-item {
   align-items: center;
@@ -91,14 +93,14 @@ border-radius: 6px;
   border-top-width: 1px;
 }
 .card{
-    display:flex;
-    flex-direction:column;
-    min-width:fit-content;
-    width: 220px;
-    word-wrap:break-word;
-    background-color:#fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius:.25rem;
+  display:flex;
+  flex-direction:column;
+  min-width: fit-content;
+  width: 300px;
+  word-wrap:break-word;
+  background-color:#fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius:.25rem;
   }
   .card-body{
       -ms-flex:1 1 auto;

@@ -1,7 +1,7 @@
 .container {
-  top: -40px;
+  top: 20%;
   position: relative;
-  
+    
 }
 .formEntry {
   display: block;
@@ -14,12 +14,25 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius:.25rem;
 }
+.form {
+  background: inherit;
+  box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  border-radius: 5px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  top:10%;
+  left:0;
+  right: 0;
+  position: absolute;
+}
 td,th{
     /* padding-left: 60px;
     padding-right: 60px;
     padding-bottom: 50px; */
-    padding:17px;
-    width:7%;
+    padding: 0.3em;
+    width: 7%;
     text-align: center;
     border: 1px solid white;
     font-family:'Comfortaa', cursive;
@@ -33,23 +46,13 @@ thead {
 	text-transform: uppercase;
 	letter-spacing: 2%;
   }
-  .middle-up {
-    position: relative;
-    top:10px;
-    left:46%;
-    color: white;
-    font-size: 30px;
-  }
-  .form {
-    background: inherit;
-    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
-    border-radius: 5px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    top: -3%;
-    padding-top: 5px;
-    left: 0;
-    right: 25%;
-    position: relative;
+.middle-up {
+  position: absolute;
+  top:12%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
   }

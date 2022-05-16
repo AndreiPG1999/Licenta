@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<!-- <div class="middle-up">
+<div class="middle-up">
     Formular pacient
-  </div> -->
+</div>
   <form [formGroup]="formularForm" (ngSubmit)="onSubmit(formularForm)" class="form">
     <p>Data nașterii</p>
     <input type="date" formControlName="data_nasterii" name="data_nasterii" placeholder="Data nasterii" class="date formEntry"/>
@@ -12,16 +12,17 @@
     <input id="input_{{afectiuniData[i]}}" type="checkbox" > {{afectiuniData[i]}}
     </label>
 
+    <input type="text" formControlName="alcool" name="alcool" placeholder="Sunteți consumator de alcool? Ce cantitate?" [ngClass]="{ 'is-invalid': submitted && formularForm.get('alcool').errors }" class="text formEntry"/>
+    <div *ngIf="submitted && formularForm.get('alcool').errors" class="invalid-feedback">
+			<div *ngIf="formularForm.get('pret').errors['required']">Acest câmp trebuie completat!</div>
+		</div>
     <div class="form-right">
+      <p>Alergii</p><br>
+      <label id="label_{{alergiiData[i]}}" formArrayName="alergii" *ngFor="let alergie of alergiiData; let i=index">
+        <input id="input_{{alergiiData[i]}}" type="checkbox" > {{alergiiData[i]}}
+      </label>
       <textarea rows="3" formControlName="sangerari" name="sangerari" placeholder="Ați avut sângerări exagerate sau prelungite care să necesite tratament special? Detaliați" class="message formEntry"></textarea>
-      <select formControlName="alergii" name="alergii" placeholder="alergii" class="select formEntry">
-          <option disabled selected value="">Aveți sau ați avut reacții alergice la medicamente?</option>
-          <option>Antibiotice</option>
-          <option>Antiinflamatorii</option>
-          <option>Anestezice</option>
-          <option>Nici una</option>
-      </select>
-      <input type="text" formControlName="alcool" name="alcool" placeholder="Sunteți consumator de alcool? Ce cantitate?"  class="text formEntry"/>
+      
       <input type="text" formControlName="fumator" name="fumator" placeholder="Sunteți fumător? Numărul de țigări zilnic:"  class="text formEntry"/>
       <input type="text" formControlName="droguri" name="droguri" placeholder="Sunteți consumator de droguri? Ce tip/cantitate?"  class="text formEntry"/>
       <input type="text" formControlName="alte_probleme" name="alte_probleme" placeholder="Alte probleme"  class="text formEntry"/>

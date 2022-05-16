@@ -22,24 +22,9 @@ export class FormularComponent implements OnInit {
   submitted = false
   afectiuniData = ['Infarct miocardic' ,'Tensiune arteriala crescuta' ,'Tulburari de ritm cardiac' ,'Hepatita' ,'Tuberculoza' , 'Ulcer/gastrita' ,'Boli renale' ,'Diabet zaharat' ,'Astm' ,'HIV/SIDA/alte afectiuni care scad imunitatea' ,
     'Afectiuni psihice' ,'Epilepsie/convulsii' ,'Anemie/alte boli ale sangelui' , 'Cancer' , 'Niciuna' ];
-    optionsMap = {
-      infarct_miocardic: false,
-      tensiune_arteriala_crescuta:false,
-      tulburari_de_ritm_cardiac:false,
-      hepatita:false,
-      tuberculoza:false,
-      ulcer_gastrita:false,
-      boli_renale:false,
-      diabet_zaharat:false,
-      astm:false,
-      hiv_sida:false,
-      afectiuni_psihice:false,
-      epilepsie_convulsii:false,
-      anemie_alte_boli:false,
-      cancer:false,
-      nici_una:false
-    };
-    optionsChecked = "";
+  alergiiData = ['Antibiotice', 'Antiinflamatoare', 'Anestezice', 'Niciuna'];
+  optionsChecked = "";
+  optionsAlergiiChecked = "";
   constructor(private notifyService:NotificationService, private token:TokenStorageService, private userService:UserService, private formularService:FormularService) { }
 
   showToasterSuccess(){
@@ -55,7 +40,7 @@ export class FormularComponent implements OnInit {
       data_nasterii: new FormControl(''),
       afectiuni: new FormArray([]),
       sangerari: new FormControl('', Validators.required),
-      alergii: new FormControl(''),
+      alergii: new FormArray([]),
       alcool: new FormControl('', Validators.required),
       fumator: new FormControl('', Validators.required),
       droguri: new FormControl('', Validators.required),
@@ -72,11 +57,6 @@ export class FormularComponent implements OnInit {
     });
   }
 
-  // initOptionsMap(){
-  //   for ( let afectiuni of this.afectiuniData)
-  //     this.optionsMap[afectiuni] = true;
-  //   }
-  // }
 
   async onSubmit(formularForm:FormGroup){
     this.submitted = true;
@@ -95,6 +75,18 @@ export class FormularComponent implements OnInit {
         }
       }
       this.formularForm.value['afectiuni'] = this.optionsChecked;
+
+      for ( let alergie of this.alergiiData){
+        var id_af = "input_" + alergie;
+        var a = document.getElementById(id_af) as HTMLInputElement;
+        if(a.checked)
+        {
+          this.optionsAlergiiChecked += alergie + ","; 
+          
+        }
+      }
+      this.formularForm.value['alergii'] = this.optionsAlergiiChecked;
+
       this.formularService.addFormular(formularForm.value).subscribe({
         next:async (response: Formular) => {
           console.log(response);

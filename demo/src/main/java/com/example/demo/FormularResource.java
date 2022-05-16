@@ -29,4 +29,17 @@ public class FormularResource {
         Formular newFormular = formularService.addFormular(formular);
         return new ResponseEntity<>(newFormular, HttpStatus.CREATED);
     }
+
+    @GetMapping("/find/{email}")
+    public ResponseEntity<Formular> getFormularByEmail(@PathVariable("email") String email){
+        List<Formular> formulars = formularService.findAllFormulars();
+        for(Formular formularLog : formulars)
+        {
+            if(formularLog.getEmail().equals(email))
+            {
+                return new ResponseEntity<>(formularLog, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
