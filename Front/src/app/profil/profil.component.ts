@@ -34,13 +34,13 @@ export class ProfilComponent implements OnInit {
   }
   ngOnInit(): void {
     this.updateLastNameform = new FormGroup({
-      last_name: new FormControl('',Validators.required)
+      last_name: new FormControl('')
     });
     this.updateFirstNameform = new FormGroup({
-      first_name: new FormControl('',Validators.required)
+      first_name: new FormControl('')
     });
     this.updateNrTelefonform = new FormGroup({
-      nr_telefon: new FormControl('',Validators.required)
+      nr_telefon: new FormControl('')
     });
     this.currentUser = this.token.getUser();
     this.userService.findUser(this.currentUser.email).subscribe({
@@ -81,10 +81,12 @@ export class ProfilComponent implements OnInit {
     this.submittedLast = true;
     if(updateLastNameform.valid)
     {  
-      this.userService.updateLastName(this.loggedInUser.email, updateLastNameform.value).subscribe({
-        next: (response: User) => {
+      var last_name = document.getElementById('last_name') as HTMLInputElement;
+      this.userService.updateLastName(this.loggedInUser.email, last_name.value).subscribe({
+        next: async (response: User) => {
           console.log(response);
           this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
           window.location.reload();
         },
         error: (error:HttpErrorResponse) => {
@@ -101,10 +103,12 @@ export class ProfilComponent implements OnInit {
     this.submittedFirst = true;
     if(updateFirstNameform.valid)
     {  
-      this.userService.updateFirstName(this.loggedInUser.email, updateFirstNameform.value).subscribe({
-        next: (response: User) => {
+      var first_name = document.getElementById('first_name') as HTMLInputElement;
+      this.userService.updateFirstName(this.loggedInUser.email, first_name.value).subscribe({
+        next: async (response: User) => {
           console.log(response);
           this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
           window.location.reload();
         },
         error: (error:HttpErrorResponse) => {
@@ -118,10 +122,12 @@ export class ProfilComponent implements OnInit {
     this.submittedNrTelefon = true;
     if(updateNrTelefonform.valid)
     {  
-      this.userService.updateNrTel(this.loggedInUser.email, updateNrTelefonform.value).subscribe({
-        next: (response: User) => {
+      var nr_telefon = document.getElementById('nr_telefon') as HTMLInputElement;
+      this.userService.updateNrTel(this.loggedInUser.email, nr_telefon.value).subscribe({
+        next: async (response: User) => {
           console.log(response);
           this.showToasterSuccess();
+          await new Promise(f => setTimeout(f, 1000));
           window.location.reload();
         },
         error: (error:HttpErrorResponse) => {

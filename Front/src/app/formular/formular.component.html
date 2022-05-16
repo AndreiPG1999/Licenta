@@ -1,43 +1,32 @@
 <app-navbar></app-navbar>
-<div class="middle-up">
+<!-- <div class="middle-up">
     Formular pacient
-  </div>
-<div>
+  </div> -->
   <form [formGroup]="formularForm" (ngSubmit)="onSubmit(formularForm)" class="form">
     <p>Data nașterii</p>
     <input type="date" formControlName="data_nasterii" name="data_nasterii" placeholder="Data nasterii" class="date formEntry"/>
-    <select formControlName="afectiuni" name="afectiuni" placeholder="afectiuni" class="select formEntry">
-            <option disabled selected>Aveți sau ați avut una din următoarele afecțiuni?</option>
-            <option>Infarct miocardic</option>
-            <option>Tensiune arterială crescută</option>
-            <option>Tulburări de ritm cardiac</option>
-            <option>Accident vascular cerebral</option>
-            <option>Hepatită</option>
-            <option>Tuberculoză</option>
-            <option>Ulcer/gastrită</option>
-            <option>Boli renale</option>
-            <option>Diabet zaharat</option>
-            <option>Astm</option>
-            <option>HIV/SIDA/alte afecțiuni care scad imunitatea</option>
-            <option>Afecțiuni psihice</option>
-            <option>Epilepsie/convulsii</option>
-            <option>Anemie/alte boli ale sângelui</option>
-            <option>Cancer</option>
-            <option>Nici una</option>
-    </select>
-    <textarea rows="3" formControlName="sangerari" name="sangerari" placeholder="Ați avut sângerări exagerate sau prelungite care să necesite tratament special? Detaliați" class="message formEntry"></textarea>
-    <select formControlName="alergii" name="alergii" placeholder="alergii" class="select formEntry">
-        <option disabled selected>Aveți sau ați avut reacții alergice la medicamente?</option>
-        <option>Antibiotice</option>
-        <option>Antiinflamatorii</option>
-        <option>Anestezice</option>
-        <option>Nici una</option>
-    </select>
-    <input type="text" formControlName="alcool" name="alcool" placeholder="Sunteți consumator de alcool? Ce cantitate?"  class="text formEntry"/>
-    <input type="text" formControlName="fumator" name="fumator" placeholder="Sunteți fumător? Numărul de țigări zilnic:"  class="text formEntry"/>
-    <input type="text" formControlName="droguri" name="droguri" placeholder="Sunteți consumator de droguri? Ce tip/cantitate?"  class="text formEntry"/>
-    
-    <button type="submit" class="submit formEntry">Adaugă</button>
+    <!-- <p>Aveți sau ați avut una sau mai multe din următoarele afecțiuni?</p> -->
+    <p>Afecțiuni</p><br>
+
+    <label id="label_{{afectiuniData[i]}}" formArrayName="afectiuni" *ngFor="let afectiune of afectiuniData; let i=index">
+    <input id="input_{{afectiuniData[i]}}" type="checkbox" > {{afectiuniData[i]}}
+    </label>
+
+    <div class="form-right">
+      <textarea rows="3" formControlName="sangerari" name="sangerari" placeholder="Ați avut sângerări exagerate sau prelungite care să necesite tratament special? Detaliați" class="message formEntry"></textarea>
+      <select formControlName="alergii" name="alergii" placeholder="alergii" class="select formEntry">
+          <option disabled selected value="">Aveți sau ați avut reacții alergice la medicamente?</option>
+          <option>Antibiotice</option>
+          <option>Antiinflamatorii</option>
+          <option>Anestezice</option>
+          <option>Nici una</option>
+      </select>
+      <input type="text" formControlName="alcool" name="alcool" placeholder="Sunteți consumator de alcool? Ce cantitate?"  class="text formEntry"/>
+      <input type="text" formControlName="fumator" name="fumator" placeholder="Sunteți fumător? Numărul de țigări zilnic:"  class="text formEntry"/>
+      <input type="text" formControlName="droguri" name="droguri" placeholder="Sunteți consumator de droguri? Ce tip/cantitate?"  class="text formEntry"/>
+      <input type="text" formControlName="alte_probleme" name="alte_probleme" placeholder="Alte probleme"  class="text formEntry"/>
+      
+      <button type="submit" class="submit formEntry">Trimite formular</button>
+    </div>
   </form>
-</div>
 

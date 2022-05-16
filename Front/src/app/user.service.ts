@@ -50,7 +50,7 @@ export class UserService {
     return this.http.put<User>(`${this.apiServerUrl}/user/updateLastName/${email}/${last_name}`, last_name);
   }
 
-  public updateFirstName(email: string, first_name: number): Observable<User>{
+  public updateFirstName(email: string, first_name: string): Observable<User>{
     return this.http.put<User>(`${this.apiServerUrl}/user/updatePacient/${email}/${first_name}`, first_name);
   }
 
