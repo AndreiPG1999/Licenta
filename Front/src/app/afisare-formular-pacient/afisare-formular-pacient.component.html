@@ -3,38 +3,44 @@
     Datele formularului
   </div>
   <div class="left">
-      <h1>Email</h1>
-      <p>Ion</p>
-      <br>
-      <h1>Nume</h1>
-      <p>Ion</p>
-      <br>
-      <h1>Prenume</h1>
-      <p>Ion</p>
-      <br>
-      <h1>Data nașterii</h1>
-      <p>Ion</p>
-      <br>
-      <h1>Data completării</h1>
-      <p>Ion</p>
-      <br>
-      <h1>Sângerări exagerate</h1>
-      <p>dsads</p>
-      <br>
-      <h1>Sunteți fumător?</h1>
-      <p>Ion</p>
+    <h1>Email</h1>
+    <p>{{currentFormular.email}}</p>
+    <br>
+    <h1>Nume</h1>
+    <p>{{currentFormular.first_name}}</p>
+    <br>
+    <h1>Prenume</h1>
+    <p>{{currentFormular.last_name}}</p>
+    <br>
+    <h1>Data nașterii</h1>
+    <p>{{currentFormular.data_nasterii}}</p>
+    <br>
+    <h1>Data completării</h1>
+    <p>{{currentFormular.data}}</p>
+    <br>
+    <h1>Sângerări exagerate</h1>
+    <p>{{currentFormular.sangerari}}</p>
+    <br>
+    <h1>Sunteți fumător?</h1>
+    <p>{{currentFormular.fumator}}</p>
   </div>
   <div class="right">
     <h1>Afecțiuni</h1>
-    <p>Ion</p>
-    <br>
+    <ul *ngFor="let afectiune of afectiuniSplitted">
+      <li>{{afectiune}}</li>
+    </ul>
+    <h1>Alergii</h1>
+    <ul *ngFor="let alergie of alergiiSplitted">
+      <li>{{alergie}}</li>
+    </ul>
     <h1>Alcool</h1>
-    <p>Ion</p>
+    <p>{{currentFormular.alcool}}</p>
     <br>
     <h1>Droguri</h1>
-    <p>Ion</p>
+    <p>{{currentFormular.droguri}}</p>
     <br>
     <h1>Alte probleme</h1>
-    <p>Ion</p>
+    <p>{{currentFormular.alte_probleme}}</p>
     <br>
+    <button class="btn">Descărcare pdf</button>
   </div>

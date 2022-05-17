@@ -43,3 +43,14 @@ p{
     position: absolute;
     padding: 30px;
 }
+.btn{
+    background-color: white;
+    font-family: inherit;
+    color: black;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+}
