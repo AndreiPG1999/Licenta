@@ -19,4 +19,12 @@ export class FormularService{
     public addFormular(formular: Formular): Observable<Formular>{
         return this.http.post<Formular>(`${this.apiServerUrl}/formular/add`, formular);
     }
+
+    public findFormular(email: string){
+        return this.http.get<Formular>(`${this.apiServerUrl}/formular/find/${email}`);
+    }
+
+    public deleteFormular(email: string): Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/formular/delete/${email}`);
+    }
 }

@@ -21,11 +21,14 @@ public class FormularService {
 
     public Formular addFormular(Formular formular){
         Date currentDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = formatter.format(currentDate);
         formular.setData(strDate);
         return formularRepo.save(formular);
     }
 
     public List<Formular> findAllFormulars(){return formularRepo.findAll();}
+    public void deleteFormular(String email){
+        formularRepo.deleteFormularByEmail(email);
+    }
 }

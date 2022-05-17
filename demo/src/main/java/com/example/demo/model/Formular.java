@@ -22,6 +22,7 @@ public class Formular {
     private String fumator;
     private String alte_probleme;
 
+    public Formular(){}
     public Formular(Long id, String first_name, String last_name, String email, String data_nasterii,
                     String afectiuni, String sangerari, String alergii, String alcool, String droguri,
                     String fumator, String alte_probleme, String data) {

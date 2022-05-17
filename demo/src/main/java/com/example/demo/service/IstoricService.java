@@ -21,7 +21,7 @@ public class IstoricService {
 
     public Istoric addIstoric(Istoric istoric){
         Date currentDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         String strDate = formatter.format(currentDate);
         istoric.setDate(strDate);
         return istoricRepo.save(istoric);

@@ -19,6 +19,7 @@ export class FormularComponent implements OnInit {
   formularForm !: FormGroup
   currentUser !: any
   loggedInUser !: any
+  existingForm !: Formular
   submitted = false
   afectiuniData = ['Infarct miocardic' ,'Tensiune arteriala crescuta' ,'Tulburari de ritm cardiac' ,'Hepatita' ,'Tuberculoza' , 'Ulcer/gastrita' ,'Boli renale' ,'Diabet zaharat' ,'Astm' ,'HIV/SIDA/alte afectiuni care scad imunitatea' ,
     'Afectiuni psihice' ,'Epilepsie/convulsii' ,'Anemie/alte boli ale sangelui' , 'Cancer' , 'Niciuna' ];
@@ -86,19 +87,46 @@ export class FormularComponent implements OnInit {
         }
       }
       this.formularForm.value['alergii'] = this.optionsAlergiiChecked;
-
-      this.formularService.addFormular(formularForm.value).subscribe({
-        next:async (response: Formular) => {
-          console.log(response);
-          this.showToasterSuccess();
-          await new Promise(f => setTimeout(f, 1000));
-          window.location.reload();
-          this.submitted = false;
+      this.formularService.findFormular(this.formularForm.value['email']).subscribe({
+        next: () => {
+          if(confirm("Ați completat deja un formular, trimiterea unui formular nou îl va șterge pe cel precedent! Apăsați ok pentru a îl trimite oricum.")){
+            this.formularService.deleteFormular(this.currentUser.email).subscribe({
+              next: () => {
+                console.log("deleted")
+              }
+            });
+            this.formularService.addFormular(formularForm.value).subscribe({
+              next:async (response: Formular) => {
+                console.log(response);
+                this.showToasterSuccess();
+                await new Promise(f => setTimeout(f, 1000));
+                window.location.reload();
+                this.submitted = false;
+              },
+              error: (error:HttpErrorResponse) => {
+                alert(error.message);
+              }
+            })
+          }
+          else{
+            window.location.reload();
+          }
         },
-        error: (error:HttpErrorResponse) => {
-          alert(error.message);
+        error: () => {
+          this.formularService.addFormular(formularForm.value).subscribe({
+            next:async (response: Formular) => {
+              console.log(response);
+              this.showToasterSuccess();
+              await new Promise(f => setTimeout(f, 1000));
+              window.location.reload();
+              this.submitted = false;
+            },
+            error: (error:HttpErrorResponse) => {
+              alert(error.message);
+            }
+          })
         }
-      })
+      });
     }
   }
 
