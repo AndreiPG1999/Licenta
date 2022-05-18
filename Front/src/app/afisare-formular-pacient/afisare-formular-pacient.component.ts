@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
 import { TokenStorageService } from '../token-storage.service';
 import { UserService } from '../user.service';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { trigger } from '@angular/animations';
 @Component({
   selector: 'app-afisare-formular-pacient',
   templateUrl: './afisare-formular-pacient.component.html',
@@ -35,6 +37,34 @@ export class AfisareFormularPacientComponent implements OnInit {
         alert(error.message);
       }
     })
+  }
+  @ViewChild('formularPDF', {static: false}) htmlData!:ElementRef;
+  public SavePDF(): void{
+    let DATA = this.htmlData.nativeElement;
+    let doc = new jsPDF('p','pt','a4');
+    doc.setFontSize(15);
+    let handleElement = {
+      '#editor': function (){
+        return true;
+      }
+    };
+    doc.html(DATA.innerHTML, {
+      callback: function(doc) {
+        doc.save('formular.pdf');
+      }
+    });
+  }
+
+  public OpenPDF(): void{
+    let DATA = this.htmlData.nativeElement;
+    let doc = new jsPDF('p','pt','a4');
+    
+    doc.html(DATA.innerHTML, {
+      callback: function(doc) {
+        doc.setFontSize(15);
+        window.open(URL.createObjectURL(doc.output("blob")));
+      }
+    });
   }
 
 }

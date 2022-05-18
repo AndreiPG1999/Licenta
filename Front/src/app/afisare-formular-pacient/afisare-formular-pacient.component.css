@@ -48,6 +48,27 @@ p{
     font-family: inherit;
     color: black;
     font-size: 22px;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    right:36.8%;
+    bottom:25%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+}
+.btn2{
+    background-color: white;
+    font-family: inherit;
+    color: black;
+    font-size: 22px;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    right:35%;
+    bottom:15%;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid white;
