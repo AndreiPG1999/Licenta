@@ -1,4 +1,27 @@
 /* @import "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"; */
+td,th{
+  /* padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 50px; */
+  padding: 1em;
+  width: 7%;
+  text-align: center;
+  border: 1px solid white;
+  font-family:'Comfortaa', cursive;
+  color:white;
+  border-radius: 7px;
+}
+thead {
+  background-color: #333; 
+  color: white;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 2%;
+}
+.container-table {
+  top: 25%;
+  position: absolute;
+}
 .middle-up {
   position: absolute;
   top:12%;
@@ -34,10 +57,7 @@
   position: absolute;
   }
   .container {
-  padding-right: 15%;
-  padding-left: 2%;
-  padding-top: 8%;
-  border-radius: 6px;
+    padding:8%;
 }
 .row {
     position: absolute;
@@ -46,10 +66,10 @@
     flex-wrap:wrap;
   }
   .col-md-6{
-    position: relative;
+    position: absolute;
     min-height: 1px;
     padding-right: 15%;
-    padding-left: 50px;
+    padding-left: 50%;
     padding-bottom: 10%;
     /* padding-top: 55%; */
   }
@@ -150,3 +170,15 @@
         border-right:0;border-left:0;border-radius:0;
         text-align: center;
     };
+    .btn{
+      padding-left: 10px;
+      padding-right: 10px;
+    position: relative;
+    background-color: inherit;
+    font-family: inherit;
+    color: white;
+    font-size: 16px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+  }

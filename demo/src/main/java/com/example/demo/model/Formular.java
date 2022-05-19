@@ -21,11 +21,12 @@ public class Formular {
     private String droguri;
     private String fumator;
     private String alte_probleme;
+    private Long id_doctor;
 
     public Formular(){}
     public Formular(Long id, String first_name, String last_name, String email, String data_nasterii,
                     String afectiuni, String sangerari, String alergii, String alcool, String droguri,
-                    String fumator, String alte_probleme, String data) {
+                    String fumator, String alte_probleme, String data, Long id_doctor) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -39,6 +40,7 @@ public class Formular {
         this.fumator = fumator;
         this.alte_probleme = alte_probleme;
         this.data = data;
+        this.id_doctor = id_doctor;
     }
 
     public Long getId() {
@@ -145,6 +147,14 @@ public class Formular {
         this.data = data;
     }
 
+    public Long getId_doctor() {
+        return id_doctor;
+    }
+
+    public void setId_doctor(Long id_doctor) {
+        this.id_doctor = id_doctor;
+    }
+
     @Override
     public String toString() {
         return "Formular{" +
@@ -161,6 +171,7 @@ public class Formular {
                 ", droguri='" + droguri + '\'' +
                 ", fumator='" + fumator + '\'' +
                 ", alte_probleme='" + alte_probleme + '\'' +
+                ", id_doctor=" + id_doctor +
                 '}';
     }
 }

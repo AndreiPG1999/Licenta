@@ -14,11 +14,11 @@ export class PacientiComponent implements OnInit {
   public users!: User[];
   currentUser!: any;
   loggedInUser!: any;
+  neededUsers !: User[];
 
   constructor(private userService:UserService, private token:TokenStorageService) { }
 
   ngOnInit(): void {
-    this.getUsers();
     this.currentUser = this.token.getUser();
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -29,6 +29,7 @@ export class PacientiComponent implements OnInit {
         alert(error.message);
       }
     });
+    this.getUsers();
   }
 
   public getUsers(): void {
@@ -36,6 +37,15 @@ export class PacientiComponent implements OnInit {
       next:(response: User[]) => {
         this.users = response;
         console.log(this.users);
+        this.userService.findUsersByTypePacienti(this.loggedInUser.id).subscribe({
+          next:(response: User[]) => {
+            this.neededUsers = response;
+            console.log(this.neededUsers);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        });
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -45,15 +55,15 @@ export class PacientiComponent implements OnInit {
 
   public searchUsers(key: string) : void{
     const results: User[] = [];
-    for(const user of this.users){
-      if(user.last_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 || 
-      user.first_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-      user.email.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(user);
+    for(const neededUser of this.neededUsers){
+      if(neededUser.last_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 || 
+      neededUser.first_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+      neededUser.email.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(neededUser);
       }
     }
-    this.users = results;
-    if(results.length === 0 || !key){
+    this.neededUsers = results;
+    if(!key){
       this.getUsers();
     }
   }

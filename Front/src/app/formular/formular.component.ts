@@ -45,7 +45,8 @@ export class FormularComponent implements OnInit {
       alcool: new FormControl('', Validators.required),
       fumator: new FormControl('', Validators.required),
       droguri: new FormControl('', Validators.required),
-      alte_probleme: new FormControl('', Validators.required)
+      alte_probleme: new FormControl('', Validators.required),
+      id_doctor: new FormControl('')
     })
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -65,6 +66,7 @@ export class FormularComponent implements OnInit {
       this.formularForm.value['email'] = this.currentUser.email;
       this.formularForm.value['first_name'] = this.loggedInUser.first_name;
       this.formularForm.value['last_name'] = this.loggedInUser.last_name;
+      this.formularForm.value['id_doctor'] = this.loggedInUser.id_doctor;
       
       for ( let afectiune of this.afectiuniData){
         var id_af = "input_" + afectiune;

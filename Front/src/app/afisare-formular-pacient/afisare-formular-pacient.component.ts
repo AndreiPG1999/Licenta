@@ -33,8 +33,7 @@ export class AfisareFormularPacientComponent implements OnInit {
         this.alergiiSplitted.pop();
         console.log(this.alergiiSplitted);
       },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
+      error: () => {
       }
     })
   }

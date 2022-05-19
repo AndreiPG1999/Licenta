@@ -30,6 +30,7 @@ import { AddTreatmentPacientComponent } from './add-treatment-pacient/add-treatm
 import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.component';
 import { FormularComponent } from './formular/formular.component';
 import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afisare-formular-pacient.component';
+import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisare-formular-doctor.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afis
     AddTreatmentPacientComponent,
     IstoricDoctorComponent,
     FormularComponent,
-    AfisareFormularPacientComponent
+    AfisareFormularPacientComponent,
+    AfisareFormularDoctorComponent
   ],
   imports: [
     BrowserModule,

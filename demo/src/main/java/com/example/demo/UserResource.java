@@ -148,6 +148,30 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping("/allTypeID")
+    public ResponseEntity<List<User>> getAllUsersByType() {
+        List<User> users = userService.findAllUsers();
+        List<User> usersCopy = new ArrayList<>(users);
+        for(User user:usersCopy){
+            if(!(user.getType().equals("pacient") && user.getId_doctor() == 0)){
+                users.remove(user);
+            }
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/allTypeID/{id}")
+    public ResponseEntity<List<User>> getAllUsersByTypePacienti(@PathVariable("id") Long id) {
+        List<User> users = userService.findAllUsers();
+        List<User> usersCopy = new ArrayList<>(users);
+        for(User user:usersCopy){
+            if(!(user.getType().equals("pacient") && user.getId_doctor() == id)){
+                users.remove(user);
+            }
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
     @Transactional
     @DeleteMapping("/delete/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable("email") String email){
