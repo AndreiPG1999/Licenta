@@ -17,7 +17,7 @@ export class ProgramariDoctorComponent implements OnInit {
   currentUser!: any;
   appointments !: Appointment[];
   loggedInUser!: any;
-  users !: User[];
+  neededAppointments!: Appointment[];
 
   constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
 
@@ -27,22 +27,23 @@ export class ProgramariDoctorComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.getAppointment();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
-    this.getAppointment()
+    
   }
   showToasterSuccess(){
     this.notifyService.showSuccess("Programare ștearsă cu succes !!")
   }
 
   public getAppointment(): void {
-    this.appointmentService.getAppointments().subscribe({
+    this.appointmentService.findAppointmentById(this.loggedInUser.id).subscribe({
       next:(response: Appointment[]) => {
-        this.appointments = response;
-        console.log(this.appointments);
+        this.neededAppointments = response;
+        console.log(this.neededAppointments);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -52,13 +53,13 @@ export class ProgramariDoctorComponent implements OnInit {
 
   public searchProgramari(key: string) : void{
     const results: Appointment[] = [];
-    for(const appointment of this.appointments){
-      if(appointment.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 || appointment.data.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(appointment);
+    for(const neededAppointment of this.neededAppointments){
+      if(neededAppointment.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 || neededAppointment.data.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(neededAppointment);
       }
     }
-    this.appointments = results;
-    if(results.length === 0 || !key){
+    this.neededAppointments = results;
+    if(!key){
       this.getAppointment();
     }
   }

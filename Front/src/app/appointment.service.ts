@@ -21,6 +21,10 @@ export class AppointmentService{
         return this.http.post<Appointment>(`${this.apiServerUrl}/appointment/add`, appointment);
     }
 
+    public findAppointmentById(id:number): Observable<Appointment[]>{
+        return this.http.get<Appointment[]>(`${this.apiServerUrl}/appointment/all/${id}`);
+      }
+
     public deleteAppointment(id: number): Observable<void>{
         return this.http.delete<void>(`${this.apiServerUrl}/appointment/delete/${id}`);
     }

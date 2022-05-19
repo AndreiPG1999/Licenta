@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { forkJoin, mergeMap } from 'rxjs';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -25,16 +26,17 @@ export class IstoricDoctorComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.getIstoric();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
-    this.getIstoric();
+    
   }
 
   public getIstoric(): void {
-    this.istoricService.getIstorics().subscribe({
+    this.istoricService.findIstoricById(this.loggedInUser.id).subscribe({
       next:(response: Istoric[]) => {
         this.istorics = response;
         console.log(this.istorics);
@@ -42,7 +44,7 @@ export class IstoricDoctorComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    });
+    })
   }
 
   public searchIstoric(key: string) : void{

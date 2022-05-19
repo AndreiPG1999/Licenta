@@ -24,28 +24,20 @@ export class PacientiComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.getUsers();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
-    this.getUsers();
+    
   }
 
   public getUsers(): void {
-    this.userService.getUsers().subscribe({
+    this.userService.findUsersByTypePacienti(this.loggedInUser.id).subscribe({
       next:(response: User[]) => {
-        this.users = response;
-        console.log(this.users);
-        this.userService.findUsersByTypePacienti(this.loggedInUser.id).subscribe({
-          next:(response: User[]) => {
-            this.neededUsers = response;
-            console.log(this.neededUsers);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
+        this.neededUsers = response;
+        console.log(this.neededUsers);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

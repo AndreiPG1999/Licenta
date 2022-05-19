@@ -12,4 +12,5 @@ export interface Formular{
     droguri:string;
     fumator:string;
     alte_probleme:string;
+    if_doctor:number;
 }

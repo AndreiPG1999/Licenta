@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,6 +19,18 @@ public class IstoricResource {
     @GetMapping("/all")
     public ResponseEntity<List<Istoric>> getAllIstorics(){
         List<Istoric> istorics = istoricService.findAllIstorics();
+        return new ResponseEntity<>(istorics, HttpStatus.OK);
+    }
+
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<Istoric>> getAllIstoricsById(@PathVariable("id") Long id) {
+        List<Istoric> istorics = istoricService.findAllIstorics();
+        List<Istoric> istoricCopy = new ArrayList<>(istorics);
+        for(Istoric istoric:istoricCopy){
+            if(!istoric.getId_doctor().equals(id)){
+                istorics.remove(istoric);
+            }
+        }
         return new ResponseEntity<>(istorics, HttpStatus.OK);
     }
 

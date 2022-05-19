@@ -1,47 +1,48 @@
 <app-navbar-doctor></app-navbar-doctor>
-<!-- merge facut un buton de finalizare programare care sa ma duca la adaugare tratament -->
-<div class="middle-up">
-    Programări
+<div *ngIf="neededAppointments.length > 0">
+    <div class="middle-up">
+        Programări
+    </div>
+    <form class="form">
+        <input type="text" (ngModelChange)="searchProgramari(key.value)" #key="ngModel" ngModel
+        name="key" id="searchName" class="search formEntry" placeholder="Caută după email pacient sau dată..." required>
+    </form>
+    <div>
+    <p></p>
+    </div>
+    <div id="wrapper" class="container">
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th><span>Email pacient</span></th>
+                    <th><span>Oră începere</span></th>
+                    <th><span>Oră finalizare</span></th>
+                    <th><span>Data</span></th>
+                    <th><span>Descriere</span></th>
+                    <th><span>Ștrergere programare</span></th>
+                    <th><span>Finalizare</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let neededAppointment of neededAppointments">
+                    <td class="lalign">{{neededAppointment.email}}</td>
+                    <td class="lalign">{{neededAppointment.ora_incepere}}</td>
+                    <td class="lalign">{{neededAppointment.ora_finalizare}}</td>
+                    <td class="lalign">{{neededAppointment.data}}</td>
+                    <td class="lalign">{{neededAppointment.descriere}}</td>
+                    <td class="lalign">
+                        <button class="btn" (click)="clickMethod(neededAppointment.id)">
+                            <i class="fas fa-solid fa-trash"></i>
+                            Ștergere programare</button>
+                    </td>
+                    <td class="lalign">
+                        <button class="btn" [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
+                            <i class="fas fa-briefcase-medical"></i>
+                            Adăugare date consultație</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<form class="form">
-    <input type="text" (ngModelChange)="searchProgramari(key.value)" #key="ngModel" ngModel
-     name="key" id="searchName" class="search formEntry" placeholder="Caută după email pacient sau dată..." required>
-</form>
-<div>
-   <p></p>
-</div>
-<div id="wrapper" class="container">
-    <table cellspacing="0" cellpadding="0">
-        <thead>
-            <tr>
-                <th><span>Email pacient</span></th>
-                <th><span>Oră începere</span></th>
-                <th><span>Oră finalizare</span></th>
-                <th><span>Data</span></th>
-                <th><span>Descriere</span></th>
-                <th><span>Ștrergere programare</span></th>
-                <th><span>Finalizare</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let appointment of appointments">
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.email}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.ora_incepere}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.ora_finalizare}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.data}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">{{appointment.descriere}}</td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">
-                    <button class="btn" (click)="clickMethod(appointment.id)">
-                        <i class="fas fa-solid fa-trash"></i>
-                        Ștergere programare</button>
-                </td>
-                <td *ngIf="loggedInUser.id === appointment.id_doctor" class="lalign">
-                    <button class="btn" [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
-                        <i class="fas fa-briefcase-medical"></i>
-                        Adăugare date consultație</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-  
+<div class="message" *ngIf="neededAppointments.length === 0"> Nu aveți nici o programare! </div>

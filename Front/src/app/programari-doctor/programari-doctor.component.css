@@ -1,7 +1,17 @@
 .container {
-  top: 20%;
-  position: relative;
+  top: 25%;
+  position: absolute;
   
+}
+.message{
+  position: absolute;
+  top:50%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
 }
 .formEntry {
 display: block;

@@ -23,6 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/appointment/all").permitAll()
                 .antMatchers(HttpMethod.GET,"/formular/all").permitAll()
                 .antMatchers(HttpMethod.GET,"/formular/all/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/appointment/all/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/istoric/all/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/istoric/all").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/add").permitAll()
                 .antMatchers(HttpMethod.POST,"/formular/add").permitAll()

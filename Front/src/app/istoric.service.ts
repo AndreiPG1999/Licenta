@@ -17,6 +17,10 @@ export class IstoricService{
         return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/all`);
     }
 
+    public findIstoricById(id:number): Observable<Istoric[]>{
+        return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/all/${id}`);
+      }
+
     public addIstoric(istoric: Istoric): Observable<Istoric>{
         return this.http.post<Istoric>(`${this.apiServerUrl}/istoric/add`, istoric);
     }
