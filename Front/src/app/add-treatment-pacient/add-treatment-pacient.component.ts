@@ -9,6 +9,7 @@ import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { Treatment } from '../treatment';
 import { TreatmentService } from '../treatment.service';
+import { User } from '../user';
 import { UserService } from '../user.service';
 
 @Component({
@@ -34,15 +35,26 @@ export class AddTreatmentPacientComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
+    this.userService.findUser(this.currentUser.email).subscribe({
+      next:(response: User) => {
+        this.loggedInUser = response;
+        console.log(this.loggedInUser);
+        this.getDiagnostics();
+        this.getTreatments();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
     this.treatmentForm = new FormGroup({
       email_pacient: new FormControl(''),
       treatment: new FormControl(''),
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
-      dinte: new FormControl('', Validators.required)
+      dinte: new FormControl('', Validators.required),
+      id_doctor: new FormControl('')
     });
-    this.getDiagnostics()
-    this.getTreatments();
+    
   }
 
   public getDiagnostics(){
@@ -69,6 +81,7 @@ export class AddTreatmentPacientComponent implements OnInit {
     this.submitted = true;
     if(treatmentForm.valid){
       this.treatmentForm.value['email_pacient'] = this.currentUser.email;
+      this.treatmentForm.value['id_doctor'] = this.loggedInUser.id_doctor;
       this.istoricService.addIstoric(treatmentForm.value).subscribe({
         next:async (response: Istoric) => {
           console.log(response);

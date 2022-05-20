@@ -27,6 +27,11 @@ public class FormularService {
         return formularRepo.save(formular);
     }
 
+    public Formular updateId_doctor(Formular formular, Long id){
+        formular.setId_doctor(id);
+        return formularRepo.save(formular);
+    }
+
     public List<Formular> findAllFormulars(){return formularRepo.findAll();}
     public void deleteFormular(String email){
         formularRepo.deleteFormularByEmail(email);

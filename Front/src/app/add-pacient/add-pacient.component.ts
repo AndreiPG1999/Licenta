@@ -1,5 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Appointment } from '../appointment';
+import { AppointmentService } from '../appointment.service';
+import { Formular } from '../formular';
+import { FormularService } from '../formular.service';
+import { Istoric } from '../istoric';
+import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
@@ -17,7 +23,7 @@ export class AddPacientComponent implements OnInit {
   loggedInUser!: any;
   public neededUsers !: User[];
 
-  constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService) { }
+  constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -79,6 +85,9 @@ export class AddPacientComponent implements OnInit {
       this.userService.updatePacient(user.email,this.loggedInUser.id).subscribe({
         next: (response: User) => {
           console.log(response);
+          this.updateIdFormular(user);
+          this.updateIdIstoric(user);
+          this.updateIdAppointment(user);
           window.location.reload();
           this.showToasterSuccess();
         },
@@ -87,5 +96,38 @@ export class AddPacientComponent implements OnInit {
         }
       });
     }
+  }
+
+  public updateIdFormular(user:User): void{
+    this.formularService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe({
+      next: (response: Formular) => {
+        console.log(response);
+      },
+      error: (error:HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
+  }
+
+  public updateIdIstoric(user:User): void{
+    this.istoricService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe({
+      next: (response: Istoric) => {
+        console.log(response);
+      },
+      error: (error:HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
+  }
+
+  public updateIdAppointment(user:User): void{
+    this.appointmentService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe({
+      next: (response: Appointment) => {
+        console.log(response);
+      },
+      error: (error:HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
   }
 }

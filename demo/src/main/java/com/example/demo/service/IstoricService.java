@@ -21,11 +21,20 @@ public class IstoricService {
 
     public Istoric addIstoric(Istoric istoric){
         Date currentDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = formatter.format(currentDate);
         istoric.setDate(strDate);
         return istoricRepo.save(istoric);
     }
 
+    public Istoric updateIdDoctor(Istoric istoric, Long id){
+        istoric.setId_doctor(id);
+        return istoricRepo.save(istoric);
+    }
+
     public List<Istoric> findAllIstorics(){return istoricRepo.findAll();}
+
+    public void deleteIstoric(String email){
+        istoricRepo.deleteIstoricByEmail(email);
+    }
 }

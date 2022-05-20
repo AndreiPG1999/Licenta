@@ -22,6 +22,11 @@ public class AppointmentService {
 
     public List<Appointment> findAllAppointments(){ return appointmentRepo.findAll(); }
 
+    public Appointment updateIdDoctor(Appointment appointment, Long id){
+        appointment.setId_doctor(id);
+        return appointmentRepo.save(appointment);
+    }
+
     public void deleteAppointment(Long id){
         appointmentRepo.deleteAppointmentById(id);
     }

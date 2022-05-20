@@ -50,7 +50,7 @@ export class IstoricDoctorComponent implements OnInit {
   public searchIstoric(key: string) : void{
     const results: Istoric[] = [];
     for(const istoric of this.istorics){
-      if(istoric.email_pacient.toLowerCase().indexOf(key.toLowerCase()) !== -1 || istoric.date.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+      if(istoric.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 || istoric.date.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(istoric);
       }
     }

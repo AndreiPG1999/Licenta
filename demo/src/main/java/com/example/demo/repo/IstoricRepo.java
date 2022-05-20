@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface IstoricRepo extends JpaRepository<Istoric, Long> {
-
+    void deleteIstoricByEmail(String email);
+    Optional<Istoric> findIstoricByEmail(String email);
 }

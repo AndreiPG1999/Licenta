@@ -61,7 +61,7 @@ p{
     position:absolute;
     margin-left: auto;
     margin-right: auto;
-    right:36.8%;
+    right:22%;
     bottom:25%;
     padding: 10px;
     border-radius: 10px;
@@ -77,8 +77,24 @@ p{
     position:absolute;
     margin-left: auto;
     margin-right: auto;
-    right:35%;
+    right:20.3%;
     bottom:15%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+}
+.btn3{
+    background-color: white;
+    font-family: inherit;
+    color: black;
+    font-size: 22px;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    right:20%;
+    bottom:5%;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid white;

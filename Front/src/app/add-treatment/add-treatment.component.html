@@ -4,7 +4,7 @@
   </div>
 <div>
   <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit(treatmentForm)" class="form">
-    <select formControlName="email_pacient" name="email_pacient" placeholder="Email_pacient" class="select formEntry">
+    <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
       <option disabled selected value="">Selectati un email</option>
       <option *ngFor="let user of users">
           {{user.email}}

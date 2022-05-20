@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-istoric',
@@ -13,8 +15,9 @@ export class IstoricComponent implements OnInit {
 
   currentUser!: any;
   istorics !: Istoric[];
+  loggedInUser !: any;
 
-  constructor(private istoricService:IstoricService, private token:TokenStorageService) { }
+  constructor(private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -26,9 +29,6 @@ export class IstoricComponent implements OnInit {
       next:(response: Istoric[]) => {
         this.istorics = response;
         console.log(this.istorics);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
       }
     });
   }

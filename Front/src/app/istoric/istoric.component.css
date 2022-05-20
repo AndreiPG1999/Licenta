@@ -1,6 +1,6 @@
 .container {
-  top: 20%;
-  position: relative;
+  top: 25%;
+  position: absolute;
 }
 .formEntry {
   display: block;
@@ -26,11 +26,21 @@
   right: 0;
   position: absolute;
 }
+.message{
+  position: absolute;
+  top:50%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+}
 td,th{
     /* padding-left: 60px;
     padding-right: 60px;
     padding-bottom: 50px; */
-    padding: 0.3em;
+    padding: 1.5em;
     width: 7%;
     text-align: center;
     border: 1px solid white;

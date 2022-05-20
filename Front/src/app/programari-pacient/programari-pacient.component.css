@@ -1,6 +1,6 @@
 .container {
-  top: 20%;
-  position: relative;
+  top: 25%;
+  position: absolute;
   
 }
 .formEntry {
@@ -28,10 +28,7 @@ border-radius:.25rem;
   position: absolute;
 }
 td,th{
-  /* padding-left: 60px;
-  padding-right: 60px;
-  padding-bottom: 50px; */
-  padding:5px;
+  padding:1.2em;
   width: 10%;
   text-align: center;
   border: 1px solid white;

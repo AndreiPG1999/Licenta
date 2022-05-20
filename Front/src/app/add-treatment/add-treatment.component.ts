@@ -38,7 +38,7 @@ export class AddTreatmentComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.treatmentForm = new FormGroup({
-      email_pacient: new FormControl(''),
+      email: new FormControl(''),
       treatment: new FormControl(''),
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),

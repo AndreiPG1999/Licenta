@@ -1,5 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Appointment } from '../appointment';
+import { AppointmentService } from '../appointment.service';
+import { Formular } from '../formular';
+import { FormularService } from '../formular.service';
+import { Istoric } from '../istoric';
+import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -16,7 +22,7 @@ export class PacientiComponent implements OnInit {
   loggedInUser!: any;
   neededUsers !: User[];
 
-  constructor(private userService:UserService, private token:TokenStorageService) { }
+  constructor(private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -66,7 +72,9 @@ export class PacientiComponent implements OnInit {
         next: (response: User) => {
           console.log(response);
           window.location.reload();
-          // this.showToasterSuccess();
+          this.updateIdFormular(user);
+          this.updateIdIstoric(user);
+          this.updateIdAppointment(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
@@ -80,11 +88,37 @@ export class PacientiComponent implements OnInit {
         next: async () => {
           await new Promise(f => setTimeout(f, 2000));
           window.location.reload();
+          this.deleteFormular(user);
+          this.deleteIstoric(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
         }
       });
     }
+  }
+
+  public updateIdFormular(user:User): void{
+    this.formularService.updateIdDoctor(user.email, 0).subscribe({
+    });
+  }
+
+  public updateIdIstoric(user:User): void{
+    this.istoricService.updateIdDoctor(user.email, 0).subscribe({
+    });
+  }
+
+  public updateIdAppointment(user:User): void{
+    this.appointmentService.updateIdDoctor(user.email, 0).subscribe({
+    });
+  }
+
+  public deleteFormular(user:User){
+    this.formularService.deleteFormular(user.email).subscribe({
+    });
+  }
+  public deleteIstoric(user:User){
+    this.istoricService.deleteIstoric(user.email).subscribe({
+    });
   }
 }

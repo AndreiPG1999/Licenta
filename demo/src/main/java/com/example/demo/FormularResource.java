@@ -57,6 +57,20 @@ public class FormularResource {
         return new ResponseEntity<>(formulars, HttpStatus.OK);
     }
 
+    @PutMapping("/updateIdDoctor/{email}/{id}")
+    public ResponseEntity<Formular> updateId_doctor(@PathVariable("email") String email, @PathVariable("id") Long id){
+        List<Formular> formulars = formularService.findAllFormulars();
+        for(Formular formularLog : formulars)
+        {
+            if(formularLog.getEmail().equals(email))
+            {
+                Formular updateFormular = formularService.updateId_doctor(formularLog, id);
+                return new ResponseEntity<>(updateFormular, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @Transactional
     @DeleteMapping("/delete/{email}")
     public ResponseEntity<?> deleteFormular(@PathVariable("email") String email){

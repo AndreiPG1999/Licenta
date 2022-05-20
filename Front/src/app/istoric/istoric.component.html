@@ -23,12 +23,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let istoric of istorics">
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.diagnostic}}</td>
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.treatment}}</td>
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.dinte}}</td>
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.pret}}</td>
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">{{istoric.date}}</td>
-                <td *ngIf="currentUser.email === istoric.email_pacient" class="lalign">coming soon</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">{{istoric.diagnostic}}</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">{{istoric.treatment}}</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">{{istoric.dinte}}</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">{{istoric.pret}}</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">{{istoric.date}}</td>
+                <td *ngIf="currentUser.email === istoric.email" class="lalign">coming soon</td>
             </tr>
         </tbody>
     </table>

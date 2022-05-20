@@ -25,7 +25,7 @@ export class AfisareFormularPacientComponent implements OnInit {
     this.formularService.findFormular(this.currentUser.email).subscribe({
       next:(response: Formular) => {
         this.currentFormular = response;
-        console.log(this.currentFormular);
+        console.log(this.currentFormular.length);
         this.afectiuniSplitted = this.currentFormular.afectiuni.split(",");
         this.afectiuniSplitted.pop();
         console.log(this.afectiuniSplitted);
@@ -64,6 +64,20 @@ export class AfisareFormularPacientComponent implements OnInit {
         window.open(URL.createObjectURL(doc.output("blob")));
       }
     });
+  }
+
+  public onDeleteFormular(){
+    if(confirm("Sigur doriți să ștergeți acest formular?")){
+      this.formularService.deleteFormular(this.currentFormular.email).subscribe({
+        next: async () => {
+          await new Promise(f => setTimeout(f, 1000));
+          window.location.reload();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
 }

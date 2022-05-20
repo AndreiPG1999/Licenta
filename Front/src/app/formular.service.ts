@@ -24,6 +24,10 @@ export class FormularService{
         return this.http.get<Formular>(`${this.apiServerUrl}/formular/find/${email}`);
     }
 
+    public updateIdDoctor(email: string, id: number): Observable<Formular>{
+        return this.http.put<Formular>(`${this.apiServerUrl}/formular/updateIdDoctor/${email}/${id}`, id);
+    }
+
     public deleteFormular(email: string): Observable<void>{
         return this.http.delete<void>(`${this.apiServerUrl}/formular/delete/${email}`);
     }

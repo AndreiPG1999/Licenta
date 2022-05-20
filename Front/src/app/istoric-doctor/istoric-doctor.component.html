@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let istoric of istorics">
-                    <td class="lalign">{{istoric.email_pacient}}</td>
+                    <td class="lalign">{{istoric.email}}</td>
                     <td class="lalign">{{istoric.diagnostic}}</td>
                     <td class="lalign">{{istoric.treatment}}</td>
                     <td class="lalign">{{istoric.dinte}}</td>
@@ -37,4 +37,4 @@
         </table>
     </div>
 </div>
-<div *ngIf="istorics.length === 0" class="message" >Nu aveți nici o programare!</div>
+<div *ngIf="istorics.length === 0" class="message" >Nu aveți nici o înregistrare a istoricului!</div>

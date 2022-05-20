@@ -32,6 +32,20 @@ public class AppointmentResource {
         return new ResponseEntity<>(newAppointment, HttpStatus.CREATED);
     }
 
+    @PutMapping("/updateIdDoctor/{email}/{id}")
+    public ResponseEntity<Appointment> updateIdDoctor(@PathVariable("email") String email, @PathVariable("id") Long id){
+        List<Appointment> appointments = appointmentService.findAllAppointments();
+        for(Appointment appointmentLog : appointments)
+        {
+            if(appointmentLog.getEmail().equals(email))
+            {
+                Appointment updateAppointment = appointmentService.updateIdDoctor(appointmentLog, id);
+                return new ResponseEntity<>(updateAppointment, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/all/{id}")
     public ResponseEntity<List<Appointment>> getAllAppointmentsByEmail(@PathVariable("id") Long id) {
         List<Appointment> appointments = appointmentService.findAllAppointments();

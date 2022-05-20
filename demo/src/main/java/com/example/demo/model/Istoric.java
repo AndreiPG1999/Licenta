@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 public class Istoric implements Serializable {
@@ -17,7 +16,7 @@ public class Istoric implements Serializable {
     private String date;
     private String dinte;
     @Column(nullable = false, updatable = false)
-    private String email_pacient;
+    private String email;
     private String radiografie;
     private Long id_doctor;
 
@@ -31,7 +30,7 @@ public class Istoric implements Serializable {
         this.diagnostic = diagnostic;
         this.date = date;
         this.dinte = dinte;
-        this.email_pacient = email_pacient;
+        this.email = email_pacient;
         this.radiografie = radiografie;
         this.id_doctor = id_doctor;
     }
@@ -84,12 +83,12 @@ public class Istoric implements Serializable {
         this.dinte = dinte;
     }
 
-    public String getEmail_pacient() {
-        return email_pacient;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmail_pacient(String email_pacient) {
-        this.email_pacient = email_pacient;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRadiografie() {
@@ -117,7 +116,7 @@ public class Istoric implements Serializable {
                 ", diagnostic='" + diagnostic + '\'' +
                 ", date='" + date + '\'' +
                 ", dinte='" + dinte + '\'' +
-                ", email_pacient='" + email_pacient + '\'' +
+                ", email='" + email + '\'' +
                 ", radiografie='" + radiografie + '\'' +
                 ", id_doctor=" + id_doctor +
                 '}';
