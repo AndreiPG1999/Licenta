@@ -21,8 +21,18 @@
           </div>
         </div>
       </li>
-      <li><a [routerLink]="['/programari_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-calendar-check"></i> Programari</a></li>
-      <li><a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i>Istoric</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Date
+            <i class="fas fa-chevron-circle-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/programari_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-calendar-check"></i> Programari</a>
+            <a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i>Istoric</a>
+            <a [routerLink]="['/afisare-formular-doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-solid fa-notes-medical"></i>Formulare pacienți</a>
+          </div>
+        </div>
+      </li>
       <li><a [routerLink]="['/pacienti']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Pacienti</a></li>
       <li><a [routerLink]="['/aboutD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-address-card"></i> Despre</a></li>
       <li><a [routerLink]="['/contactD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-id-card"></i> Contact</a></li>

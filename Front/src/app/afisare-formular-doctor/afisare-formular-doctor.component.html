@@ -1,1 +1,66 @@
-<p>afisare-formular-doctor works!</p>
+<app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+   Adăugare pacienți
+ </div>
+<form class="form">
+    <input type="text" (ngModelChange)="searchFormulars(key.value)" #key="ngModel" ngModel
+     name="key" id="searchName" class="search formEntry" placeholder="Caută pacienți..." required>
+</form>
+<div>
+   <p></p>
+</div>
+<div *ngIf="formulars.length < 9">
+   <div class="container" id="main-container">
+      <div class="row">
+         <div *ngFor="let formular of formulars">
+            <div class="col-md-6">
+               <div class="card">
+                  <div class="list-group">
+                     <div class="list-title align-self-center mb-0">
+                        <li class="list-group-item"><h5>{{formular.last_name}} {{formular.first_name}}</h5></li>
+                     </div>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{formular.email}}</li>
+                  </ul>
+                  <div class="list-group-item">
+                        <div class="btn-primary">
+                            <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Descarca pdf</i></a>
+                         </div>
+                         <div class="btn-primary">
+                            <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Deschide pdf</i></a>
+                         </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div *ngIf="formulars.length > 8">
+      <div id="wrapper" class="container-table">
+         <table cellspacing="0" cellpadding="0">
+            <thead>
+               <tr>
+                     <th><span>Nume</span></th>
+                     <th><span>Prenume</span></th>
+                     <th><span>Email</span></th>
+                     <th><span>Nr de telefon</span></th>
+                     <th><span>Adaugare pacient</span></th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let formular of formulars">
+                     <td class="lalign">{{formular.last_name}}</td>
+                     <td class="lalign">{{formular.first_name}}</td>
+                     <td class="lalign">{{formular.email}}</td>
+                     <td class="lalign">
+                        <div class="btn">
+                           <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Descarca pdf</i></a>
+                        </div>
+                     </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+</div>

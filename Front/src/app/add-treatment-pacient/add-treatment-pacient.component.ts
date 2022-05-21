@@ -47,7 +47,7 @@ export class AddTreatmentPacientComponent implements OnInit {
       }
     });
     this.treatmentForm = new FormGroup({
-      email_pacient: new FormControl(''),
+      email: new FormControl(''),
       treatment: new FormControl(''),
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
@@ -80,7 +80,7 @@ export class AddTreatmentPacientComponent implements OnInit {
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){
-      this.treatmentForm.value['email_pacient'] = this.currentUser.email;
+      this.treatmentForm.value['email'] = this.currentUser.email;
       this.treatmentForm.value['id_doctor'] = this.loggedInUser.id_doctor;
       this.istoricService.addIstoric(treatmentForm.value).subscribe({
         next:async (response: Istoric) => {

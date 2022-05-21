@@ -20,6 +20,9 @@ export class FormularService{
         return this.http.post<Formular>(`${this.apiServerUrl}/formular/add`, formular);
     }
 
+    public findFormularById(id:number) :Observable<Formular[]>{
+        return this.http.get<Formular[]>(`${this.apiServerUrl}/formular/all/${id}`);
+    }
     public findFormular(email: string){
         return this.http.get<Formular>(`${this.apiServerUrl}/formular/find/${email}`);
     }

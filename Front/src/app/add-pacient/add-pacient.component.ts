@@ -31,30 +31,20 @@ export class AddPacientComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
-        
+        this.getUsers();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
-    this.getUsers();
+    
   }
 
   public getUsers(): void {
-    this.userService.getUsers().subscribe({
+    this.userService.findUsersByType().subscribe({
       next:(response: User[]) => {
-        this.users = response;
-        console.log(this.users);
-        this.userService.findUsersByType().subscribe({
-          next:(response: User[]) => {
-            this.neededUsers = response;
-            console.log(this.neededUsers);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
-        
+        this.neededUsers = response;
+        console.log(this.neededUsers);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -103,8 +93,7 @@ export class AddPacientComponent implements OnInit {
       next: (response: Formular) => {
         console.log(response);
       },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
+      error: () => {
       }
     });
   }
@@ -114,8 +103,7 @@ export class AddPacientComponent implements OnInit {
       next: (response: Istoric) => {
         console.log(response);
       },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
+      error: () => {
       }
     });
   }
@@ -125,8 +113,7 @@ export class AddPacientComponent implements OnInit {
       next: (response: Appointment) => {
         console.log(response);
       },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
+      error: () => {
       }
     });
   }
