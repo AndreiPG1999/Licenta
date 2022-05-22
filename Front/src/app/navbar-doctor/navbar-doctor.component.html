@@ -18,6 +18,11 @@
             <a [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
                 <i class="fas fa-briefcase-medical"></i>
                 Adaugare tratamente și diagnostice</a>
+            <a><button type="button" class="btn" (click)="onOpenModal()">
+                <i class="fas fa-plus"></i>
+                Adaugare radiografie
+              </button>
+            </a>
           </div>
         </div>
       </li>
@@ -28,8 +33,9 @@
           </button>
           <div class="dropdown-content">
             <a [routerLink]="['/programari_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-calendar-check"></i> Programari</a>
-            <a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i>Istoric</a>
-            <a [routerLink]="['/afisare-formular-doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-solid fa-notes-medical"></i>Formulare pacienți</a>
+            <a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i> Istoric</a>
+            <a [routerLink]="['/afisare-formular-doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-solid fa-notes-medical"></i> Formulare pacienți</a>
+            <a [routerLink]="['/radiografii']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"> Radiografii</a>
           </div>
         </div>
       </li>
@@ -66,4 +72,33 @@
           Logout</a></li>
       </div>
     </ul>
+  </div>
+
+  <!-- modal adaugare radiografie -->
+  <div class="modal" tabindex="-1" id="addRadiografie" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Adăugare radiografie</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseModal()"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="addRadiografieForm">
+                    <div class="form-group">
+                      <select formControlName="email" name="email" placeholder="Email" class="select formEntry">
+                        <option disabled selected value="">Selectati un email</option>
+                        <option *ngFor="let user of users">
+                            {{user.email}}
+                        </option>
+                      </select>
+                      <input type="file" (change)="onFileChanged($event)">
+                    </div>
+                    <div class="modal-footer">
+                       <button (click)="onUpload()" data-dismiss="modal" class="btnModal" >Update</button>
+                       <button type="button" class="btnModal" (click)="onCloseModal()" >Close</button>
+                    </div>
+                  </form>
+                </div>
+          </div>
+    </div>
   </div>

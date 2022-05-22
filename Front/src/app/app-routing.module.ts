@@ -23,6 +23,7 @@ import { ProfilDoctorComponent } from './profil-doctor/profil-doctor.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProgramariDoctorComponent } from './programari-doctor/programari-doctor.component';
 import { ProgramariPacientComponent } from './programari-pacient/programari-pacient.component';
+import { RadiografiiComponent } from './radiografii/radiografii.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
   { path: 'add-treatment-pacient', component:AddTreatmentPacientComponent},
   { path: 'formular', component:FormularComponent},
   { path: 'afisare-formular-pacient', component:AfisareFormularPacientComponent},
-  { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent}
+  { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent},
+  { path: 'radiografii', component:RadiografiiComponent}
 ];
 
 @NgModule({

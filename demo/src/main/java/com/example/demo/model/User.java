@@ -20,12 +20,11 @@ public class User implements Serializable {
     private String type;
     private Long id_doctor;
     private String nr_telefon;
-    private String profile_picture;
 
     public User(){}
 
     public User(Long id, String first_name, String last_name, String email, String password, String type,
-                Long id_doctor, String nr_telefon, String profile_picture) {
+                Long id_doctor, String nr_telefon) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -34,7 +33,6 @@ public class User implements Serializable {
         this.type = type;
         this.id_doctor = id_doctor;
         this.nr_telefon = nr_telefon;
-        this.profile_picture = profile_picture;
     }
 
     public Long getId() {
@@ -101,14 +99,6 @@ public class User implements Serializable {
         this.nr_telefon = nr_telefon;
     }
 
-    public String getProfile_picture() {
-        return profile_picture;
-    }
-
-    public void setProfile_picture(String profile_picture) {
-        this.profile_picture = profile_picture;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -120,7 +110,6 @@ public class User implements Serializable {
                 ", type='" + type + '\'' +
                 ", id_doctor=" + id_doctor +
                 ", nr_telefon='" + nr_telefon + '\'' +
-                ", profile_picture=" + profile_picture +
                 '}';
     }
 }

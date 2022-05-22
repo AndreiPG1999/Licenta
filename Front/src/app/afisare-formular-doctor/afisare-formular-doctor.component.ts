@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import jsPDF from 'jspdf';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
 import { NotificationService } from '../notification.service';
@@ -59,6 +60,20 @@ export class AfisareFormularDoctorComponent implements OnInit {
     this.formulars = results;
     if(!key){
       this.getFormulars();
+    }
+  }
+
+  public onDeleteFormular(formular:Formular){
+    if(confirm("Sigur doriți să ștergeți acest formular?")){
+      this.formularService.deleteFormular(formular.email).subscribe({
+        next: async () => {
+          await new Promise(f => setTimeout(f, 1000));
+          window.location.reload();
+        },
+        error: (error:HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
     }
   }
 }

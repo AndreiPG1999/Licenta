@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
@@ -27,6 +27,7 @@ export class AddTreatmentComponent implements OnInit {
   users !: User[];
   loggedInUser!: any;
   currentUser!: any;
+  selectedFile !: File;
 
   constructor(private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
@@ -87,6 +88,8 @@ export class AddTreatmentComponent implements OnInit {
       }
     })
   }
+
+
   async onSubmit(treatmentForm:FormGroup){
     this.submitted = true;
     if(treatmentForm.valid){

@@ -24,12 +24,15 @@
                      <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{formular.email}}</li>
                   </ul>
                   <div class="list-group-item">
-                        <div class="btn-primary">
-                            <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Descarca pdf</i></a>
-                         </div>
-                         <div class="btn-primary">
-                            <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Deschide pdf</i></a>
-                         </div>
+                     <div class="btn-primary">
+                           <a mat-raised-button data-placement="top" data-original-title="Add">Descarca pdf</a>
+                     </div>
+                     <div class="btn-primary">
+                           <a mat-raised-button data-placement="top" data-original-title="Add">Deschide pdf</a>
+                     </div>
+                     <div class="btn-primary">
+                        <a mat-raised-button (click)="onDeleteFormular(formular)" data-placement="top" data-original-title="Add">Sterge formular</a>
+                  </div>
                   </div>
                </div>
             </div>

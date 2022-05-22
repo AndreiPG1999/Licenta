@@ -31,6 +31,7 @@ import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.componen
 import { FormularComponent } from './formular/formular.component';
 import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afisare-formular-pacient.component';
 import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisare-formular-doctor.component';
+import { RadiografiiComponent } from './radiografii/radiografii.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisar
     IstoricDoctorComponent,
     FormularComponent,
     AfisareFormularPacientComponent,
-    AfisareFormularDoctorComponent
+    AfisareFormularDoctorComponent,
+    RadiografiiComponent
   ],
   imports: [
     BrowserModule,

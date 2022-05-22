@@ -21,7 +21,6 @@ export class PacientiComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
   neededUsers !: User[];
-
   constructor(private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
