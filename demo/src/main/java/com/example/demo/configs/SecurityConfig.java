@@ -52,6 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/radiografie/upload/{email}/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/radiografie/get/{email}").permitAll()
                 .antMatchers(HttpMethod.GET,"/radiografie/all").permitAll()
+                .antMatchers(HttpMethod.POST,"/acces/add").permitAll()
+                .antMatchers(HttpMethod.GET,"/acces/all").permitAll()
+                .antMatchers(HttpMethod.GET,"/acces/find/{email}").permitAll()
                 .anyRequest().authenticated();
     }
 

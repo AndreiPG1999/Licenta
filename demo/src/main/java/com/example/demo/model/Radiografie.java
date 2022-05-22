@@ -1,10 +1,11 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Arrays;
 
 @Entity
-public class Radiografie {
+public class Radiografie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

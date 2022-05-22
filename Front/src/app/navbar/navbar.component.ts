@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Acces } from '../acces';
+import { AccesService } from '../acces.service';
 import { FormularService } from '../formular.service';
 import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
@@ -23,7 +25,8 @@ export class NavbarPacientComponent implements OnInit {
   selectedFile !:File;
   addRadiografieForm !: FormGroup;
   loggedInUser !: any;
-  constructor(private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router, private formularService:FormularService, private istoricService:IstoricService, private radiografieService:RadiografieService) { }
+  accesList !: Acces;
+  constructor(private accesService:AccesService, private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router, private formularService:FormularService, private istoricService:IstoricService, private radiografieService:RadiografieService) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Cont sters cu succes !!")
@@ -43,6 +46,7 @@ export class NavbarPacientComponent implements OnInit {
         alert(error.message);
       }
     });
+    this.getAcces();
   }
   clickMethod(){
     if(confirm("Sunteți sigur că doriți să ștergeți contul?")){
@@ -59,6 +63,15 @@ export class NavbarPacientComponent implements OnInit {
         }
       });
     }
+  }
+
+  public getAcces(){
+    this.accesService.findAcces(this.currentUser.email).subscribe({
+      next:async (response: Acces) => {
+        this.accesList = response;
+        console.log(this.accesList);
+      }
+    });
   }
 
   public deleteFormular(){

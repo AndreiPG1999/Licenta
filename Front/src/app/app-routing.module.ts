@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccesComponent } from './acces/acces.component';
 import { AddPacientComponent } from './add-pacient/add-pacient.component';
 import { AddProgramareComponent } from './add-programare/add-programare.component';
 import { AddTreatmentPacientComponent } from './add-treatment-pacient/add-treatment-pacient.component';
@@ -52,7 +53,8 @@ const routes: Routes = [
   { path: 'formular', component:FormularComponent},
   { path: 'afisare-formular-pacient', component:AfisareFormularPacientComponent},
   { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent},
-  { path: 'radiografii', component:RadiografiiComponent}
+  { path: 'radiografii', component:RadiografiiComponent},
+  { path: 'acces', component:AccesComponent}
 ];
 
 @NgModule({
