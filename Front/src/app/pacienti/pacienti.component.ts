@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AccesService } from '../acces.service';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { Formular } from '../formular';
@@ -21,7 +22,7 @@ export class PacientiComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
   neededUsers !: User[];
-  constructor(private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
+  constructor(private accesService:AccesService, private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -74,6 +75,7 @@ export class PacientiComponent implements OnInit {
           this.updateIdFormular(user);
           this.updateIdIstoric(user);
           this.updateIdAppointment(user);
+          this.updateIdAcces(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
@@ -89,6 +91,7 @@ export class PacientiComponent implements OnInit {
           window.location.reload();
           this.deleteFormular(user);
           this.deleteIstoric(user);
+          this.deleteAcces(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
@@ -112,12 +115,22 @@ export class PacientiComponent implements OnInit {
     });
   }
 
+  public updateIdAcces(user:User): void{
+    this.accesService.updateIdDoctor(user.email, 0).subscribe({
+    });
+  }
+
   public deleteFormular(user:User){
     this.formularService.deleteFormular(user.email).subscribe({
     });
   }
   public deleteIstoric(user:User){
     this.istoricService.deleteIstoric(user.email).subscribe({
+    });
+  }
+
+  public deleteAcces(user:User){
+    this.accesService.deleteAcces(user.email).subscribe({
     });
   }
 }

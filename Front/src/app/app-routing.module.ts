@@ -14,6 +14,7 @@ import { DespreComponent } from './despre/despre.component';
 import { FormularComponent } from './formular/formular.component';
 import { HomeDoctorComponent } from './home-doctor/home-doctor.component';
 import { HomePacientComponent } from './home-pacient/home-pacient.component';
+import { InfoAccesComponent } from './info-acces/info-acces.component';
 import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.component';
 import { IstoricComponent } from './istoric/istoric.component';
 import { LoginComponent } from './login/login.component';
@@ -54,7 +55,8 @@ const routes: Routes = [
   { path: 'afisare-formular-pacient', component:AfisareFormularPacientComponent},
   { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent},
   { path: 'radiografii', component:RadiografiiComponent},
-  { path: 'acces', component:AccesComponent}
+  { path: 'acces', component:AccesComponent},
+  { path: 'info-acces', component:InfoAccesComponent}
 ];
 
 @NgModule({

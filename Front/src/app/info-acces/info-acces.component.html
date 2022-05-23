@@ -1,0 +1,30 @@
+<app-navbar-doctor></app-navbar-doctor>
+<div class="middle-up">
+    Date acces pacienți
+  </div>
+  <form class="form">
+    <input type="text" (ngModelChange)="searchAcces(key.value)" #key="ngModel" ngModel
+     name="key" id="searchName" class="search formEntry" placeholder="Caută după email..." required>
+</form>
+<div id="wrapper" class="container-table">
+    <table cellspacing="0" cellpadding="0">
+       <thead>
+          <tr>
+                <th><span>Email</span></th>
+                <th><span>Acces adăugare radiografie</span></th>
+                <th><span>Acces adăugare tratament</span></th>
+                <th><span>Acces ștergere cont</span></th>
+                <th><span>Acces afișare formular</span></th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr *ngFor="let acces of accesList">
+                <td class="lalign">{{acces.email}}</td>
+                <td class="lalign">{{acces.adaugareRadiografie}}</td>
+                <td class="lalign">{{acces.adaugareTratament}}</td>
+                <td class="lalign">{{acces.stergereCont}}</td>
+                <td class="lalign">{{acces.afisareFormular}}</td>
+          </tr>
+       </tbody>
+    </table>
+ </div>

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.Acces;
 import com.example.demo.model.Radiografie;
 import com.example.demo.repo.RadiografieRepo;
 import org.springframework.beans.factory.annotation.Autowired;

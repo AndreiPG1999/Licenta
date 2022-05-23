@@ -33,6 +33,7 @@ import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afis
 import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisare-formular-doctor.component';
 import { RadiografiiComponent } from './radiografii/radiografii.component';
 import { AccesComponent } from './acces/acces.component';
+import { InfoAccesComponent } from './info-acces/info-acces.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { AccesComponent } from './acces/acces.component';
     AfisareFormularPacientComponent,
     AfisareFormularDoctorComponent,
     RadiografiiComponent,
-    AccesComponent
+    AccesComponent,
+    InfoAccesComponent
   ],
   imports: [
     BrowserModule,

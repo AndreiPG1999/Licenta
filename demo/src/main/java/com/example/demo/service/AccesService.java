@@ -24,6 +24,11 @@ public class AccesService {
         return accesRepo.findAll();
     }
 
+    public Acces updateId_doctor(Acces acces, Long id){
+        acces.setId_doctor(id);
+        return accesRepo.save(acces);
+    }
+
     public void deleteAcces(String email){
         accesRepo.deleteAccesByEmail(email);
     }

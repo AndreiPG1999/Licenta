@@ -23,6 +23,8 @@
                 Adaugare radiografie
               </button>
             </a>
+            <a [routerLink]="['/acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Modificare acces pacienti</a>
+            
           </div>
         </div>
       </li>
@@ -36,10 +38,10 @@
             <a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i> Istoric</a>
             <a [routerLink]="['/afisare-formular-doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-solid fa-notes-medical"></i> Formulare pacienți</a>
             <a [routerLink]="['/radiografii']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"> Radiografii</a>
+            <a [routerLink]="['/info-acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Informatii acces pacienti</a>
           </div>
         </div>
       </li>
-      <li><a [routerLink]="['/acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Acces</a></li>
       <li><a [routerLink]="['/pacienti']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Pacienti</a></li>
       <li><a [routerLink]="['/aboutD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-address-card"></i> Despre</a></li>
       <li><a [routerLink]="['/contactD']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-id-card"></i> Contact</a></li>

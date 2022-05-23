@@ -19,4 +19,16 @@ export class AccesService{
     public findAcces(email: string){
         return this.http.get<Acces>(`${this.apiServerUrl}/acces/find/${email}`);
     }
+
+    public updateIdDoctor(email: string, id: number): Observable<Acces>{
+        return this.http.put<Acces>(`${this.apiServerUrl}/acces/updateIdDoctor/${email}/${id}`, id);
+    }
+
+    public findAccesById(id:number) :Observable<Acces[]>{
+        return this.http.get<Acces[]>(`${this.apiServerUrl}/acces/all/${id}`);
+    }
+
+    public deleteAcces(email: string){
+        return this.http.delete<void>(`${this.apiServerUrl}/acces/delete/${email}`);
+    }
 }

@@ -23,17 +23,17 @@ export class AccesComponent implements OnInit {
   constructor(private token:TokenStorageService, private accesService:AccesService, private userService:UserService, private notifyService:NotificationService) { }
 
   showToasterSuccess(){
-    this.notifyService.showSuccess("Date adaugate cu succes !!")
+    this.notifyService.showSuccess("Accesul utilizatorului a fost modificat !!")
   }
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.accesForm = new FormGroup({
       email: new FormControl(''),
       id_doctor: new FormControl(''),
-      adaugareTratament: new FormControl(''),
-      adaugareRadiografie: new FormControl(''),
-      stergereCont: new FormControl(''),
-      afisareFormular: new FormControl('')
+      adaugareTratament: new FormControl('', Validators.required),
+      adaugareRadiografie: new FormControl('', Validators.required),
+      stergereCont: new FormControl('', Validators.required),
+      afisareFormular: new FormControl('', Validators.required)
     });
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -60,6 +60,11 @@ export class AccesComponent implements OnInit {
     if(accesForm.valid)
     {
       this.accesForm.value['id_doctor'] = this.loggedInUser.id;
+      this.accesService.deleteAcces(this.accesForm.value['email']).subscribe({
+        next: () => {
+          console.log("deleted");
+        }
+      });
       this.accesService.addAcces(accesForm.value).subscribe({
         next:async (response: Acces) => {
           console.log(this.users);

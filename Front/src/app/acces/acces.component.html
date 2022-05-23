@@ -11,15 +11,24 @@
       </option>
     </select>
 
-    <input type="text" formControlName="adaugareTratament" name="adaugareTratament" placeholder="Acces tratament(true/false)" class="text formEntry"/>
-
-    <input type="text" formControlName="adaugareRadiografie" name="adaugareRadiografie" placeholder="Acces radiografie(true/false)" class="text formEntry"/>
-
-    <input type="text" formControlName="stergereCont" name="stergereCont" placeholder="Acces stergere cont(true/false)" class="text formEntry"/>
-
-    <input type="text" formControlName="afisareFormular" name="afisareFormular" placeholder="Acces afisare formular(true/false)" class="text formEntry"/>
+    <input type="text" formControlName="adaugareTratament" name="adaugareTratament" placeholder="Acces tratament(true/false)" [ngClass]="{ 'is-invalid': submitted && accesForm.get('adaugareTratament').errors }" class="text formEntry"/>
+      <div *ngIf="submitted && accesForm.get('adaugareTratament').errors" class="invalid-feedback">
+        <div *ngIf="accesForm.get('adaugareTratament').errors['required']">Acest câmp nu poate fi gol.</div>
+      </div>
+    <input type="text" formControlName="adaugareRadiografie" name="adaugareRadiografie" placeholder="Acces radiografie(true/false)" [ngClass]="{ 'is-invalid': submitted && accesForm.get('adaugareRadiografie').errors }" class="text formEntry"/>
+      <div *ngIf="submitted && accesForm.get('adaugareRadiografie').errors" class="invalid-feedback">
+        <div *ngIf="accesForm.get('adaugareRadiografie').errors['required']">Acest câmp nu poate fi gol.</div>
+      </div>
+    <input type="text" formControlName="stergereCont" name="stergereCont" placeholder="Acces stergere cont(true/false)" [ngClass]="{ 'is-invalid': submitted && accesForm.get('stergereCont').errors }" class="text formEntry"/>
+      <div *ngIf="submitted && accesForm.get('stergereCont').errors" class="invalid-feedback">
+        <div *ngIf="accesForm.get('stergereCont').errors['required']">Acest câmp nu poate fi gol.</div>
+      </div>
+    <input type="text" formControlName="afisareFormular" name="afisareFormular" placeholder="Acces afisare formular(true/false)" [ngClass]="{ 'is-invalid': submitted && accesForm.get('afisareFormular').errors }" class="text formEntry"/>
+    <div *ngIf="submitted && accesForm.get('afisareFormular').errors" class="invalid-feedback">
+      <div *ngIf="accesForm.get('afisareFormular').errors['required']">Acest câmp nu poate fi gol.</div>
+    </div>
     
-    <button type="submit" class="submit formEntry">Adaugă</button>
+    <button type="submit" class="submit formEntry">Modifica acces</button>
   </form>
 </div>
 

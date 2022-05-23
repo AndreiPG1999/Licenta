@@ -84,7 +84,7 @@ export class FormularComponent implements OnInit {
         var a = document.getElementById(id_af) as HTMLInputElement;
         if(a.checked)
         {
-          this.optionsAlergiiChecked += alergie + ","; 
+          this.optionsAlergiiChecked += alergie + ",";
           
         }
       }

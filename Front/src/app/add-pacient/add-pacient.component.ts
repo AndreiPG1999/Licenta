@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Acces } from '../acces';
+import { AccesService } from '../acces.service';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { Formular } from '../formular';
@@ -23,7 +25,7 @@ export class AddPacientComponent implements OnInit {
   loggedInUser!: any;
   public neededUsers !: User[];
 
-  constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
+  constructor(private accesService:AccesService, private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -78,6 +80,7 @@ export class AddPacientComponent implements OnInit {
           this.updateIdFormular(user);
           this.updateIdIstoric(user);
           this.updateIdAppointment(user);
+          this.updateIdAcces(user);
           window.location.reload();
           this.showToasterSuccess();
         },
@@ -111,6 +114,16 @@ export class AddPacientComponent implements OnInit {
   public updateIdAppointment(user:User): void{
     this.appointmentService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe({
       next: (response: Appointment) => {
+        console.log(response);
+      },
+      error: () => {
+      }
+    });
+  }
+
+  public updateIdAcces(user:User): void{
+    this.accesService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe({
+      next: (response: Acces) => {
         console.log(response);
       },
       error: () => {
