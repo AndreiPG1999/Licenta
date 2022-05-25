@@ -27,6 +27,7 @@ import { ProgramariDoctorComponent } from './programari-doctor/programari-doctor
 import { ProgramariPacientComponent } from './programari-pacient/programari-pacient.component';
 import { RadiografiiComponent } from './radiografii/radiografii.component';
 import { RegisterComponent } from './register/register.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent},
@@ -56,7 +57,8 @@ const routes: Routes = [
   { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent},
   { path: 'radiografii', component:RadiografiiComponent},
   { path: 'acces', component:AccesComponent},
-  { path: 'info-acces', component:InfoAccesComponent}
+  { path: 'info-acces', component:InfoAccesComponent},
+  { path: 'stats', component:StatsComponent}
 ];
 
 @NgModule({
