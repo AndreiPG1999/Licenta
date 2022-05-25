@@ -34,6 +34,7 @@ import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisar
 import { RadiografiiComponent } from './radiografii/radiografii.component';
 import { AccesComponent } from './acces/acces.component';
 import { InfoAccesComponent } from './info-acces/info-acces.component';
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,9 @@ import { InfoAccesComponent } from './info-acces/info-acces.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ChartsModule,
+    WavesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
