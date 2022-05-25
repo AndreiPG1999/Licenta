@@ -56,8 +56,7 @@ const routes: Routes = [
   { path: 'afisare-formular-doctor', component:AfisareFormularDoctorComponent},
   { path: 'radiografii', component:RadiografiiComponent},
   { path: 'acces', component:AccesComponent},
-  { path: 'info-acces', component:InfoAccesComponent},
-  { path: 'statistici', component:StatisticiComponent}
+  { path: 'info-acces', component:InfoAccesComponent}
 ];
 
 @NgModule({
