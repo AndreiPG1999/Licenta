@@ -40,9 +40,6 @@ export class IstoricDoctorComponent implements OnInit {
       next:(response: Istoric[]) => {
         this.istorics = response;
         console.log(this.istorics);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
       }
     })
   }
