@@ -49,10 +49,6 @@ export class StatsComponent implements OnInit {
   }
   chartType = 'bar';
 
-  chartDatasets = [
-    { data: [this.nrAbces, this.nrAmeloblastom, this.nrAngina, this.nrDiastema, this.nrGingivita, this.nrCarie, this.nrCheilita, this.nrFluoroza, this.nrFractura, this.nrHiperplazia, this.nrParodontoza, this.nrRetractie, this.nrSangerare], label: 'Diagnostice' }
-  ];
-
   chartLabels = ['Abces dentar', 'Ameloblastom', 'Angina Ludwig', 'Diastema', 'Gingivita', 'Caria dentara', 'Cheilita angulara', 'Fluoroza dentara', 'Fractura mandibulara', 'Hiperplazia gingivala', 'Parodontoza', 'Retractie gingivala', 'Sangerare gingivala'];
 
   chartColors = [
@@ -114,55 +110,53 @@ export class StatsComponent implements OnInit {
       next:(response: Istoric[]) => {
         this.istorics = response;
         console.log(this.istorics);
+        for(let istoric of this.istorics){
+          if(istoric.diagnostic === "Abces dentar")
+            this.nrAbces ++;
+          if(istoric.diagnostic === "Ameloblastom")
+            this.nrAmeloblastom ++;
+          if(istoric.diagnostic === "Angina Ludwig")
+            this.nrAngina ++;
+          if(istoric.diagnostic === "Diastema")
+            this.nrDiastema ++;
+          if(istoric.diagnostic === "Gingivita")
+            this.nrGingivita ++;
+          if(istoric.diagnostic === "Caria dentara")
+            this.nrCarie ++;
+          if(istoric.diagnostic === "Cheilita angulara")
+            this.nrCheilita ++;
+          if(istoric.diagnostic === "Fluoroza dentara")
+            this.nrFluoroza ++;
+          if(istoric.diagnostic === "Fractura mandibulara")
+            this.nrFractura ++;
+          if(istoric.diagnostic === "Hiperplazia gingivala")
+            this.nrHiperplazia ++;
+          if(istoric.diagnostic === "Parodontoza")
+            this.nrParodontoza ++;
+          if(istoric.diagnostic === "Retractie gingivala")
+            this.nrRetractie ++;
+          if(istoric.diagnostic === "Sangerare gingivala")
+            this.nrSangerare ++;
+        }
+        const  array2 = new Array<Number>();
+        array2.push(this.nrAbces);
+        array2.push(this.nrAmeloblastom);
+        array2.push(this.nrAngina);
+        array2.push(this.nrDiastema);
+        array2.push(this.nrGingivita);
+        array2.push(this.nrCarie);
+        array2.push(this.nrCheilita);
+        array2.push(this.nrFluoroza);
+        array2.push(this.nrFractura);
+        array2.push(this.nrHiperplazia);
+        array2.push(this.nrParodontoza);
+        array2.push(this.nrRetractie);
+        array2.push(this.nrSangerare);
+    
+        this.array = array2;
+        console.log(this.array);
+        this.getChartData();
       }
     })
-  }
-
-  public getData(): void{
-    for(let istoric of this.istorics){
-      if(istoric.diagnostic === "Abces dentar")
-        this.nrAbces ++;
-      if(istoric.diagnostic === "Ameloblastom")
-        this.nrAmeloblastom ++;
-      if(istoric.diagnostic === "Angina Ludwig")
-        this.nrAngina ++;
-      if(istoric.diagnostic === "Diastema")
-        this.nrDiastema ++;
-      if(istoric.diagnostic === "Gingivita")
-        this.nrGingivita ++;
-      if(istoric.diagnostic === "Caria dentara")
-        this.nrCarie ++;
-      if(istoric.diagnostic === "Cheilita angulara")
-        this.nrCheilita ++;
-      if(istoric.diagnostic === "Fluoroza dentara")
-        this.nrFluoroza ++;
-      if(istoric.diagnostic === "Fractura mandibulara")
-        this.nrFractura ++;
-      if(istoric.diagnostic === "Hiperplazia gingivala")
-        this.nrHiperplazia ++;
-      if(istoric.diagnostic === "Parodontoza")
-        this.nrParodontoza ++;
-      if(istoric.diagnostic === "Retractie gingivala")
-        this.nrRetractie ++;
-      if(istoric.diagnostic === "Sangerare gingivala")
-        this.nrSangerare ++;
-    }
-    const  array2 = new Array<Number>();
-    array2.push(this.nrAbces);
-    array2.push(this.nrAmeloblastom);
-    array2.push(this.nrAngina);
-    array2.push(this.nrDiastema);
-    array2.push(this.nrGingivita);
-    array2.push(this.nrCarie);
-    array2.push(this.nrCheilita);
-    array2.push(this.nrFluoroza);
-    array2.push(this.nrFractura);
-    array2.push(this.nrHiperplazia);
-    array2.push(this.nrParodontoza);
-    array2.push(this.nrRetractie);
-    array2.push(this.nrSangerare);
-
-    this.array = array2;
-
   }
 }
