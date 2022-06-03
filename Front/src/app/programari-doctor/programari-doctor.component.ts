@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../appointment';
@@ -19,6 +20,10 @@ export class ProgramariDoctorComponent implements OnInit {
   loggedInUser!: any;
   neededAppointments!: Appointment[];
 
+  today = new Date();
+  changedDate='';
+  pipe = new DatePipe('en-US');
+  cond !: boolean;
   constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
 
   ngOnInit(): void {
@@ -27,6 +32,9 @@ export class ProgramariDoctorComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
+        this.today.setDate(this.today.getDate() - 1);
+        let changeFormat = this.pipe.transform(this.today, 'yyyy-MM-dd');
+        this.changedDate = changeFormat!;
         this.getAppointment();
       },
       error: (error: HttpErrorResponse) => {
@@ -51,6 +59,11 @@ export class ProgramariDoctorComponent implements OnInit {
     });
   }
 
+  condition(data:string) : boolean {
+    this.cond = data >= this.changedDate;
+    return this.cond; 
+    
+  }
   public searchProgramari(key: string) : void{
     const results: Appointment[] = [];
     for(const neededAppointment of this.neededAppointments){

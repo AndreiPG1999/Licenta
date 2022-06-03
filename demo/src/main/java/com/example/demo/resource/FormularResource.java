@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.resource;
 
 import com.example.demo.model.Formular;
 import com.example.demo.service.FormularService;
@@ -65,7 +65,6 @@ public class FormularResource {
             if(formularLog.getEmail().equals(email))
             {
                 Formular updateFormular = formularService.updateId_doctor(formularLog, id);
-                return new ResponseEntity<>(updateFormular, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

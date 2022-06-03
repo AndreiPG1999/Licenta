@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.resource;
 
 import com.example.demo.model.Istoric;
 import com.example.demo.service.IstoricService;
@@ -44,7 +44,6 @@ public class IstoricResource {
             if(istoricLog.getEmail().equals(email))
             {
                 Istoric updateIstoric = istoricService.updateIdDoctor(istoricLog, id);
-                return new ResponseEntity<>(updateIstoric, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

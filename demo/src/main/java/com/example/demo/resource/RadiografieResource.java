@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.resource;
 
 import com.example.demo.model.Acces;
 import com.example.demo.model.Radiografie;

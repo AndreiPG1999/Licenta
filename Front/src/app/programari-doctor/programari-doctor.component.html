@@ -25,17 +25,17 @@
             </thead>
             <tbody>
                 <tr *ngFor="let neededAppointment of neededAppointments">
-                    <td class="lalign">{{neededAppointment.email}}</td>
-                    <td class="lalign">{{neededAppointment.ora_incepere}}</td>
-                    <td class="lalign">{{neededAppointment.ora_finalizare}}</td>
-                    <td class="lalign">{{neededAppointment.data}}</td>
-                    <td class="lalign">{{neededAppointment.descriere}}</td>
-                    <td class="lalign">
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">{{neededAppointment.email}}</td>
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">{{neededAppointment.ora_incepere}}</td>
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">{{neededAppointment.ora_finalizare}}</td>
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">{{neededAppointment.data}}</td>
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">{{neededAppointment.descriere}}</td>
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">
                         <button class="btn" (click)="clickMethod(neededAppointment.id)">
                             <i class="fas fa-solid fa-trash"></i>
                             Ștergere programare</button>
                     </td>
-                    <td class="lalign">
+                    <td *ngIf="condition(neededAppointment.data)" class="lalign">
                         <button class="btn" [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
                             <i class="fas fa-briefcase-medical"></i>
                             Adăugare date consultație</button>

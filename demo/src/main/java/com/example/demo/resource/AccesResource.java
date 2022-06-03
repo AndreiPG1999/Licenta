@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.resource;
 
 import com.example.demo.model.Acces;
 import com.example.demo.service.AccesService;
@@ -53,7 +53,6 @@ public class AccesResource {
             if(accesLog.getEmail().equals(email))
             {
                 Acces updateAcces = accesService.updateId_doctor(accesLog, id);
-                return new ResponseEntity<>(updateAcces, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

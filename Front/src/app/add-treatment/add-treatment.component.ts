@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppointmentService } from '../appointment.service';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
 import { Istoric } from '../istoric';
@@ -21,6 +22,7 @@ import { UserService } from '../user.service';
 export class AddTreatmentComponent implements OnInit {
 
   treatmentForm!:FormGroup
+  appointmentForm !: FormGroup
   submitted = false
   treatments !: Treatment[];
   diagnostics !: Diagnostic[];
@@ -29,7 +31,7 @@ export class AddTreatmentComponent implements OnInit {
   currentUser!: any;
   selectedFile !: File;
 
-  constructor(private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
+  constructor(private appointmentService: AppointmentService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){

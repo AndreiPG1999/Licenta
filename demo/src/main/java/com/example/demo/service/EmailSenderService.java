@@ -23,12 +23,12 @@ public class EmailSenderService {
         Properties mailProperties = new Properties();
         mailProperties.put("mail.smtp.starttls.enable", true);
         mailProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
         ms.setHost("smtp.gmail.com");
         ms.setPort(587);
         ms.setUsername("andreipopescu052@gmail.com");
         ms.setPassword("pckxpjpncdzojkvl");
         ms.setJavaMailProperties(mailProperties);
+
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo("andreipopescu052@gmail.com");
         mail.setFrom(email.getEmail());

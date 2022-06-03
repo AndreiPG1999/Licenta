@@ -47,10 +47,6 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public User findUserByEmail(String email){
-        return userRepo.findUserByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-    }
     public void deleteUser(String email){
         userRepo.deleteUserByEmail(email);
     }
