@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 
 import com.example.demo.exception.UserNotFoundException;
+import com.example.demo.model.Acces;
 import com.example.demo.model.User;
+import com.example.demo.repo.AccesRepo;
 import com.example.demo.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +14,22 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepo userRepo;
+    private final AccesRepo accesRepo;
 
     @Autowired
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, AccesRepo accesRepo) {
+
         this.userRepo = userRepo;
+        this.accesRepo = accesRepo;
     }
 
     public User addUser(User user){
+        Acces acces = new Acces(user.getEmail(), 0L, false, false, false, false);
+        accesRepo.save(acces);
         user.setType("pacient");
         user.setId_doctor(0L);
         return userRepo.save(user);
+
     }
     public List<User> findAllUsers(){
         return userRepo.findAll();

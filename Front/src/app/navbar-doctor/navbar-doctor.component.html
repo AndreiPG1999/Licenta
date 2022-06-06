@@ -11,19 +11,19 @@
           <div class="dropdown-content">
             <a [routerLink]="['/add-pacient']" [queryParams]="{ loggedIn: 'true' }">
                 <i class="fas fa-plus"></i>
-                Adaugare pacient</a>
+                Adaugă pacient</a>
             <a [routerLink]="['/add-programare']" [queryParams]="{ loggedIn: 'true' }">
                 <i class="far fa-calendar-plus"></i>
-                Adaugare programare</a>
+                Adaugă programare</a>
             <a [routerLink]="['/add-treatments']" [queryParams]="{ loggedIn: 'true' }">
                 <i class="fas fa-briefcase-medical"></i>
-                Adaugare tratamente și diagnostice</a>
+                Adaugă tratamente și diagnostice</a>
             <a><button type="button" class="btn" (click)="onOpenModal()">
                 <i class="fas fa-plus"></i>
-                Adaugare radiografie
+                Radiografie
               </button>
             </a>
-            <a [routerLink]="['/acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Modificare acces pacienti</a>
+            <a [routerLink]="['/acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Modifică acces pacienti</a>
             
           </div>
         </div>
@@ -37,7 +37,7 @@
             <a [routerLink]="['/programari_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-calendar-check"></i> Programari</a>
             <a [routerLink]="['/istoric_doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-history"></i> Istoric</a>
             <a [routerLink]="['/afisare-formular-doctor']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-solid fa-notes-medical"></i> Formulare pacienți</a>
-            <a [routerLink]="['/radiografii']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"> Radiografii</a>
+            <a [routerLink]="['/radiografii']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"> Radiografii pacienți</a>
             <a [routerLink]="['/info-acces']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-hospital-user"></i> Informatii acces pacienti</a>
             <a [routerLink]="['/stats']" [queryParams]="{ loggedIn: 'true' }" class="nav-link"><i class="fas fa-calendar-check"></i> Statistici</a>
           </div>

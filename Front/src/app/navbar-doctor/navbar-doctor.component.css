@@ -327,8 +327,6 @@ html, body, div, p, ul, li {
   padding-right: 50px;
 }
 .btn{
-  padding-left: 15px;
-  bottom: 3px;
   position: relative;
   background-color: inherit;
   font-family: inherit;

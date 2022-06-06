@@ -20,8 +20,7 @@ public class Acces implements Serializable {
 
     public Acces(){}
 
-    public Acces(Long id, String email, Long id_doctor, boolean adaugareTratament, boolean adaugareRadiografie, boolean stergereCont, boolean afisareFormular) {
-        this.id = id;
+    public Acces(String email, Long id_doctor, boolean adaugareTratament, boolean adaugareRadiografie, boolean stergereCont, boolean afisareFormular) {
         this.email = email;
         this.id_doctor = id_doctor;
         this.adaugareTratament = adaugareTratament;

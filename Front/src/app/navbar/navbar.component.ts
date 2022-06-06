@@ -70,6 +70,9 @@ export class NavbarPacientComponent implements OnInit {
       next:async (response: Acces) => {
         this.accesList = response;
         console.log(this.accesList);
+      },
+      error: (error:HttpErrorResponse) => {
+        alert(error.message);
       }
     });
   }
