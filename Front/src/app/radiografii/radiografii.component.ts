@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Radiografie } from '../radiografie';
 import { RadiografieService } from '../radiografie.service';
+import { TokenStorageService } from '../token-storage.service';
 
 @Component({
   selector: 'app-radiografii',
@@ -11,46 +13,32 @@ import { RadiografieService } from '../radiografie.service';
 })
 export class RadiografiiComponent implements OnInit {
 
-  image !: any;
+  images !: any[];
   base64Data: any;
   retrieveResponse: any;
   radiografii !: Radiografie[];
-  rad !: Radiografie;
-  constructor(private radiografieService:RadiografieService, private sanitizer:DomSanitizer) { }
+  currentUser !: any;
+  constructor(private radiografieService:RadiografieService, private token:TokenStorageService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
-    this.radiografieService.getAll().subscribe({
+    
+    this.currentUser = this.token.getUser();
+    this.radiografieService.getRadiografie(this.currentUser.email).subscribe({
       next: async (response:Radiografie[]) => {
         this.radiografii = response;
         console.log(this.radiografii);
+        this.convertImg();
       },
       error: (error:HttpErrorResponse) => {
         alert(error.message);
       }
-    });
+    })
     
-    // this.radiografieService.getRadiografie("radiografie.jpg").subscribe({
-    //   next: (response:Radiografie) => {
-    //     this.retrieveResponse = response;
-    //     this.base64Data = this.retrieveResponse.picByte;
-    //     this.image = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-    //     + this.base64Data);
-    //   },
-    //   error: (error:HttpErrorResponse) => {
-    //     alert(error.message);
-    //   }
-    // });
-    // this.radiografieService.getRadiografie("salut.jpg").subscribe({
-    //   next: (response:Radiografie) => {
-    //     this.retrieveResponse = response;
-    //     this.base64Data = this.retrieveResponse.picByte;
-    //     this.image = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-    //     + this.base64Data);
-    //   },
-    //   error: (error:HttpErrorResponse) => {
-    //     alert(error.message);
-    //   }
-    // });
   }
-
+  convertImg():void{
+    for(let radiografie of this.radiografii){
+      this.images.push(this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + radiografie.picByte));
+      console.log(this.images);
+    }
+  }
 }

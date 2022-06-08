@@ -36,12 +36,9 @@ public class RadiografieResource {
         return new ResponseEntity<>(rad, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{name}")
-    public Radiografie getRadiografie(@PathVariable("name") String name) {
-        final Optional<Radiografie> retrievedRadiografie = radiografieRepo.findRadiografieByName(name);
-        Radiografie rad = new Radiografie(retrievedRadiografie.get().getName(), retrievedRadiografie.get().getType(),
-                decompressBytes(retrievedRadiografie.get().getPicByte()));
-        return rad;
+    @GetMapping("/get/{email}")
+    public List<Optional<Radiografie>> getRadiografie(@PathVariable("email") String email) {
+        return radiografieRepo.findRadiografieByEmail(email);
     }
 
     @GetMapping("/all")

@@ -36,6 +36,7 @@ import { AccesComponent } from './acces/acces.component';
 import { InfoAccesComponent } from './info-acces/info-acces.component';
 import { StatsComponent } from './stats/stats.component';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
+import { RadiografieDoctorComponent } from './radiografie-doctor/radiografie-doctor.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
     RadiografiiComponent,
     AccesComponent,
     InfoAccesComponent,
-    StatsComponent
+    StatsComponent,
+    RadiografieDoctorComponent
   ],
   imports: [
     BrowserModule,

@@ -37,34 +37,6 @@ export class AfisareFormularPacientComponent implements OnInit {
       }
     })
   }
-  @ViewChild('formularPDF', {static: false}) htmlData!:ElementRef;
-  public SavePDF(): void{
-    let DATA = this.htmlData.nativeElement;
-    let doc = new jsPDF('p','pt','a4');
-    doc.setFontSize(15);
-    let handleElement = {
-      '#editor': function (){
-        return true;
-      }
-    };
-    doc.html(DATA.innerHTML, {
-      callback: function(doc) {
-        doc.save('formular.pdf');
-      }
-    });
-  }
-
-  public OpenPDF(): void{
-    let DATA = this.htmlData.nativeElement;
-    let doc = new jsPDF('p','pt','a4');
-    
-    doc.html(DATA.innerHTML, {
-      callback: function(doc) {
-        doc.setFontSize(15);
-        window.open(URL.createObjectURL(doc.output("blob")));
-      }
-    });
-  }
 
   public onDeleteFormular(){
     if(confirm("Sigur doriți să ștergeți acest formular?")){

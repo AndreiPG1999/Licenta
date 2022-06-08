@@ -1,2 +1,4 @@
 <app-navbar-doctor></app-navbar-doctor>
-<img [src]="image" style="width:30%">
+<div *ngFor="let image of images">
+    <img [src]="image" style="width:30%">
+</div>

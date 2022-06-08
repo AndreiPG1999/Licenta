@@ -16,11 +16,11 @@ export class RadiografieService{
         return this.http.post<Radiografie>(`${this.apiServerUrl}/radiografie/upload/${email}/${id}`, uploadImageData);
     }
 
-    public getRadiografie(name :string): Observable<Radiografie>{
-        return this.http.get<Radiografie>(`${this.apiServerUrl}/radiografie/get/${name}`);
+    public getRadiografie(email :string){
+        return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/get/${email}`);
     }
 
-    public getAll(): Observable<Radiografie[]>{
+    public getAllRadiografii(): Observable<Radiografie[]>{
         return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/all`);
     }
 }

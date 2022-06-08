@@ -1,11 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AccesService } from '../acces.service';
-import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
-import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
-import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
@@ -36,7 +33,6 @@ export class PacientiComponent implements OnInit {
         alert(error.message);
       }
     });
-    
   }
 
   public getUsers(): void {
