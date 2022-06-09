@@ -1,12 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
 import { TokenStorageService } from '../token-storage.service';
 import { UserService } from '../user.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-import { trigger } from '@angular/animations';
 @Component({
   selector: 'app-afisare-formular-pacient',
   templateUrl: './afisare-formular-pacient.component.html',

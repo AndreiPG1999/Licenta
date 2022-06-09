@@ -19,6 +19,10 @@ export class AfisareFormularDoctorComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
   public formulars !: Formular[];
+  display="none";
+  formularModal !: Formular;
+  afectiuniSplitted !: any
+  alergiiSplitted !: any
 
   constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private formularService:FormularService) { }
 
@@ -41,6 +45,7 @@ export class AfisareFormularDoctorComponent implements OnInit {
       next:(response: Formular[]) => {
         this.formulars = response;
         console.log(this.formulars);
+        
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -75,5 +80,26 @@ export class AfisareFormularDoctorComponent implements OnInit {
         }
       });
     }
+  }
+  public openModal(formularModal:Formular): void{
+    this.display = "block";
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', '#formularModal');
+
+    this.afectiuniSplitted = formularModal.afectiuni.split(",");
+    this.afectiuniSplitted.pop();
+    this.alergiiSplitted = formularModal.alergii.split(",");
+    this.alergiiSplitted.pop();
+
+    this.formularModal = formularModal;
+    container?.appendChild(button);
+    button.click();
+    
+  }
+  public onCloseModal(): void{
+    this.display = "none";
   }
 }

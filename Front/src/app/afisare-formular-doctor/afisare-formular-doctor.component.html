@@ -9,7 +9,7 @@
 <div>
    <p></p>
 </div>
-<div *ngIf="formulars.length < 9">
+<!-- <div *ngIf="formulars.length < 9"> -->
    <div class="container" id="main-container">
       <div class="row">
          <div *ngFor="let formular of formulars">
@@ -25,18 +25,18 @@
                   </ul>
                   <div class="list-group-item">
                      <div class="btn-primary">
-                           <a mat-raised-button data-placement="top" data-original-title="Add">Deschide formular</a>
+                           <a mat-raised-button (click)="openModal(formular)" data-placement="top" data-original-title="Add">Deschide formular</a>
                      </div>
                      <div class="btn-primary">
                         <a mat-raised-button (click)="onDeleteFormular(formular)" data-placement="top" data-original-title="Add">Sterge formular</a>
-                  </div>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
    </div>
-</div>
+<!-- </div> -->
 <div *ngIf="formulars.length > 8">
       <div id="wrapper" class="container-table">
          <table cellspacing="0" cellpadding="0">
@@ -45,8 +45,8 @@
                      <th><span>Nume</span></th>
                      <th><span>Prenume</span></th>
                      <th><span>Email</span></th>
-                     <th><span>Nr de telefon</span></th>
-                     <th><span>Adaugare pacient</span></th>
+                     <th><span>Deschide formular</span></th>
+                     <th><span>Sterge formular</span></th>
                </tr>
             </thead>
             <tbody>
@@ -55,8 +55,13 @@
                      <td class="lalign">{{formular.first_name}}</td>
                      <td class="lalign">{{formular.email}}</td>
                      <td class="lalign">
-                        <div class="btn">
-                           <a mat-raised-button  data-placement="top" data-original-title="Add"><i class="fa fa-plus">Descarca pdf</i></a>
+                        <div class="btn-primary">
+                           <a mat-raised-button  data-placement="top" data-original-title="Add">Deschide formular</a>
+                        </div>
+                     </td>
+                     <td class="lalign">
+                        <div class="btn-primary">
+                           <a mat-raised-button (click)="onDeleteFormular(formular)" data-placement="top" data-original-title="Add">Sterge formular</a>
                         </div>
                      </td>
                </tr>
@@ -64,3 +69,62 @@
          </table>
       </div>
 </div>
+<!-- modal -->
+<div class="modal" id="formularModal" tabindex="-1" role="dialog" aria-labelledby="formularModalLabel" aria-hidden="true" [ngStyle]="{'display':display}">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="formularModalLabel">Formularul lui {{formularModal.first_name}} {{formularModal.last_name}}</h5>
+           <button type="button" class="close" (click)="onCloseModal()">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+         <div>
+            <h1>Email</h1>
+            <p>{{formularModal.email}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Nume</h1>
+            <p>{{formularModal.first_name}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Prenume</h1>
+            <p>{{formularModal.last_name}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Data nasterii</h1>
+            <p>{{formularModal.data_nasterii}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Data completarii</h1>
+            <p>{{formularModal.data}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Sangerari exagerate</h1>
+            <p>{{formularModal.sangerari}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Sunteti fumator?</h1>
+            <p>{{formularModal.fumator}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Afectiuni</h1>
+            <ul *ngFor="let afectiune of afectiuniSplitted">
+            <li>{{afectiune}}</li>
+            </ul>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Alergii</h1>
+            <ul *ngFor="let alergie of alergiiSplitted">
+            <li>{{alergie}}</li>
+            </ul>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Alcool</h1>
+            <p>{{formularModal.alcool}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Droguri</h1>
+            <p>{{formularModal.droguri}}</p>
+            <p>-------------------------------------------------------------------------------------</p>
+            <h1>Alte probleme</h1>
+            <p>{{formularModal.alte_probleme}}</p>
+            <br>
+         </div>
+           <div class="modal-footer">
+               <button type="button" class="btn-primary" (click)="onCloseModal()" >Close</button>
+        </div>
+     </div>
+   </div>
+   </div>

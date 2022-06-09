@@ -63,20 +63,21 @@ export class AccesComponent implements OnInit {
       this.accesService.deleteAcces(this.accesForm.value['email']).subscribe({
         next: () => {
           console.log("deleted");
+          this.accesService.addAcces(accesForm.value).subscribe({
+            next:async (response: Acces) => {
+              console.log(this.users);
+              this.showToasterSuccess();
+              await new Promise(f => setTimeout(f, 1000));
+              window.location.reload();
+              this.submitted = false;
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          });
         }
       });
-      this.accesService.addAcces(accesForm.value).subscribe({
-        next:async (response: Acces) => {
-          console.log(this.users);
-          this.showToasterSuccess();
-          await new Promise(f => setTimeout(f, 1000));
-          window.location.reload();
-          this.submitted = false;
-        },
-        error: (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      });
+      
     }
   }
 }

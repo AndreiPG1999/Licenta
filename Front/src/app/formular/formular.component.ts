@@ -95,20 +95,21 @@ export class FormularComponent implements OnInit {
             this.formularService.deleteFormular(this.currentUser.email).subscribe({
               next: () => {
                 console.log("deleted")
+                this.formularService.addFormular(formularForm.value).subscribe({
+                  next:async (response: Formular) => {
+                    console.log(response);
+                    this.showToasterSuccess();
+                    await new Promise(f => setTimeout(f, 1000));
+                    window.location.reload();
+                    this.submitted = false;
+                  },
+                  error: (error:HttpErrorResponse) => {
+                    alert(error.message);
+                  }
+                })
               }
             });
-            this.formularService.addFormular(formularForm.value).subscribe({
-              next:async (response: Formular) => {
-                console.log(response);
-                this.showToasterSuccess();
-                await new Promise(f => setTimeout(f, 1000));
-                window.location.reload();
-                this.submitted = false;
-              },
-              error: (error:HttpErrorResponse) => {
-                alert(error.message);
-              }
-            })
+            
           }
           else{
             window.location.reload();
