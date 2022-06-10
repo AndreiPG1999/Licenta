@@ -27,10 +27,17 @@
 			<div *ngIf="treatmentForm.get('pret').errors['required']">Introduceti pretul.</div>
       <div *ngIf="treatmentForm.get('pret').errors['pattern']">Pretul trebuie să fie un număr.</div>
 		</div>
-    <input type="text" formControlName="dinte" name="dinte" placeholder="Dinte" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('dinte').errors }" class="name formEntry"/>
-    <div *ngIf="submitted && treatmentForm.get('dinte').errors" class="invalid-feedback">
-			<div *ngIf="treatmentForm.get('dinte').errors['required']">Introduceti dintele.</div>
-		</div>
+    <select formControlName="dinte" name="dinte" placeholder="Dinte" class="select formEntry">
+      <option disabled selected value="">Selectati un dinte</option>
+      <option *ngFor="let dinteFor of dinti">
+        {{dinteFor.dinte}}
+      </option>
+    </select>
+    <textarea formControlName="descriere" name="descriere" placeholder="Descriere" [ngClass]="{ 'is-invalid': submitted && treatmentForm.get('descriere').errors }" class="name formEntry">
+      <div *ngIf="submitted && treatmentForm.get('descriere').errors" class="invalid-feedback">
+        <div *ngIf="treatmentForm.get('descriere').errors['required']">Introduceti descrierea.</div>
+      </div>
+    </textarea>
     <button type="submit" class="submit formEntry">Adaugă</button>
   </form>
 </div>

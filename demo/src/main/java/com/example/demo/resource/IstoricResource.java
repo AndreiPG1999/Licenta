@@ -24,7 +24,7 @@ public class IstoricResource {
     }
 
     @GetMapping("/find/{email}")
-    public ResponseEntity<Istoric> getUserByEmail(@PathVariable("email") String email){
+    public ResponseEntity<Istoric> getIstoricByEmail(@PathVariable("email") String email){
         List<Istoric> istorics = istoricService.findAllIstorics();
         for(Istoric istoricLog : istorics)
         {
@@ -47,6 +47,18 @@ public class IstoricResource {
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/allEmails/{email}")
+    public ResponseEntity<List<Istoric>> getAllIstoricsByEmail(@PathVariable("email") String email) {
+        List<Istoric> istorics = istoricService.findAllIstorics();
+        List<Istoric> istoricCopy = new ArrayList<>(istorics);
+        for(Istoric istoric:istoricCopy){
+            if(!istoric.getEmail().equals(email)){
+                istorics.remove(istoric);
+            }
+        }
+        return new ResponseEntity<>(istorics, HttpStatus.OK);
     }
 
     @GetMapping("/all/{id}")

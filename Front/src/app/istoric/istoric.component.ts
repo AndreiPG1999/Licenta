@@ -16,19 +16,48 @@ export class IstoricComponent implements OnInit {
   currentUser!: any;
   istorics !: Istoric[];
   loggedInUser !: any;
+  users !:User[]
+  id !: number;
+  doctor !: User;
 
   constructor(private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.getIstoric();
+    
   }
 
   public getIstoric(): void {
-    this.istoricService.getIstorics().subscribe({
+    this.istoricService.getIstoricsByEmail(this.currentUser.email).subscribe({
       next:(response: Istoric[]) => {
         this.istorics = response;
+        this.getIstoricId();
+        this.getUsers();
         console.log(this.istorics);
+      }
+    });
+  }
+
+  public getIstoricId(){
+    for(let istoric of this.istorics)
+    {
+      this.id = istoric.id_doctor;
+    }
+  }
+  public getUsers(){
+    this.userService.getUsers().subscribe({
+      next:(response: User[]) => {
+        this.users = response;
+        for(var user of this.users)
+        {
+          if(user.id === this.id)
+          {
+            this.doctor = user;
+            console.log(this.doctor);
+          }
+          
+        }
       }
     });
   }

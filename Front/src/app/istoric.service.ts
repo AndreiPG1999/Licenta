@@ -20,6 +20,9 @@ export class IstoricService{
     public findIstoricById(id:number): Observable<Istoric[]>{
         return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/all/${id}`);
       }
+    public getIstoricsByEmail(email:string): Observable<Istoric[]>{
+        return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/allEmails/${email}`);
+      }
     
     public findIstoricByEmail(email:string): Observable<Istoric[]>{
         return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/find/${email}`);

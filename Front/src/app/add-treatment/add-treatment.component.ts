@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppointmentService } from '../appointment.service';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
+import { Dinte } from '../dinte';
+import { DinteService } from '../dinte.service';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
@@ -30,8 +32,9 @@ export class AddTreatmentComponent implements OnInit {
   loggedInUser!: any;
   currentUser!: any;
   selectedFile !: File;
+  dinti !: Dinte[];
 
-  constructor(private appointmentService: AppointmentService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
+  constructor(private dinteService:DinteService, private appointmentService: AppointmentService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){
@@ -46,7 +49,8 @@ export class AddTreatmentComponent implements OnInit {
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
       dinte: new FormControl('', Validators.required),
-      id_doctor: new FormControl('')
+      id_doctor: new FormControl(''),
+      descriere: new FormControl('', Validators.required)
     });
     this.userService.findUser(this.currentUser.email).subscribe({
       next:(response: User) => {
@@ -56,6 +60,9 @@ export class AddTreatmentComponent implements OnInit {
           next:(response: User[]) => {
             this.users = response;
             console.log(this.users);
+            this.getDiagnostics();
+            this.getTreatments();
+            this.getDinti();
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -66,14 +73,23 @@ export class AddTreatmentComponent implements OnInit {
         alert(error.message);
       }
     });
-    this.getDiagnostics()
-    this.getTreatments()
+    
   }
 
   public getDiagnostics(){
     this.diagnosticSerivce.getDiagnostics().subscribe({
       next:(response: Diagnostic[]) => {
         this.diagnostics = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    })
+  }
+  public getDinti(){
+    this.dinteService.getDinti().subscribe({
+      next:(response: Dinte[]) => {
+        this.dinti = response;
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
+import { Dinte } from '../dinte';
+import { DinteService } from '../dinte.service';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
@@ -25,8 +27,9 @@ export class AddTreatmentPacientComponent implements OnInit {
   diagnostics !: Diagnostic[];
   loggedInUser!: any;
   currentUser!: any;
+  dinti !: Dinte[];
 
-  constructor(private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
+  constructor(private dinteService:DinteService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){
@@ -41,6 +44,7 @@ export class AddTreatmentPacientComponent implements OnInit {
         console.log(this.loggedInUser);
         this.getDiagnostics();
         this.getTreatments();
+        this.getDinti();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -51,8 +55,9 @@ export class AddTreatmentPacientComponent implements OnInit {
       treatment: new FormControl(''),
       diagnostic: new FormControl(''),
       pret: new FormControl('',[Validators.required, Validators.pattern('^[0-9-]+$')]),
-      dinte: new FormControl('', Validators.required),
-      id_doctor: new FormControl('')
+      dinte: new FormControl(''),
+      id_doctor: new FormControl(''),
+      descriere: new FormControl('', Validators.required)
     });
     
   }
@@ -71,6 +76,17 @@ export class AddTreatmentPacientComponent implements OnInit {
     this.treatmentService.getTreatments().subscribe({
       next:(response: Treatment[]) => {
         this.treatments = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    })
+  }
+
+  public getDinti(){
+    this.dinteService.getDinti().subscribe({
+      next:(response: Dinte[]) => {
+        this.dinti = response;
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

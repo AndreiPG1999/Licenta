@@ -7,4 +7,5 @@ export interface Istoric{
     pret: Float32Array;
     treatment: string;
     id_doctor: number;
+    descriere:string;
 }
