@@ -19,6 +19,9 @@ export class RadiografieService{
     public getRadiografie(email :string){
         return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/get/${email}`);
     }
+    public getRadiografieByID(id:number){
+        return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/getByID/${id}`);
+    }
 
     public getAllRadiografii(): Observable<Radiografie[]>{
         return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/all`);

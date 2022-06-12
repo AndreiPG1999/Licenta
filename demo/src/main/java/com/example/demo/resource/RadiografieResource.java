@@ -1,6 +1,5 @@
 package com.example.demo.resource;
 
-import com.example.demo.model.Acces;
 import com.example.demo.model.Radiografie;
 import com.example.demo.repo.RadiografieRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
@@ -39,6 +39,17 @@ public class RadiografieResource {
     @GetMapping("/get/{email}")
     public List<Optional<Radiografie>> getRadiografie(@PathVariable("email") String email) {
         return radiografieRepo.findRadiografieByEmail(email);
+    }
+    @GetMapping("/getByID/{id}")
+    public ResponseEntity<List<Radiografie>> getRadiografie(@PathVariable("id") Long id) {
+        List<Radiografie> radiografii = radiografieRepo.findAll();
+        List<Radiografie> radiografieCopy = new ArrayList<>(radiografii);
+        for(Radiografie radiografie:radiografieCopy){
+            if(!radiografie.getId_doctor().equals(id)){
+                radiografii.remove(radiografie);
+            }
+        }
+        return new ResponseEntity<>(radiografii, HttpStatus.OK);
     }
 
     @GetMapping("/all")

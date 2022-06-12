@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Radiografie } from '../radiografie';
 import { RadiografieService } from '../radiografie.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -17,9 +18,10 @@ export class RadiografieDoctorComponent implements OnInit {
   loggedInUser !: any;
   radiografii !:Radiografie[];
   users !: User[];
-  user !: User;
+  radiografieModal !: Radiografie;
   display="none";
-  constructor(private userService:UserService, private token:TokenStorageService, private radiografieService:RadiografieService) { }
+  image !: any[];
+  constructor(private userService:UserService, private token:TokenStorageService, private radiografieService:RadiografieService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -28,29 +30,25 @@ export class RadiografieDoctorComponent implements OnInit {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
         this.getRadiografii();
-        this.getUsers();
+        
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
+   
   }
+  async ExecuteAsyncCode(i:number) {
+    return [] as Radiografie[]
+}
   public getRadiografii(): void {
-    this.radiografieService.getAllRadiografii().subscribe({
+    this.radiografieService.getRadiografieByID(this.loggedInUser.id).subscribe({
       next:(response: Radiografie[]) => {
         this.radiografii = response;
         console.log(this.radiografii);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
-  }
-  public getUsers(): void {
-    this.userService.findUsersByTypePacienti(this.loggedInUser.id).subscribe({
-      next:(response: User[]) => {
-        this.users = response;
-        console.log(this.users);
+        this.openRadiografiiModal(this.radiografii[1]);
+        this.onCloseModal();
+        this.convertImg();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -68,18 +66,24 @@ export class RadiografieDoctorComponent implements OnInit {
     }
     this.users = results;
     if(!key){
-      this.getUsers();
+      this.getRadiografii();
     }
   }
+  async convertImg():Promise<void>{
+      this.radiografii.forEach((radiografie:Radiografie) => {
+        this.image.push(this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + radiografie.picByte));
+        console.log(this.image);
+      })
+  }
 
-  public openRadiografiiModal(user:User): void{
+  public openRadiografiiModal(radiografie:Radiografie): void{
     this.display = "block"
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', '#radiografiiModal');
-    this.user = user;
+    this.radiografieModal = radiografie;
     container?.appendChild(button);
     button.click();
     
