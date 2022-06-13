@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RadiografieRepo extends JpaRepository<Radiografie,Long> {
-    List<Optional<Radiografie>> findRadiografieByEmail(String name);
+    List<Radiografie> findRadiografieByEmail(String email);
 
     void deleteRadiografieById(Long id);
 }

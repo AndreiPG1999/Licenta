@@ -4,7 +4,7 @@ export interface Istoric{
     dinte:string;
     diagnostic: string;
     email: string;
-    pret: Float32Array;
+    pret: number;
     treatment: string;
     id_doctor: number;
     descriere:string;

@@ -1,7 +1,8 @@
+import { KeyValue } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Radiografie } from '../radiografie';
 import { RadiografieService } from '../radiografie.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
@@ -16,11 +17,13 @@ export class RadiografieDoctorComponent implements OnInit {
 
   currentUser !: any;
   loggedInUser !: any;
-  radiografii !:Radiografie[];
+  radiografii !:KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>;
   users !: User[];
-  radiografieModal !: Radiografie;
+  radiografieModal !: KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>;
   display="none";
-  image !: any[];
+  images !: any[];
+  values !: KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>[];
+  
   constructor(private userService:UserService, private token:TokenStorageService, private radiografieService:RadiografieService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
@@ -38,45 +41,30 @@ export class RadiografieDoctorComponent implements OnInit {
     });
    
   }
-  async ExecuteAsyncCode(i:number) {
-    return [] as Radiografie[]
-}
+  // public convertImg():void{
+  //   for(let val of this.values){
+  //     this.images.push(this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + val));
+  //     console.log(this.images);
+  //   }
+  // }
   public getRadiografii(): void {
     this.radiografieService.getRadiografieByID(this.loggedInUser.id).subscribe({
-      next:(response: Radiografie[]) => {
+      next:(response: KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>) => {
         this.radiografii = response;
         console.log(this.radiografii);
-        this.openRadiografiiModal(this.radiografii[1]);
+        this.values = Object.values(this.radiografii);
+        console.log(this.values);
+        this.openRadiografiiModal(this.radiografii);
         this.onCloseModal();
-        this.convertImg();
+        // this.convertImg();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     });
   }
-  public searchUsers(key: string) : void{
-    const results: User[] = [];
-    for(const neededUser of this.users){
-      if(neededUser.last_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 || 
-      neededUser.first_name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-      neededUser.email.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(neededUser);
-      }
-    }
-    this.users = results;
-    if(!key){
-      this.getRadiografii();
-    }
-  }
-  async convertImg():Promise<void>{
-      this.radiografii.forEach((radiografie:Radiografie) => {
-        this.image.push(this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + radiografie.picByte));
-        console.log(this.image);
-      })
-  }
 
-  public openRadiografiiModal(radiografie:Radiografie): void{
+  public openRadiografiiModal(radiografie:KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>): void{
     this.display = "block"
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -86,7 +74,6 @@ export class RadiografieDoctorComponent implements OnInit {
     this.radiografieModal = radiografie;
     container?.appendChild(button);
     button.click();
-    
   }
   public onCloseModal(): void{
     this.display = "none";

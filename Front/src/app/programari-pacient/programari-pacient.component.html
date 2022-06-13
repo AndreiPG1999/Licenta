@@ -10,7 +10,6 @@
                 <th><span>Oră finalizare</span></th>
                 <th><span>Data</span></th>
                 <th><span>Descriere</span></th>
-                <th><span>Chitanță</span></th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +18,6 @@
                 <td *ngIf="currentUser.email === appointment.email" class="lalign">{{appointment.ora_finalizare}}</td>
                 <td *ngIf="currentUser.email === appointment.email" class="lalign">{{appointment.data}}</td>
                 <td *ngIf="currentUser.email === appointment.email" class="lalign">{{appointment.descriere}}</td>
-                <td *ngIf="currentUser.email === appointment.email" class="lalign">Chitanță pdf coming soon</td>
             </tr>
         </tbody>
     </table>

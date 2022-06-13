@@ -2,6 +2,7 @@ package com.example.demo.resource;
 
 import com.example.demo.model.Radiografie;
 import com.example.demo.repo.RadiografieRepo;
+import com.example.demo.service.RadiografieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -21,9 +20,10 @@ import java.util.zip.Inflater;
 @RestController
 @RequestMapping("/radiografie")
 public class RadiografieResource {
-
     @Autowired
     private RadiografieRepo radiografieRepo;
+    @Autowired
+    private RadiografieService radiografieService;
 
     @PostMapping("/upload/{email}/{id}")
     public ResponseEntity<Radiografie> uploadRadiografie(@RequestParam("imageFile")MultipartFile file,
@@ -37,19 +37,14 @@ public class RadiografieResource {
     }
 
     @GetMapping("/get/{email}")
-    public List<Optional<Radiografie>> getRadiografie(@PathVariable("email") String email) {
+    public List<Radiografie> getRadiografie(@PathVariable("email") String email) {
         return radiografieRepo.findRadiografieByEmail(email);
     }
     @GetMapping("/getByID/{id}")
-    public ResponseEntity<List<Radiografie>> getRadiografie(@PathVariable("id") Long id) {
-        List<Radiografie> radiografii = radiografieRepo.findAll();
-        List<Radiografie> radiografieCopy = new ArrayList<>(radiografii);
-        for(Radiografie radiografie:radiografieCopy){
-            if(!radiografie.getId_doctor().equals(id)){
-                radiografii.remove(radiografie);
-            }
-        }
-        return new ResponseEntity<>(radiografii, HttpStatus.OK);
+    public ResponseEntity<Map<String, Set<byte[]>>> getRadiografie(@PathVariable("id") Long id) {
+        Map<String, Set<byte[]>> radiografieMap;
+        radiografieMap = radiografieService.getRadiografieByID(id);
+        return new ResponseEntity<>(radiografieMap, HttpStatus.OK);
     }
 
     @GetMapping("/all")

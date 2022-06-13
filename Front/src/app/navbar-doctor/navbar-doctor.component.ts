@@ -90,6 +90,7 @@ export class NavbarDoctorComponent implements OnInit {
     this.radiografieService.addRadiografie(uploadImageData, this.addRadiografieForm.value['email'], this.addRadiografieForm.value['id_doctor']).subscribe({
       next:async (response: Radiografie) => {
         console.log(response);
+        this.onCloseModal();
       },
       error: (error:HttpErrorResponse) => {
         alert(error.message);

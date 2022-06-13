@@ -45,7 +45,8 @@ export class AfisareFormularDoctorComponent implements OnInit {
       next:(response: Formular[]) => {
         this.formulars = response;
         console.log(this.formulars);
-        
+        this.openModal(this.formulars[0]);
+        this.onCloseModal();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

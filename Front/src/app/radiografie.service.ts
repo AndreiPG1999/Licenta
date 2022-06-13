@@ -1,4 +1,6 @@
+import { KeyValue } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
+import { Byte } from "@angular/compiler/src/util";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -19,8 +21,8 @@ export class RadiografieService{
     public getRadiografie(email :string){
         return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/get/${email}`);
     }
-    public getRadiografieByID(id:number){
-        return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/getByID/${id}`);
+    public getRadiografieByID(id:number): Observable<KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>>{
+        return this.http.get<KeyValue<keyof KeyValue<String, Byte[]>, String | number[]>>(`${this.apiServerUrl}/radiografie/getByID/${id}`);
     }
 
     public getAllRadiografii(): Observable<Radiografie[]>{
