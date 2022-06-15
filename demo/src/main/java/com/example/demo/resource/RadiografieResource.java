@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
@@ -47,6 +48,30 @@ public class RadiografieResource {
         return new ResponseEntity<>(radiografieMap, HttpStatus.OK);
     }
 
+    @PutMapping("/updateIdDoctor/{email}/{id}")
+    public ResponseEntity<Radiografie> updateIdDoctor(@PathVariable("email") String email, @PathVariable("id") Long id){
+        List<Radiografie> radiografii = radiografieRepo.findAll();
+        for(Radiografie radiografieLog : radiografii)
+        {
+            if(radiografieLog.getEmail().equals(email))
+            {
+                Radiografie updateRadiografie = radiografieService.updateIdDoctor(radiografieLog, id);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteRadiografie(@PathVariable("id") Long id){
+        radiografieService.deleteRadiografie(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @Transactional
+    @DeleteMapping("/deleteAll/{email}")
+    public ResponseEntity<?> deleteAllRadiografiiByEmail(@PathVariable("email") String email){
+        radiografieService.deleteRadiografieEmail(email);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @GetMapping("/all")
     public ResponseEntity<List<Radiografie>> getAll() {
         List<Radiografie> radiografii = radiografieRepo.findAll();

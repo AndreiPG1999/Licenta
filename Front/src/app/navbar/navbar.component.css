@@ -59,7 +59,8 @@ html, body, div, p, ul, li {
   list-style: none;
   height: 60px; /* should be the same as line-height */
   line-height: 60px; /* should be the same as height */
-  padding: 0 40px; /* "0" sets top and bottom padding to none */
+  padding: 0; /* "0" sets top and bottom padding to none */
+  width: 170px;
 }
 
 /* :hover allows you change the background color of the nav items when you mouse over them. Play around with the transition value to change the speed of the hover transition. */
@@ -71,15 +72,18 @@ html, body, div, p, ul, li {
 .nav-link {
   color: #fff;
   text-decoration: none;
+  padding-left: 25%;
 }
 
 /* Dropdown button */
 .dropdown .dropbtn {
   font-size: 16px;
   border: none;
+  cursor: pointer;
   outline: none;
   color: white;
   padding: 14px 16px;
+  width: 165px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
@@ -97,7 +101,7 @@ html, body, div, p, ul, li {
 display: none;
 position: absolute;
 background-color: #f9f9f9;
-min-width: 200px;
+max-width: 100%;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 

@@ -9,6 +9,7 @@ import { FormularService } from '../formular.service';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
+import { RadiografieService } from '../radiografie.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -25,7 +26,7 @@ export class AddPacientComponent implements OnInit {
   loggedInUser!: any;
   public neededUsers !: User[];
 
-  constructor(private accesService:AccesService, private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
+  constructor(private radiografieService:RadiografieService, private accesService:AccesService, private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -81,6 +82,7 @@ export class AddPacientComponent implements OnInit {
           this.updateIdIstoric(user);
           this.updateIdAppointment(user);
           this.updateIdAcces(user);
+          this.updateIdRadiografie(user);
           window.location.reload();
           this.showToasterSuccess();
         },
@@ -129,5 +131,10 @@ export class AddPacientComponent implements OnInit {
       error: () => {
       }
     });
+  }
+  public updateIdRadiografie(user:User): void{
+    this.radiografieService.updateIdDoctor(user.email, this.loggedInUser.id).subscribe(
+      
+    );
   }
 }

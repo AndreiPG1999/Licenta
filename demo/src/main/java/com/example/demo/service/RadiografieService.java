@@ -38,4 +38,14 @@ public class RadiografieService {
         }
         return radiografieMap;
     }
+    public Radiografie updateIdDoctor(Radiografie radiografie, Long id){
+        radiografie.setId_doctor(id);
+        return radiografieRepo.save(radiografie);
+    }
+    public void deleteRadiografie(Long id){
+        radiografieRepo.deleteRadiografieById(id);
+    }
+    public void deleteRadiografieEmail(String email){
+        radiografieRepo.deleteRadiografieByEmail(email);
+    }
 }

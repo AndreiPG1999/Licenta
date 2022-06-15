@@ -10,4 +10,5 @@ public interface RadiografieRepo extends JpaRepository<Radiografie,Long> {
     List<Radiografie> findRadiografieByEmail(String email);
 
     void deleteRadiografieById(Long id);
+    void deleteRadiografieByEmail(String email);
 }

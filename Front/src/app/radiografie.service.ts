@@ -28,4 +28,13 @@ export class RadiografieService{
     public getAllRadiografii(): Observable<Radiografie[]>{
         return this.http.get<Radiografie[]>(`${this.apiServerUrl}/radiografie/all`);
     }
+    public updateIdDoctor(email: string, id: number): Observable<Radiografie>{
+        return this.http.put<Radiografie>(`${this.apiServerUrl}/radiografie/updateIdDoctor/${email}/${id}`, id);
+    }
+    public deleteRadiografieById(id: number): Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/radiografie/delete/${id}`);
+    }
+    public deleteRadiografiiByEmail(email: string): Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/radiografie/deleteAll/${email}`);
+    }
 }

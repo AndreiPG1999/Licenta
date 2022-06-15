@@ -4,6 +4,7 @@ import { AccesService } from '../acces.service';
 import { AppointmentService } from '../appointment.service';
 import { FormularService } from '../formular.service';
 import { IstoricService } from '../istoric.service';
+import { RadiografieService } from '../radiografie.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -19,7 +20,7 @@ export class PacientiComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
   neededUsers !: User[];
-  constructor(private accesService:AccesService, private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
+  constructor(private radiografieService: RadiografieService, private accesService:AccesService, private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
@@ -72,6 +73,7 @@ export class PacientiComponent implements OnInit {
           this.updateIdIstoric(user);
           this.updateIdAppointment(user);
           this.updateIdAcces(user);
+          this.updateIdRadiografie(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
@@ -88,6 +90,7 @@ export class PacientiComponent implements OnInit {
           this.deleteFormular(user);
           this.deleteIstoric(user);
           this.deleteAcces(user);
+          this.deleteRadiografie(user);
         },
         error: (error:HttpErrorResponse) => {
           alert(error.message);
@@ -115,6 +118,10 @@ export class PacientiComponent implements OnInit {
     this.accesService.updateIdDoctor(user.email, 0).subscribe({
     });
   }
+  public updateIdRadiografie(user:User): void{
+    this.radiografieService.updateIdDoctor(user.email, 0).subscribe({
+    });
+  }
 
   public deleteFormular(user:User){
     this.formularService.deleteFormular(user.email).subscribe({
@@ -127,6 +134,10 @@ export class PacientiComponent implements OnInit {
 
   public deleteAcces(user:User){
     this.accesService.deleteAcces(user.email).subscribe({
+    });
+  }
+  public deleteRadiografie(user:User){
+    this.radiografieService.deleteRadiografiiByEmail(user.email).subscribe({
     });
   }
 }
