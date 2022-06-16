@@ -2,6 +2,13 @@
 <div class="middle-up">
     Grafic diagnostice
 </div>
+<div>
+    <span class="editable-property-title" > Dată start </span>
+    <input type="date" class="name formEntry" id="startDate">
+    <span class="editable-property-title" > Dată final </span>
+    <input type="date" class="name formEntry" id="endDate">
+    <button type="submit" (click)="onStats()" class="submit formEntry"> Afișează datele </button>
+</div>
 <div class="stats" style="width: 80%; background-color: white;">
     <br>
     <canvas mdbChart

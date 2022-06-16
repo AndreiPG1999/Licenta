@@ -39,4 +39,10 @@ export class IstoricService{
     public deleteIstoric(email: string): Observable<void>{
         return this.http.delete<void>(`${this.apiServerUrl}/istoric/delete/${email}`);
     }
+    public getIstoricsByEmailByDate(email:string, startDate:string, endDate:string): Observable<Istoric[]>{
+        return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/allDates/${email}/${startDate}/${endDate}`);
+    }
+    public getIstoricsByIdByDate(id:number, startDate:string, endDate:string): Observable<Istoric[]>{
+    return this.http.get<Istoric[]>(`${this.apiServerUrl}/istoric/allDatesById/${id}/${startDate}/${endDate}`);
+    }
 }

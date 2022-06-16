@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public User addUser(User user){
-        Acces acces = new Acces(user.getEmail(), 0L, false, false, false, false);
+        Acces acces = new Acces(user.getEmail(), 0L, false, false, false);
         accesRepo.save(acces);
         user.setType("pacient");
         user.setId_doctor(0L);

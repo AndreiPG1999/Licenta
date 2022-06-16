@@ -31,12 +31,10 @@ import { IstoricDoctorComponent } from './istoric-doctor/istoric-doctor.componen
 import { FormularComponent } from './formular/formular.component';
 import { AfisareFormularPacientComponent } from './afisare-formular-pacient/afisare-formular-pacient.component';
 import { AfisareFormularDoctorComponent } from './afisare-formular-doctor/afisare-formular-doctor.component';
-import { RadiografiiComponent } from './radiografii/radiografii.component';
 import { AccesComponent } from './acces/acces.component';
 import { InfoAccesComponent } from './info-acces/info-acces.component';
 import { StatsComponent } from './stats/stats.component';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
-import { RadiografieDoctorComponent } from './radiografie-doctor/radiografie-doctor.component';
 import { StatsPacientComponent } from './stats-pacient/stats-pacient.component';
 
 @NgModule({
@@ -68,11 +66,9 @@ import { StatsPacientComponent } from './stats-pacient/stats-pacient.component';
     FormularComponent,
     AfisareFormularPacientComponent,
     AfisareFormularDoctorComponent,
-    RadiografiiComponent,
     AccesComponent,
     InfoAccesComponent,
     StatsComponent,
-    RadiografieDoctorComponent,
     StatsPacientComponent
   ],
   imports: [

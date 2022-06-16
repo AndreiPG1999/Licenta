@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable, shareReplay } from 'rxjs';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -17,34 +18,28 @@ export class StatsPacientComponent implements OnInit {
   currentUser !: any;
   loggedInUser !: any;
   istorics !: Istoric[];
-  pretAbces = 0;
-  pretAmeloblastom = 0;
-  pretAngina = 0;
-  pretDiastema = 0;
-  pretGingivita = 0;
-  pretCarie = 0;
-  pretCheilita = 0;
-  pretFluoroza = 0;
-  pretFractura = 0;
-  pretHiperplazia = 0;
-  pretParodontoza = 0;
-  pretRetractie = 0;
-  pretSangerare = 0;
+  pretAbces !: number;
+  pretAmeloblastom !: number;
+  pretAngina !: number;
+  pretDiastema !: number;
+  pretGingivita !: number;
+  pretCarie !: number;
+  pretCheilita !: number;
+  pretFluoroza !: number;
+  pretFractura !: number;
+  pretHiperplazia !: number;
+  pretParodontoza !: number;
+  pretRetractie !: number;
+  pretSangerare !: number;
+  startDateValue !: string;
+  endDateValue !: string;
   constructor(private userService:UserService, private token:TokenStorageService, private istoricService: IstoricService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getIstoric();
-        
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    })
+    
+    this.getIstoric();
+    
   }
   chartType = 'bar';
 
@@ -105,7 +100,97 @@ export class StatsPacientComponent implements OnInit {
   }
 
   public getIstoric(): void {
-    this.istoricService.getIstoricsByEmail(this.currentUser.email).subscribe({
+    this.pretAngina = 0;
+    this.pretDiastema = 0;
+    this.pretGingivita = 0;
+    this.pretCarie = 0;
+    this.pretCheilita = 0;
+    this.pretFluoroza = 0;
+    this.pretFractura = 0;
+    this.pretHiperplazia = 0;
+    this.pretParodontoza = 0;
+    this.pretRetractie = 0;
+    this.pretSangerare = 0;
+    const startDate = document.getElementById('startDate') as HTMLInputElement;
+    const endDate = document.getElementById('endDate') as HTMLInputElement;
+  
+    this.startDateValue = ((startDate?.value !== "") ? startDate?.value : "1900-01-01");
+    this.endDateValue = ((endDate?.value !== "") ? endDate?.value : "2023-01-01");
+    this.istoricService.getIstoricsByEmailByDate(this.currentUser.email, this.startDateValue, this.endDateValue).subscribe({
+      next:(response: Istoric[]) => {
+        this.istorics = response;
+        console.log(this.istorics);
+        for(let istoric of this.istorics){
+          if(istoric.diagnostic === "Abces dentar")
+            this.pretAbces += istoric.pret;
+          if(istoric.diagnostic === "Ameloblastom")
+            this.pretAmeloblastom += istoric.pret;
+          if(istoric.diagnostic === "Angina Ludwig")
+            this.pretAngina += istoric.pret;
+          if(istoric.diagnostic === "Diastema")
+            this.pretDiastema += istoric.pret;
+          if(istoric.diagnostic === "Gingivita")
+            this.pretGingivita += istoric.pret;
+          if(istoric.diagnostic === "Caria dentara")
+            this.pretCarie += istoric.pret;
+          if(istoric.diagnostic === "Cheilita angulara")
+            this.pretCheilita += istoric.pret;
+          if(istoric.diagnostic === "Fluoroza dentara")
+            this.pretFluoroza += istoric.pret;
+          if(istoric.diagnostic === "Fractura mandibulara")
+            this.pretFractura += istoric.pret;
+          if(istoric.diagnostic === "Hiperplazia gingivala")
+            this.pretHiperplazia += istoric.pret;
+          if(istoric.diagnostic === "Parodontoza")
+            this.pretParodontoza += istoric.pret;
+          if(istoric.diagnostic === "Retractie gingivala")
+            this.pretRetractie += istoric.pret;
+          if(istoric.diagnostic === "Sangerare gingivala")
+            this.pretSangerare += istoric.pret;
+        }
+        const  array2 = new Array<Number>();
+        array2.push(this.pretAbces);
+        array2.push(this.pretAmeloblastom);
+        array2.push(this.pretAngina);
+        array2.push(this.pretDiastema);
+        array2.push(this.pretGingivita);
+        array2.push(this.pretCarie);
+        array2.push(this.pretCheilita);
+        array2.push(this.pretFluoroza);
+        array2.push(this.pretFractura);
+        array2.push(this.pretHiperplazia);
+        array2.push(this.pretParodontoza);
+        array2.push(this.pretRetractie);
+        array2.push(this.pretSangerare);
+    
+        this.array = array2;
+        console.log(this.array);
+        this.getChartData();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    })
+
+  }
+  public onStats(): void{
+    this.pretAngina = 0;
+    this.pretDiastema = 0;
+    this.pretGingivita = 0;
+    this.pretCarie = 0;
+    this.pretCheilita = 0;
+    this.pretFluoroza = 0;
+    this.pretFractura = 0;
+    this.pretHiperplazia = 0;
+    this.pretParodontoza = 0;
+    this.pretRetractie = 0;
+    this.pretSangerare = 0;
+    const startDate = document.getElementById('startDate') as HTMLInputElement;
+    const endDate = document.getElementById('endDate') as HTMLInputElement;
+  
+    this.startDateValue = ((startDate?.value !== "") ? startDate?.value : "1900-01-01");
+    this.endDateValue = ((endDate?.value !== "") ? endDate?.value : "2023-01-01");
+    this.istoricService.getIstoricsByEmailByDate(this.currentUser.email, this.startDateValue, this.endDateValue).subscribe({
       next:(response: Istoric[]) => {
         this.istorics = response;
         console.log(this.istorics);
@@ -158,4 +243,6 @@ export class StatsPacientComponent implements OnInit {
       }
     })
   }
+  
 }
+

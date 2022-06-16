@@ -31,7 +31,6 @@ export class AccesComponent implements OnInit {
       email: new FormControl(''),
       id_doctor: new FormControl(''),
       adaugareTratament: new FormControl('', Validators.required),
-      adaugareRadiografie: new FormControl('', Validators.required),
       stergereCont: new FormControl('', Validators.required),
       afisareFormular: new FormControl('', Validators.required)
     });

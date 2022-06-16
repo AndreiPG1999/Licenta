@@ -7,8 +7,6 @@ import { AccesService } from '../acces.service';
 import { FormularService } from '../formular.service';
 import { IstoricService } from '../istoric.service';
 import { NotificationService } from '../notification.service';
-import { Radiografie } from '../radiografie';
-import { RadiografieService } from '../radiografie.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -26,7 +24,7 @@ export class NavbarPacientComponent implements OnInit {
   addRadiografieForm !: FormGroup;
   loggedInUser !: any;
   accesList !: Acces;
-  constructor(private accesService:AccesService, private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router, private formularService:FormularService, private istoricService:IstoricService, private radiografieService:RadiografieService) { }
+  constructor(private accesService:AccesService, private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router, private formularService:FormularService, private istoricService:IstoricService) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Cont sters cu succes !!")
@@ -97,24 +95,4 @@ export class NavbarPacientComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  onUpload() {
-    console.log(this.selectedFile);
-    
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-  
-    //Make a call to the Spring Boot Application to save the image
-    this.addRadiografieForm.value['email'] = this.loggedInUser.email;
-    this.addRadiografieForm.value['id_doctor'] = this.loggedInUser.id_doctor;
-    this.radiografieService.addRadiografie(uploadImageData, this.addRadiografieForm.value['email'], this.addRadiografieForm.value['id_doctor']).subscribe({
-      next:async (response: Radiografie) => {
-        console.log(response);
-        this.onCloseModal();
-      },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
-  }
 }

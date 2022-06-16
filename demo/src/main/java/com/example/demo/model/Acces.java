@@ -14,17 +14,15 @@ public class Acces implements Serializable {
     private String email;
     private Long id_doctor;
     private boolean adaugareTratament;
-    private boolean adaugareRadiografie;
     private boolean stergereCont;
     private boolean afisareFormular;
 
     public Acces(){}
 
-    public Acces(String email, Long id_doctor, boolean adaugareTratament, boolean adaugareRadiografie, boolean stergereCont, boolean afisareFormular) {
+    public Acces(String email, Long id_doctor, boolean adaugareTratament, boolean stergereCont, boolean afisareFormular) {
         this.email = email;
         this.id_doctor = id_doctor;
         this.adaugareTratament = adaugareTratament;
-        this.adaugareRadiografie = adaugareRadiografie;
         this.stergereCont = stergereCont;
         this.afisareFormular = afisareFormular;
     }
@@ -61,14 +59,6 @@ public class Acces implements Serializable {
         this.adaugareTratament = adaugareTratament;
     }
 
-    public boolean isAdaugareRadiografie() {
-        return adaugareRadiografie;
-    }
-
-    public void setAdaugareRadiografie(boolean adaugareRadiografie) {
-        this.adaugareRadiografie = adaugareRadiografie;
-    }
-
     public boolean isStergereCont() {
         return stergereCont;
     }
@@ -92,7 +82,6 @@ public class Acces implements Serializable {
                 ", email='" + email + '\'' +
                 ", id_doctor=" + id_doctor +
                 ", adaugareTratament=" + adaugareTratament +
-                ", adaugareRadiografie=" + adaugareRadiografie +
                 ", stergereCont=" + stergereCont +
                 ", afisareFormular=" + afisareFormular +
                 '}';

@@ -1,7 +1,7 @@
 .stats{
     position: absolute;
     left: 8%;
-    top:15%;
+    top:20%;
     color: white;
     border-radius: 3%;
     
@@ -16,3 +16,75 @@
     transform: translate(-50%, -50%);
     font-size: 30px;
 }
+.name {
+    background-color: #ebebeb;
+    font-family:'Comfortaa', cursive;
+  }
+  .name:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 20px;
+    width: 130px;
+    transition: ease 0.5s;
+  }
+  .select{
+    background-color: #ebebeb;
+    height: 3.5em;
+    width:320px;
+    font-family:'Comfortaa', cursive;
+  }
+  .select:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 55px;
+    width: 380px;
+    transition: ease 0.5s;
+  }
+  .email {
+    background-color: #ebebeb;
+    height: 2em;
+    font-family:'Comfortaa', cursive;
+  }
+  
+  .email:hover {
+    border-bottom: 5px solid #0e3721;
+    height: 30px;
+    width: 380px;
+    transition: ease 0.5s;
+  }
+  .submit {
+    width: 150px;
+    position: relative;
+    height: 51px;
+    color: white;
+    top:1px;
+    cursor: pointer;
+    left:60%;
+    background-color: #0e3721;
+    font-size: 15px;
+    font-family:'Comfortaa', cursive;
+  }
+  
+  .submit:hover {
+    /* box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219); */
+    /* transform: translateY(-3px); */
+    width: 170px;
+    /* border-top: 5px solid #0e3750; */
+    border-radius: 0%;
+  }
+  
+  .formEntry {
+    /* display: block; */
+    margin: 30px auto;
+    min-width: 100px;
+    padding: 15px;
+    left:10%;
+    position: relative;
+    border-radius: 2px;
+    border: none;
+    transition: all 0.5s ease 0s;
+  }
+  .editable-property-title{
+    font-family: 'Comfortaa', cursive;
+    position: relative;
+    left: 10%;
+    color:white;
+  }

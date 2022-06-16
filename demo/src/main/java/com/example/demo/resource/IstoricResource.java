@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -55,6 +58,45 @@ public class IstoricResource {
         List<Istoric> istoricCopy = new ArrayList<>(istorics);
         for(Istoric istoric:istoricCopy){
             if(!istoric.getEmail().equals(email)){
+                istorics.remove(istoric);
+            }
+        }
+        return new ResponseEntity<>(istorics, HttpStatus.OK);
+    }
+
+    @GetMapping("/allDates/{email}/{startDate}/{endDate}")
+    public ResponseEntity<List<Istoric>> getAllIstoricsByEmail(@PathVariable("email") String email,
+                                                               @PathVariable("startDate") String startDate,
+                                                               @PathVariable("endDate") String endDate) throws ParseException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDateX = (Date)formatter.parse(startDate);
+        Date endDateX = (Date)formatter.parse(endDate);
+
+        List<Istoric> istorics = istoricService.findAllIstorics();
+        List<Istoric> istoricCopy = new ArrayList<>(istorics);
+        for(Istoric istoric:istoricCopy){
+            Date istoricDateX = (Date)formatter.parse(istoric.getDate());
+            if(!istoric.getEmail().equals(email) || istoricDateX.compareTo(startDateX) < 0 || istoricDateX.compareTo(endDateX) > 0){
+                istorics.remove(istoric);
+            }
+        }
+        return new ResponseEntity<>(istorics, HttpStatus.OK);
+    }
+    @GetMapping("/allDatesById/{id}/{startDate}/{endDate}")
+    public ResponseEntity<List<Istoric>> getAllIstoricsByIdByDates(@PathVariable("id") Long id,
+                                                               @PathVariable("startDate") String startDate,
+                                                               @PathVariable("endDate") String endDate) throws ParseException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDateX = (Date)formatter.parse(startDate);
+        Date endDateX = (Date)formatter.parse(endDate);
+
+        List<Istoric> istorics = istoricService.findAllIstorics();
+        List<Istoric> istoricCopy = new ArrayList<>(istorics);
+        for(Istoric istoric:istoricCopy){
+            Date istoricDateX = (Date)formatter.parse(istoric.getDate());
+            if(!istoric.getId_doctor().equals(id) || istoricDateX.compareTo(startDateX) < 0 || istoricDateX.compareTo(endDateX) > 0){
                 istorics.remove(istoric);
             }
         }
