@@ -31,6 +31,9 @@ export class NavbarPacientComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
+    console.log(this.token.getUser())
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
     this.addRadiografieForm = new FormGroup({
       email: new FormControl(''),
       id_doctor: new FormControl('')
@@ -39,12 +42,10 @@ export class NavbarPacientComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
       }
     });
     this.getAcces();
+    
   }
   clickMethod(){
     if(confirm("Sunteți sigur că doriți să ștergeți contul?")){
@@ -68,9 +69,6 @@ export class NavbarPacientComponent implements OnInit {
       next:async (response: Acces) => {
         this.accesList = response;
         console.log(this.accesList);
-      },
-      error: (error:HttpErrorResponse) => {
-        alert(error.message);
       }
     });
   }

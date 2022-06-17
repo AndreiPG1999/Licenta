@@ -47,9 +47,6 @@ export class ProfilComponent implements OnInit {
       next:(response: User) => {
         this.loggedInUser = response;
         console.log(this.loggedInUser);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
       }
     });
   }

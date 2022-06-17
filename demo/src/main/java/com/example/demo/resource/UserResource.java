@@ -12,6 +12,10 @@ import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +38,10 @@ public class UserResource {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
+    public ResponseEntity<User> login(@RequestBody User user) throws NoSuchAlgorithmException {
         List<User> users = userService.findAllUsers();
         for (User userLog : users) {
-            if (userLog.getEmail().equals(user.getEmail()) && userLog.getPassword().equals(user.getPassword()))
+            if (userLog.getEmail().equals(user.getEmail()) && userLog.getPassword().equals(toHexString(getSHA(user.getPassword()))))
                 return new ResponseEntity<>(user, HttpStatus.OK);
             else
                 continue;
@@ -64,7 +68,8 @@ public class UserResource {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    public ResponseEntity<User> addUser(@RequestBody User user) throws NoSuchAlgorithmException {
+        user.setPassword(toHexString(getSHA(user.getPassword())));
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
@@ -177,5 +182,30 @@ public class UserResource {
     public ResponseEntity<?> deleteUser(@PathVariable("email") String email){
         userService.deleteUser(email);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
+    {
+        /* MessageDigest instance for hashing using SHA256 */
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        /* digest() method called to calculate message digest of an input and return array of byte */
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String toHexString(byte[] hash)
+    {
+        /* Convert byte array of hash into digest */
+        BigInteger number = new BigInteger(1, hash);
+
+        /* Convert the digest into hex value */
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+
+        /* Pad with leading zeros */
+        while (hexString.length() < 32)
+        {
+            hexString.insert(0, '0');
+        }
+        return hexString.toString();
     }
 }

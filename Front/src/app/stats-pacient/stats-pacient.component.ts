@@ -54,13 +54,13 @@ export class StatsPacientComponent implements OnInit {
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(153, 102, 255, 0.2)'
+        'rgba(150, 70, 195, 0.2)',
+        'rgba(63, 182, 195, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 142, 0, 0.2)',
+        'rgba(255, 127, 0, 0.2)',
+        'rgba(148, 102, 186, 0.2)',
+        'rgba(255, 255, 74, 0.2)'
       ],
       borderColor: [
         'rgba(255,99,132,1)',
@@ -69,13 +69,13 @@ export class StatsPacientComponent implements OnInit {
         'rgba(75, 192, 192, 1)',
         'rgba(153, 102, 255, 1)',
         'rgba(255, 159, 64, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(75, 192, 192, 1)'
+        'rgba(120, 70, 195, 1)',
+        'rgba(33, 182, 195, 1)',
+        'rgba(30, 255, 0, 1)',
+        'rgba(30, 142, 0, 1)',
+        'rgba(220, 127, 0, 1)',
+        'rgba(178, 102, 186, 1)',
+        'rgba(220, 255, 74, 1)'
       ],
       borderWidth: 2,
     }
@@ -100,6 +100,8 @@ export class StatsPacientComponent implements OnInit {
   }
 
   public getIstoric(): void {
+    this.pretAbces = 0;
+    this.pretAmeloblastom = 0;
     this.pretAngina = 0;
     this.pretDiastema = 0;
     this.pretGingivita = 0;
@@ -174,6 +176,8 @@ export class StatsPacientComponent implements OnInit {
 
   }
   public onStats(): void{
+    this.pretAbces = 0;
+    this.pretAmeloblastom = 0;
     this.pretAngina = 0;
     this.pretDiastema = 0;
     this.pretGingivita = 0;

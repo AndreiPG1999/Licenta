@@ -68,12 +68,10 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                       <button (click)="updateFirstName(updateFirstNameform)" data-dismiss="modal" class="btn" >Update</button>
+                       <button (click)="updateFirstName(updateFirstNameform)" data-dismiss="modal" class="btnModal" >Update</button>
+                       <button type="button" class="btnModal" (click)="onCloseFirstModal()" >Close</button>
                     </div>
                   </form>
-                </div>
-                <div class="modal-footer">
-                      <button type="button" class="btn btn-default" (click)="onCloseFirstModal()" >Close</button>
                 </div>
             </div>
     </div>
@@ -97,12 +95,10 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                       <button (click)="updateNrTelefon(updateNrTelefonform)" data-dismiss="modal" class="btn" >Update</button>
+                       <button (click)="updateNrTelefon(updateNrTelefonform)" data-dismiss="modal" class="btnModal" >Update</button>
+                       <button type="button" class="btnModal" (click)="onCloseNrModal()" >Close</button>
                     </div>
                   </form>
-                </div>
-                <div class="modal-footer">
-                      <button type="button" class="btn btn-default" (click)="onCloseNrModal()" >Close</button>
                 </div>
             </div>
     </div>
