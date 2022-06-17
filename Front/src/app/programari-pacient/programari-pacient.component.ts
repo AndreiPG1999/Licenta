@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -15,12 +16,15 @@ export class ProgramariPacientComponent implements OnInit {
   currentUser!: any;
   appointments !: Appointment[];
 
-  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService) { }
+  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser()
-    
-    this.getAppointment();
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.getAppointment();
+    }
   }
 
   public getAppointment(): void {

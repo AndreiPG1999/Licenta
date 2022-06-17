@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, shareReplay } from 'rxjs';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
@@ -33,12 +34,15 @@ export class StatsPacientComponent implements OnInit {
   pretSangerare !: number;
   startDateValue !: string;
   endDateValue !: string;
-  constructor(private userService:UserService, private token:TokenStorageService, private istoricService: IstoricService) { }
+  constructor(private userService:UserService, private token:TokenStorageService, private istoricService: IstoricService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    
-    this.getIstoric();
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.getIstoric();
+    }
     
   }
   chartType = 'bar';

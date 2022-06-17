@@ -64,6 +64,10 @@ export class NavbarPacientComponent implements OnInit {
     }
   }
 
+  public removeToken():void {
+    this.token.removeUser();
+  }
+
   public getAcces(){
     this.accesService.findAcces(this.currentUser.email).subscribe({
       next:async (response: Acces) => {

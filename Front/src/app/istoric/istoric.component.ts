@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -20,12 +21,15 @@ export class IstoricComponent implements OnInit {
   id !: number;
   doctor !: User;
 
-  constructor(private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService) { }
+  constructor(private router:Router, private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.getIstoric();
-    
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.getIstoric();
+    }
   }
 
   public getIstoric(): void {

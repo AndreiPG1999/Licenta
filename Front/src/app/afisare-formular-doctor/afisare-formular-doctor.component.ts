@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
@@ -24,20 +25,24 @@ export class AfisareFormularDoctorComponent implements OnInit {
   afectiuniSplitted !: any
   alergiiSplitted !: any
 
-  constructor(private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private formularService:FormularService) { }
+  constructor(private router:Router, private userService:UserService, private notifyService:NotificationService, private token:TokenStorageService, private formularService:FormularService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getFormulars();
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.getFormulars();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   public getFormulars(): void {

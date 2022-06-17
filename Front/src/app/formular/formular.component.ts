@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
 import { NotificationService } from '../notification.service';
@@ -26,7 +27,7 @@ export class FormularComponent implements OnInit {
   alergiiData = ['Antibiotice', 'Antiinflamatoare', 'Anestezice', 'Niciuna'];
   optionsChecked = "";
   optionsAlergiiChecked = "";
-  constructor(private notifyService:NotificationService, private token:TokenStorageService, private userService:UserService, private formularService:FormularService) { }
+  constructor(private notifyService:NotificationService, private token:TokenStorageService, private userService:UserService, private formularService:FormularService, private router:Router) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Formular trimis cu succes !!")
@@ -34,29 +35,34 @@ export class FormularComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.formularForm = new FormGroup({
-      email: new FormControl(''),
-      first_name: new FormControl(''),
-      last_name: new FormControl(''),
-      data_nasterii: new FormControl(''),
-      afectiuni: new FormArray([]),
-      sangerari: new FormControl('', Validators.required),
-      alergii: new FormArray([]),
-      alcool: new FormControl('', Validators.required),
-      fumator: new FormControl('', Validators.required),
-      droguri: new FormControl('', Validators.required),
-      alte_probleme: new FormControl('', Validators.required),
-      id_doctor: new FormControl('')
-    })
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.formularForm = new FormGroup({
+        email: new FormControl(''),
+        first_name: new FormControl(''),
+        last_name: new FormControl(''),
+        data_nasterii: new FormControl(''),
+        afectiuni: new FormArray([]),
+        sangerari: new FormControl('', Validators.required),
+        alergii: new FormArray([]),
+        alcool: new FormControl('', Validators.required),
+        fumator: new FormControl('', Validators.required),
+        droguri: new FormControl('', Validators.required),
+        alte_probleme: new FormControl('', Validators.required),
+        id_doctor: new FormControl('')
+      })
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
+    
   }
 
 

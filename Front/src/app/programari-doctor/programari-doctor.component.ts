@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { NotificationService } from '../notification.service';
@@ -24,23 +25,27 @@ export class ProgramariDoctorComponent implements OnInit {
   changedDate='';
   pipe = new DatePipe('en-US');
   cond !: boolean;
-  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
+  constructor(private appointmentService:AppointmentService, private token:TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser()
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.today.setDate(this.today.getDate() - 1);
-        let changeFormat = this.pipe.transform(this.today, 'yyyy-MM-dd');
-        this.changedDate = changeFormat!;
-        this.getAppointment();
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.today.setDate(this.today.getDate() - 1);
+          let changeFormat = this.pipe.transform(this.today, 'yyyy-MM-dd');
+          this.changedDate = changeFormat!;
+          this.getAppointment();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
     
   }
   showToasterSuccess(){

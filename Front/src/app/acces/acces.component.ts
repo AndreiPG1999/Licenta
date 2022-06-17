@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Acces } from '../acces';
 import { AccesService } from '../acces.service';
 import { NotificationService } from '../notification.service';
@@ -20,7 +21,7 @@ export class AccesComponent implements OnInit {
   loggedInUser !: any;
   users !: User[];
   submitted = false;
-  constructor(private token:TokenStorageService, private accesService:AccesService, private userService:UserService, private notifyService:NotificationService) { }
+  constructor(private token:TokenStorageService, private accesService:AccesService, private userService:UserService, private notifyService:NotificationService, private router:Router) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Accesul utilizatorului a fost modificat !!")
@@ -34,24 +35,28 @@ export class AccesComponent implements OnInit {
       stergereCont: new FormControl('', Validators.required),
       afisareFormular: new FormControl('', Validators.required)
     });
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
-          next:(response: User[]) => {
-            this.users = response;
-            console.log(this.users);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+            next:(response: User[]) => {
+              this.users = response;
+              console.log(this.users);
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   onSubmit(accesForm:FormGroup){

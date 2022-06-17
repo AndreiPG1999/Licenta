@@ -31,24 +31,28 @@ export class NavbarDoctorComponent implements OnInit {
       email: new FormControl(''),
       id_doctor: new FormControl('')
     });
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
-          next:(response: User[]) => {
-            this.users = response;
-            console.log(this.users);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+            next:(response: User[]) => {
+              this.users = response;
+              console.log(this.users);
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
   clickMethod(){
     if(confirm("Sunteți sigur că doriți să vă ștergeți contul?")){
@@ -64,7 +68,9 @@ export class NavbarDoctorComponent implements OnInit {
       });
     }
   }
-
+  public removeToken(){
+    this.token.removeUser();
+  }
   public onCloseModal(){
     this.display = "none";
   }

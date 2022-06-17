@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -15,21 +16,26 @@ export class HomePacientComponent implements OnInit {
   
   currentUser!: any;
   loggedInUser!: any;
-  constructor(private token: TokenStorageService, private userService:UserService) { }
+  constructor(private token: TokenStorageService, private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.showSlides();
     this.currentUser = this.token.getUser();
     this.Repeat();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
+    
   }
   Repeat(){
     setTimeout(() => {

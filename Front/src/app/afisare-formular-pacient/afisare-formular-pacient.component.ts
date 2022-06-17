@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { Formular } from '../formular';
 import { FormularService } from '../formular.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -15,10 +16,12 @@ export class AfisareFormularPacientComponent implements OnInit {
   currentFormular !: any
   afectiuniSplitted !: any
   alergiiSplitted !: any
-  constructor(private userService:UserService, private formularService:FormularService, private token:TokenStorageService) { }
+  constructor(private router:Router, private userService:UserService, private formularService:FormularService, private token:TokenStorageService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser()
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
     this.formularService.findFormular(this.currentUser.email).subscribe({
       next:(response: Formular) => {
         this.currentFormular = response;

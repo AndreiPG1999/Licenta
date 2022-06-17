@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppointmentService } from '../appointment.service';
 import { Diagnostic } from '../diagnostic';
 import { DiagnosticService } from '../diagnostic.service';
@@ -34,7 +35,7 @@ export class AddTreatmentComponent implements OnInit {
   selectedFile !: File;
   dinti !: Dinte[];
 
-  constructor(private dinteService:DinteService, private appointmentService: AppointmentService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
+  constructor(private router:Router, private dinteService:DinteService, private appointmentService: AppointmentService, private istoricService:IstoricService, private notifyService:NotificationService, private userService:UserService, private treatmentService:TreatmentService, private diagnosticSerivce: DiagnosticService, private token:TokenStorageService) {
     
   }
   showToasterSuccess(){
@@ -52,28 +53,31 @@ export class AddTreatmentComponent implements OnInit {
       id_doctor: new FormControl(''),
       descriere: new FormControl('', Validators.required)
     });
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
-          next:(response: User[]) => {
-            this.users = response;
-            console.log(this.users);
-            this.getDiagnostics();
-            this.getTreatments();
-            this.getDinti();
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
-    
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+            next:(response: User[]) => {
+              this.users = response;
+              console.log(this.users);
+              this.getDiagnostics();
+              this.getTreatments();
+              this.getDinti();
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   public getDiagnostics(){

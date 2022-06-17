@@ -17,4 +17,8 @@ export class TokenStorageService {
   public getUser(): any{
     return JSON.parse(sessionStorage.getItem(USER_KEY) || '{}');
   }
+
+  public removeUser(): any{
+    window.sessionStorage.removeItem(USER_KEY);
+  }
 }

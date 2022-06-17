@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccesService } from '../acces.service';
 import { AppointmentService } from '../appointment.service';
 import { FormularService } from '../formular.service';
@@ -19,20 +20,24 @@ export class PacientiComponent implements OnInit {
   currentUser!: any;
   loggedInUser!: any;
   neededUsers !: User[];
-  constructor(private accesService:AccesService, private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService) { }
+  constructor(private accesService:AccesService, private userService:UserService, private token:TokenStorageService, private appointmentService:AppointmentService, private istoricService:IstoricService, private formularService:FormularService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getUsers();
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.getUsers();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   public getUsers(): void {

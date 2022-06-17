@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -33,22 +34,26 @@ export class StatsComponent implements OnInit {
   startDateValue !: string;
   endDateValue !: string;
 
-  constructor(private userService:UserService, private token:TokenStorageService, private istoricService: IstoricService) { }
+  constructor(private userService:UserService, private token:TokenStorageService, private istoricService: IstoricService, private router:Router) { }
 
   ngOnInit(): void {
     
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getIstoric();
-        
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    })
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.getIstoric();
+          
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      })
+    }
   }
   chartType = 'bar';
 

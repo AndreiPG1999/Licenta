@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
@@ -27,7 +28,7 @@ export class ProfilDoctorComponent implements OnInit {
   submittedFirst = false;
   submittedLast = false;
   submittedNrTelefon = false;
-  constructor(private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
+  constructor(private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService, private router:Router) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Update realizat cu succes !!")
@@ -43,15 +44,19 @@ export class ProfilDoctorComponent implements OnInit {
       nr_telefon: new FormControl('',Validators.required)
     });
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   public onOpenLastNameModal(){

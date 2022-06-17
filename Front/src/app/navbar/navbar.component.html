@@ -70,7 +70,7 @@
             </div>
           </div>
         </li>
-        <li><a  [routerLink]="['/login']" [queryParams]="{ loggedIn: 'false' }" class="nav-link">
+        <li><a (click)="removeToken()" [routerLink]="['/login']" [queryParams]="{ loggedIn: 'false' }" class="nav-link">
           <i class="fas fa-sign-out-alt"></i>
           Logout</a></li>
       </div>

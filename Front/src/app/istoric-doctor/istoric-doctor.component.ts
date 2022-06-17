@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { forkJoin, mergeMap } from 'rxjs';
 import { Istoric } from '../istoric';
 import { IstoricService } from '../istoric.service';
@@ -18,20 +19,24 @@ export class IstoricDoctorComponent implements OnInit {
   istorics !: Istoric[];
   loggedInUser!: any;
 
-  constructor(private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService) { }
+  constructor(private istoricService:IstoricService, private token:TokenStorageService, private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getIstoric();
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.getIstoric();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
     
   }
 

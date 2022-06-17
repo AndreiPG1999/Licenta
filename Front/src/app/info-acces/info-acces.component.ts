@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Acces } from '../acces';
 import { AccesService } from '../acces.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -18,20 +19,24 @@ export class InfoAccesComponent implements OnInit {
   loggedInUser!: any;
   accesList !: Acces[];
   
-  constructor(private userService:UserService, private token:TokenStorageService, private accesService:AccesService) { }
+  constructor(private userService:UserService, private token:TokenStorageService, private accesService:AccesService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.getAcces();
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.getAcces();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   public getAcces(): void{

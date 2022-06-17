@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { NotificationService } from '../notification.service';
@@ -22,7 +23,7 @@ export class AddProgramareComponent implements OnInit {
   submitted = false
   id_doc !: number;
 
-  constructor(private appointmentService:AppointmentService, private notifyService:NotificationService, private userService:UserService, private token:TokenStorageService) { }
+  constructor(private appointmentService:AppointmentService, private notifyService:NotificationService, private userService:UserService, private token:TokenStorageService, private router:Router) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Programare înregistrată cu succes !!")
@@ -38,24 +39,28 @@ export class AddProgramareComponent implements OnInit {
       descriere: new FormControl('', Validators.required),
       id_doctor: new FormControl('')
     });
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-        this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
-          next:(response: User[]) => {
-            this.users = response;
-            console.log(this.users);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+          this.userService.findUsersByEmail(this.loggedInUser.id).subscribe({
+            next:(response: User[]) => {
+              this.users = response;
+              console.log(this.users);
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      });
+    }
   }
 
   async onSubmit(appointmentForm:FormGroup){

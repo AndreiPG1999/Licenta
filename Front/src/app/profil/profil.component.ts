@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationService } from '../notification.service';
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
@@ -27,7 +28,7 @@ export class ProfilComponent implements OnInit {
   submittedFirst = false;
   submittedLast = false;
   submittedNrTelefon = false;
-  constructor(private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
+  constructor(private router:Router, private token: TokenStorageService, private userService:UserService, private notifyService:NotificationService) { }
 
   showToasterSuccess(){
     this.notifyService.showSuccess("Update realizat cu succes !!")
@@ -43,12 +44,16 @@ export class ProfilComponent implements OnInit {
       nr_telefon: new FormControl('')
     });
     this.currentUser = this.token.getUser();
-    this.userService.findUser(this.currentUser.email).subscribe({
-      next:(response: User) => {
-        this.loggedInUser = response;
-        console.log(this.loggedInUser);
-      }
-    });
+    if(!this.currentUser.email)
+      this.router.navigate(['login']);
+    else{
+      this.userService.findUser(this.currentUser.email).subscribe({
+        next:(response: User) => {
+          this.loggedInUser = response;
+          console.log(this.loggedInUser);
+        }
+      });
+    }
   }
 
   public onOpenLastNameModal(){
