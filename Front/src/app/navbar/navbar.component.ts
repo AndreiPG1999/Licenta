@@ -54,6 +54,7 @@ export class NavbarPacientComponent implements OnInit {
           this.showToasterSuccess();
           this.deleteFormular();
           this.deleteIstoric();
+          this.deleteAcces();
           await new Promise(f => setTimeout(f, 2000));
           this.router.navigate(['/login']);
         },
@@ -83,6 +84,10 @@ export class NavbarPacientComponent implements OnInit {
   }
   public deleteIstoric(){
     this.istoricService.deleteIstoric(this.currentUser.email).subscribe({
+    });
+  }
+  public deleteAcces(){
+    this.accesService.deleteAcces(this.currentUser.email).subscribe({
     });
   }
 
